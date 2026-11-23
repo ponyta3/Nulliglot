@@ -4,6 +4,9 @@ Instruction-tuning strictly monolingual language models. The first model is Bulg
 (`iamshnoo/bul_100m`); German (`iamshnoo/deu_100m`) is planned next. Base model, adapters and
 training data stay in the single target language.
 
+A separate project, a Tamil base model trained from scratch, is in `tamil_base_model/`; see its
+own README.
+
 ## Status (18 November 2026)
 
 - The tuned model stops after its answer, writes only Bulgarian, and can copy a text from its

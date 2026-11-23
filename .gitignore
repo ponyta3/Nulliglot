@@ -16,3 +16,7 @@ __pycache__/
 # Personal notes, kept on the laptop only.
 /advisor_summary.md
 /New_Summary.md
+
+# Tamil base model: downloaded text and weights stay out of git.
+/tamil_base_model/data/
+/tamil_base_model/models/
