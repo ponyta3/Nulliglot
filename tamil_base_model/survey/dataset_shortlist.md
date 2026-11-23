@@ -16,12 +16,19 @@ script. Word counts are before filtering and before removing duplicates across s
 
 | # | Dataset | Text | Words (millions) | Document length (words) | Tamil rows | Licence | Work needed | Link |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `ai4bharat/sangraha`, `verified/tam` | Curated web pages (91%), PDF/OCR (8%), transcripts | about 2,190 (R) | whole pages, median 165 | 90% | CC-BY-4.0 | Repair ":" stored as "ஃ" (about 26% of documents); drop navigation fragments | [view](https://huggingface.co/datasets/ai4bharat/sangraha/viewer/verified/tam) |
+| 1 | `ai4bharat/sangraha`, `verified/tam` | Curated web pages (91%), PDF/OCR (8%), transcripts | about 2,190 (R) | whole pages, median 165 | 90% | CC-BY-4.0 | Repair ":" stored as "ஃ" (about 26% of documents); drop navigation fragments | [Tamil files](https://huggingface.co/datasets/ai4bharat/sangraha/tree/main/verified/tam), [viewer](https://huggingface.co/datasets/ai4bharat/sangraha/viewer/verified/tam) |
 | 2 | `HuggingFaceFW/fineweb-2`, `tam_Taml` | Web pages from Common Crawl, 2013–2024 | 1,885 (P) | whole pages, median 191 | 93% | ODC-By | Some machine-translated content-farm pages, no label to remove them | [view](https://huggingface.co/datasets/HuggingFaceFW/fineweb-2/viewer/tam_Taml) |
 | 3 | `wikimedia/wikipedia`, `20231101.ta` | Encyclopedia | 38 (P) | median 105 | 81% | CC-BY-SA | Drop templated stubs (about a quarter of articles, 8% of words) | [view](https://huggingface.co/datasets/wikimedia/wikipedia/viewer/20231101.ta) |
-| 4 | `ramSeraph/indic_wikisource`, Tamil rows | Proofread book pages, mostly 20th-century prose | about 22 (R) | 140 per page | 93% | CC-BY-SA / GFDL | Strip wiki templates; join pages into books | [view](https://huggingface.co/datasets/ramSeraph/indic_wikisource) |
-| 5 | `Joemn/project-madurai-corpus-tamil`, `raw_markdown` | 1,346 literary works, mostly classical verse | about 20 (R) | about 12,500 per work | 76% | per work | Drop English volumes and reserved-rights works | [view](https://huggingface.co/datasets/Joemn/project-madurai-corpus-tamil) |
+| 4 | `ramSeraph/indic_wikisource`, Tamil rows | Proofread book pages, mostly 20th-century prose | about 22 (R) | 140 per page | 93% | CC-BY-SA / GFDL | Strip wiki templates; join pages into books | [Tamil file](https://huggingface.co/datasets/ramSeraph/indic_wikisource/blob/main/ta.parquet), [viewer at the Tamil rows](https://huggingface.co/datasets/ramSeraph/indic_wikisource/viewer/default/train?p=4500) |
+| 5 | `Joemn/project-madurai-corpus-tamil`, `raw_markdown` | 1,346 literary works, mostly classical verse | about 20 (R) | about 12,500 per work | 76% | per work | Drop English volumes and reserved-rights works | [view](https://huggingface.co/datasets/Joemn/project-madurai-corpus-tamil/viewer/raw_markdown) |
 | 6 | `wikimedia/wikisource`, `20231201.ta` | Classics, Bharathi, Kalki | 4.7 (P) | median 780 | 95% | CC-BY-SA | About 12% is Bible and Quran (human translations) | [view](https://huggingface.co/datasets/wikimedia/wikisource/viewer/20231201.ta) |
+
+Only the Tamil part of each dataset is used. From `ai4bharat/sangraha` only the `verified`
+subset, `tam` split is taken (53 files, 18.7 GB); its `synthetic` subset is machine-translated
+and is not used, and no other language is downloaded. The Hugging Face viewer for Sangraha is
+unreliable and can show an error or another language; if it does, choose Subset `verified` and
+Split `tam`, or open the Tamil files link. `ramSeraph/indic_wikisource` holds twelve languages in
+one table; the Tamil rows are the file `ta.parquet`.
 
 Sources 1 and 2 together hold about 4 billion words before duplicates are removed. Both crawl
 Tamil web sites, so they overlap; the overlap has not been measured. Sources 3 to 6 add about
