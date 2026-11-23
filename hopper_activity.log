@@ -1426,3 +1426,17 @@ $ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/dataset_sh
                   1851M  57221M  61989M            1811   1000k   1200k        
 172.16.128.120:/scratch  2.3P  1.7P  540T  77% /scratch
 ===== 2026-11-23 11:50:06  END (exit 0)
+
+===== 2026-11-23 12:32:07  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 12:32:10  END (exit 0)
+
+===== 2026-11-23 12:32:10  START
+COPY TO HOPPER    tamil_base_model/survey/dataset_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/dataset_shortlist.md
+===== 2026-11-23 12:32:12  END (exit 0)
+
+===== 2026-11-23 12:32:12  START
+$ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/dataset_shortlist.md | cut -c1-12,65-
+4463a26adf3e  README.md
+d4cf9cc2458a  survey/dataset_shortlist.md
+===== 2026-11-23 12:32:15  END (exit 0)

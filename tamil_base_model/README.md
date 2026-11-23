@@ -17,6 +17,8 @@ no model, tokenizer or data with them.
 - The model is trained only on Tamil text. No multilingual base model, tokenizer, adapter or data.
 - Latin-script brand names and digits inside Tamil text are allowed.
 - No machine-translated text, for now.
+- The model will be released on Hugging Face for research, so sources with no licence or a
+  non-commercial licence are left out.
 - Data comes from Hugging Face datasets: first select good Tamil datasets, then filter and drop
   unwanted rows (English sentences, Tamil written in Latin letters, other Indian scripts).
 
@@ -31,8 +33,8 @@ no model, tokenizer or data with them.
 
 ## Status
 
-- 23 Nov 2026: project started. Dataset survey finished: eight core sources hold about
-  4.3 billion words of original Tamil before filtering and removing duplicates. The two largest
+- 23 Nov 2026: project started. Dataset survey finished: six core sources hold about
+  4.2 billion words of original Tamil before filtering and removing duplicates. The two largest
   are the verified Tamil part of `ai4bharat/sangraha` and the Tamil part of
   `HuggingFaceFW/fineweb-2`. Nothing has been downloaded yet.
 
