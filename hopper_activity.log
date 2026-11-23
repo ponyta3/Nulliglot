@@ -1500,3 +1500,27 @@ $ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/strict_sho
 c3472a5a1b  survey/strict_shortlist.md
 1de6ba0226  survey/dataset_shortlist.md
 ===== 2026-11-23 13:31:24  END (exit 0)
+
+===== 2026-11-23 15:01:48  START
+$ mkdir -p /scratch/pgopalan/tamil_base_model/survey/exclusions
+===== 2026-11-23 15:01:50  END (exit 0)
+
+===== 2026-11-23 15:01:50  START
+COPY TO HOPPER    tamil_base_model/survey/exclusions  ->  /scratch/pgopalan/tamil_base_model/survey/
+===== 2026-11-23 15:01:54  END (exit 0)
+
+===== 2026-11-23 15:01:54  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 15:01:55  END (exit 0)
+
+===== 2026-11-23 15:01:55  START
+COPY TO HOPPER    tamil_base_model/survey/strict_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/strict_shortlist.md
+===== 2026-11-23 15:01:57  END (exit 0)
+
+===== 2026-11-23 15:01:57  START
+$ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/strict_shortlist.md | cut -c1-10,65-; ls survey/exclusions | wc -l; cat survey/exclusions/* | sha256sum | cut -c1-10
+6a2cecdfd4  README.md
+28ec6803c8  survey/strict_shortlist.md
+14
+16641f9056
+===== 2026-11-23 15:01:59  END (exit 0)

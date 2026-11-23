@@ -38,7 +38,10 @@ no model, tokenizer or data with them.
   120 million words that meet every rule with a licence from the authors or publisher
   (Wikipedia, proofread Wikisource, Thamizh Mann nationalised books, small news and ebook sets).
   The large sources (Sangraha verified, about 2.2 billion words; HPLT 3.0) carry a licence from
-  the collector only. Which groups to use is not decided. Nothing has been downloaded yet.
+  the collector only. A third search found nothing substantial to add, and an audit found that
+  about a third of Tamil Wikipedia is machine-translated or bot-generated; with that removed,
+  the fully compliant group is about 95 to 100 million words. Which groups to use is not
+  decided. Nothing has been downloaded yet.
 
 ## Not decided yet
 

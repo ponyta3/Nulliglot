@@ -33,6 +33,46 @@ keeping lines with at least 90% Tamil letters.
 Group A total: about 120 million words, before removing overlap. A2 and A3 both contain
 nationalised books, so part of that is counted twice.
 
+## Machine-translation audit of Group A (third round)
+
+Group A was checked for machine-translated, machine-generated and translated text. The lists
+of items to drop are in `exclusions/`.
+
+| Source | What was found | Share | How it is removed |
+|---|---|---|---|
+| A1 Tamil Wikipedia | Articles made with the Content Translation tool (machine translation, mostly kept unedited) | 36,186 articles listed, about 22% of articles in truth | `tawiki_contenttranslation_union_titles.txt`, plus a tag check on each article's first revision |
+| A1 Tamil Wikipedia | Bot-generated stubs (temples, panchayats and others) | 24,349 articles, 12.6% | `tawiki_bot_created_titles.txt` |
+| A1 Tamil Wikipedia | Google translation project 2009–11; 2017 schoolteacher drive; flagged translations | 1,195 + 4,249 + 732 articles | `tawiki_google_translation_titles.txt`, `tawiki_tnse_teacher_titles.txt`, `tawiki_translation_maintenance_titles.txt` |
+| A2 Tamil Wikisource | Human translations only: 28 translated books, Bible, Quran | about 1% of proofread pages | `tawikisource_translation_flags.txt` |
+| A3 Thamizh Mann | Human translations (18 works), dictionaries (41), English (5) | 64 of 639 works | `thamizh_mann_flagged.tsv` |
+| A4–A5 Wikinews, Wikibooks, Wikiquote | No translation tags; quotations include hand-translated quotes | unknown, small | nothing to filter by label |
+| A6 Kaniyam | Translated posts; one prolific author whose posts read as undisclosed machine-assisted translation (a judgement, not proof) | 664 of 2,375 posts, 43% of words | `kaniyam_flagged_posts.tsv` |
+| A7 FreeTamilEbooks | Human translations; no machine-translated book found (descriptions searched, not book bodies) | 18 of 396 open-licensed books | `fte_translation_flagged.tsv` |
+
+After these removals Tamil Wikipedia keeps about 122,000 to 128,000 articles and 34 to 36
+million words (estimate), down from 193,348 articles and 57 million. Group A as a whole is then
+about 95 to 100 million words before overlap is removed.
+
+What cannot be guaranteed: only labelled machine translation is removed. Edited machine
+translation and pasted translator output carry no marker. A Tamil reader checking 300 random
+passages per source with no hits would bound the remainder below 1%.
+
+## Third round: search for more Group A sources
+
+Five further searches (government text, journals, Creative Commons sites and the Internet
+Archive, literature e-text projects, and the audit above) found nothing substantial to add.
+
+| Area | Result |
+|---|---|
+| Government and public bodies | Nothing new. Openly released Tamil Nadu text (nationalised books, the Tamil encyclopedias) is already in Wikisource; the Tamil Virtual Academy's own copies are scans. Textbooks, Assembly debates, Singapore and Sri Lanka parliaments fail on licence. |
+| Open-access journals | Licences are good (CC BY or CC BY-SA: IRJT about 2,094 articles, Kalanjiyam 834, Shanlax about 643), but all are PDF only and all 25 PDFs tested extract as corrupted text. Possible later: convert Shanlax's legacy font with a custom table, or ask publishers for Word files. |
+| Creative Commons sites, Internet Archive | One small pass: `gnutamil.blogspot.com`, a single author's GNU/Linux blog, CC BY 3.0, about 70,000 words. Internet Archive items outside FreeTamilEbooks are scans with uploader-applied marks. Tamil Wikivoyage and about 90% of StoryWeaver's Tamil books are translations. |
+| Literature e-text projects, universities | Nothing new. Scholarly editions are in Latin transliteration or non-commercial; devotional sites are all rights reserved; some new collections contain AI-generated text. |
+
+Unverified leads: a possible CC BY-SA encyclopedia on the Tamil Virtual Academy site
+(தமிழ்ப்பெருங்களஞ்சியம்) could not be located; shaivam.org, the Tamil Heritage Foundation and
+several Tamil Nadu government sites blocked automated access.
+
 ## Group B: large, but the licence comes from the collector, not the original publishers
 
 These have a stated open licence and good documentation, so they pass the rules as written.
