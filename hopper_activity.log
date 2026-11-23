@@ -1449,3 +1449,12 @@ COPY TO HOPPER    tamil_base_model/survey/dataset_shortlist.md  ->  /scratch/pgo
 $ sha256sum /scratch/pgopalan/tamil_base_model/survey/dataset_shortlist.md | cut -c1-12
 3c55fd9c8367
 ===== 2026-11-23 12:38:46  END (exit 0)
+
+===== 2026-11-23 12:46:37  START
+COPY TO HOPPER    tamil_base_model/survey/Tamil_dataset_shortlist.docx  ->  /scratch/pgopalan/tamil_base_model/survey/Tamil_dataset_shortlist.docx
+===== 2026-11-23 12:46:38  END (exit 0)
+
+===== 2026-11-23 12:46:38  START
+$ sha256sum /scratch/pgopalan/tamil_base_model/survey/Tamil_dataset_shortlist.docx | cut -c1-12
+881cd1a52399
+===== 2026-11-23 12:46:39  END (exit 0)
