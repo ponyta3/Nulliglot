@@ -1,0 +1,463 @@
+
+Lmod is automatically replacing "gnu9/9.3.0" with "gnu12/12.3.0".
+
+
+Inactive Modules:
+  1) hwloc/2.1.0     2) libfabric     3) ucx
+
+The following have been reloaded with a version change:
+  1) openmpi4/4.0.4 => openmpi4/4.1.6-a2
+
+node: gpu014.orc.gmu.edu  job: 3725405  started: Fri Nov 13 19:50:05 EST 2026
+Fri Nov 13 19:50:05 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          On  |   00000000:41:00.0 Off |                   On |
+| N/A   33C    P0            173W /  500W |   20980MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |              Shared Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                Shared BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    2   0   0  |             107MiB / 40192MiB    | 42      0 |  3   0    2    0    0 |
+|                  |               0MiB / 24543MiB    |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+train: 38344 examples (12916 dropped as > 512 tokens)
+val:   300 examples (0 dropped)
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights:   1%|          | 1/111 [00:00<00:32,  3.37it/s]Loading weights:  82%|████████▏ | 91/111 [00:00<00:00, 292.43it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 238.79it/s]
+trainable params: 3,391,488 || all params: 313,658,112 || trainable%: 1.0813
+training stop-token output row: 768 extra params
+step 0/7191  val_loss 3.7141  (untrained adapter = base model)
+step 20/7191  epoch 0.01  loss 4.2009  lr 1.95e-05  eta 63.6 min
+step 40/7191  epoch 0.02  loss 3.8405  lr 3.81e-05  eta 74.4 min
+step 60/7191  epoch 0.03  loss 4.0958  lr 5.67e-05  eta 69.6 min
+step 80/7191  epoch 0.03  loss 3.8467  lr 7.53e-05  eta 68.6 min
+step 100/7191  epoch 0.04  loss 3.6738  lr 9.40e-05  eta 71.6 min
+step 120/7191  epoch 0.05  loss 3.4728  lr 1.13e-04  eta 70.4 min
+step 140/7191  epoch 0.06  loss 3.5125  lr 1.31e-04  eta 70.4 min
+step 160/7191  epoch 0.07  loss 3.6528  lr 1.50e-04  eta 70.3 min
+step 180/7191  epoch 0.08  loss 3.4153  lr 1.68e-04  eta 70.6 min
+step 200/7191  epoch 0.08  loss 3.3769  lr 1.87e-04  eta 70.5 min
+step 200/7191  val_loss 3.3652  (saved best)
+step 220/7191  epoch 0.09  loss 3.3422  lr 2.00e-04  eta 73.4 min
+step 240/7191  epoch 0.10  loss 3.2932  lr 2.00e-04  eta 72.8 min
+step 260/7191  epoch 0.11  loss 3.4117  lr 2.00e-04  eta 72.3 min
+step 280/7191  epoch 0.12  loss 3.3018  lr 2.00e-04  eta 71.2 min
+step 300/7191  epoch 0.13  loss 3.2106  lr 2.00e-04  eta 70.3 min
+step 320/7191  epoch 0.13  loss 3.4244  lr 2.00e-04  eta 69.6 min
+step 340/7191  epoch 0.14  loss 3.4239  lr 2.00e-04  eta 68.9 min
+step 360/7191  epoch 0.15  loss 3.1061  lr 2.00e-04  eta 68.3 min
+step 380/7191  epoch 0.16  loss 3.3095  lr 2.00e-04  eta 67.6 min
+step 400/7191  epoch 0.17  loss 3.3014  lr 2.00e-04  eta 67.4 min
+step 400/7191  val_loss 3.2549  (saved best)
+step 420/7191  epoch 0.18  loss 3.2954  lr 2.00e-04  eta 68.3 min
+step 440/7191  epoch 0.18  loss 3.1688  lr 1.99e-04  eta 68.8 min
+step 460/7191  epoch 0.19  loss 3.1738  lr 1.99e-04  eta 68.5 min
+step 480/7191  epoch 0.20  loss 3.1844  lr 1.99e-04  eta 67.9 min
+step 500/7191  epoch 0.21  loss 3.2592  lr 1.99e-04  eta 67.4 min
+step 520/7191  epoch 0.22  loss 3.2400  lr 1.99e-04  eta 66.8 min
+step 540/7191  epoch 0.23  loss 3.2408  lr 1.99e-04  eta 66.1 min
+step 560/7191  epoch 0.23  loss 3.2159  lr 1.99e-04  eta 66.1 min
+step 580/7191  epoch 0.24  loss 3.1779  lr 1.99e-04  eta 65.9 min
+step 600/7191  epoch 0.25  loss 3.2515  lr 1.99e-04  eta 65.7 min
+step 600/7191  val_loss 3.1992  (saved best)
+step 620/7191  epoch 0.26  loss 3.1865  lr 1.98e-04  eta 66.3 min
+step 640/7191  epoch 0.27  loss 3.1673  lr 1.98e-04  eta 66.1 min
+step 660/7191  epoch 0.28  loss 3.2679  lr 1.98e-04  eta 65.9 min
+step 680/7191  epoch 0.28  loss 3.2230  lr 1.98e-04  eta 65.4 min
+step 700/7191  epoch 0.29  loss 3.1531  lr 1.98e-04  eta 65.4 min
+step 720/7191  epoch 0.30  loss 3.1488  lr 1.97e-04  eta 65.3 min
+step 740/7191  epoch 0.31  loss 3.1502  lr 1.97e-04  eta 65.1 min
+step 760/7191  epoch 0.32  loss 3.1470  lr 1.97e-04  eta 64.8 min
+step 780/7191  epoch 0.33  loss 3.2098  lr 1.97e-04  eta 64.5 min
+step 800/7191  epoch 0.33  loss 3.0953  lr 1.97e-04  eta 64.1 min
+step 800/7191  val_loss 3.1733  (saved best)
+step 820/7191  epoch 0.34  loss 3.1497  lr 1.96e-04  eta 64.6 min
+step 840/7191  epoch 0.35  loss 3.1677  lr 1.96e-04  eta 64.3 min
+step 860/7191  epoch 0.36  loss 3.1497  lr 1.96e-04  eta 64.0 min
+step 880/7191  epoch 0.37  loss 3.0633  lr 1.96e-04  eta 63.5 min
+step 900/7191  epoch 0.38  loss 3.1526  lr 1.95e-04  eta 63.2 min
+step 920/7191  epoch 0.38  loss 3.1938  lr 1.95e-04  eta 62.9 min
+step 940/7191  epoch 0.39  loss 3.1507  lr 1.95e-04  eta 62.5 min
+step 960/7191  epoch 0.40  loss 3.1238  lr 1.94e-04  eta 62.1 min
+step 980/7191  epoch 0.41  loss 3.2110  lr 1.94e-04  eta 61.8 min
+step 1000/7191  epoch 0.42  loss 3.0805  lr 1.94e-04  eta 61.5 min
+step 1000/7191  val_loss 3.1454  (saved best)
+step 1020/7191  epoch 0.43  loss 3.1569  lr 1.94e-04  eta 61.8 min
+step 1040/7191  epoch 0.43  loss 3.2832  lr 1.93e-04  eta 61.5 min
+step 1060/7191  epoch 0.44  loss 3.1201  lr 1.93e-04  eta 61.1 min
+step 1080/7191  epoch 0.45  loss 3.2096  lr 1.93e-04  eta 60.6 min
+step 1100/7191  epoch 0.46  loss 3.1338  lr 1.92e-04  eta 60.2 min
+step 1120/7191  epoch 0.47  loss 3.0917  lr 1.92e-04  eta 59.8 min
+step 1140/7191  epoch 0.48  loss 3.1658  lr 1.91e-04  eta 59.6 min
+step 1160/7191  epoch 0.48  loss 3.0456  lr 1.91e-04  eta 59.2 min
+step 1180/7191  epoch 0.49  loss 3.0345  lr 1.91e-04  eta 58.9 min
+step 1200/7191  epoch 0.50  loss 3.0919  lr 1.90e-04  eta 58.7 min
+step 1200/7191  val_loss 3.1262  (saved best)
+step 1220/7191  epoch 0.51  loss 3.1221  lr 1.90e-04  eta 59.0 min
+step 1240/7191  epoch 0.52  loss 3.0982  lr 1.90e-04  eta 58.8 min
+step 1260/7191  epoch 0.53  loss 3.1851  lr 1.89e-04  eta 58.6 min
+step 1280/7191  epoch 0.53  loss 3.1217  lr 1.89e-04  eta 58.2 min
+step 1300/7191  epoch 0.54  loss 3.1204  lr 1.88e-04  eta 57.8 min
+step 1320/7191  epoch 0.55  loss 3.1204  lr 1.88e-04  eta 57.4 min
+step 1340/7191  epoch 0.56  loss 3.0722  lr 1.87e-04  eta 57.2 min
+step 1360/7191  epoch 0.57  loss 3.1044  lr 1.87e-04  eta 56.9 min
+step 1380/7191  epoch 0.58  loss 3.1529  lr 1.87e-04  eta 56.7 min
+step 1400/7191  epoch 0.58  loss 3.1333  lr 1.86e-04  eta 56.5 min
+step 1400/7191  val_loss 3.1146  (saved best)
+step 1420/7191  epoch 0.59  loss 3.0336  lr 1.86e-04  eta 56.5 min
+step 1440/7191  epoch 0.60  loss 3.1291  lr 1.85e-04  eta 56.3 min
+step 1460/7191  epoch 0.61  loss 3.0991  lr 1.85e-04  eta 56.2 min
+step 1480/7191  epoch 0.62  loss 3.0674  lr 1.84e-04  eta 55.9 min
+step 1500/7191  epoch 0.63  loss 3.0463  lr 1.84e-04  eta 55.8 min
+step 1520/7191  epoch 0.63  loss 3.0459  lr 1.83e-04  eta 55.6 min
+step 1540/7191  epoch 0.64  loss 3.1704  lr 1.83e-04  eta 55.4 min
+step 1560/7191  epoch 0.65  loss 3.0735  lr 1.82e-04  eta 55.2 min
+step 1580/7191  epoch 0.66  loss 3.0669  lr 1.82e-04  eta 55.0 min
+step 1600/7191  epoch 0.67  loss 3.0653  lr 1.81e-04  eta 54.7 min
+step 1600/7191  val_loss 3.0967  (saved best)
+step 1620/7191  epoch 0.68  loss 3.0182  lr 1.81e-04  eta 54.8 min
+step 1640/7191  epoch 0.68  loss 3.1630  lr 1.80e-04  eta 54.7 min
+step 1660/7191  epoch 0.69  loss 3.1067  lr 1.80e-04  eta 54.5 min
+step 1680/7191  epoch 0.70  loss 3.1650  lr 1.79e-04  eta 54.4 min
+step 1700/7191  epoch 0.71  loss 3.1362  lr 1.78e-04  eta 54.1 min
+step 1720/7191  epoch 0.72  loss 3.1152  lr 1.78e-04  eta 53.8 min
+step 1740/7191  epoch 0.73  loss 3.1375  lr 1.77e-04  eta 53.5 min
+step 1760/7191  epoch 0.73  loss 3.1196  lr 1.77e-04  eta 53.2 min
+step 1780/7191  epoch 0.74  loss 3.0533  lr 1.76e-04  eta 53.0 min
+step 1800/7191  epoch 0.75  loss 3.0940  lr 1.76e-04  eta 52.8 min
+step 1800/7191  val_loss 3.0804  (saved best)
+step 1820/7191  epoch 0.76  loss 3.1387  lr 1.75e-04  eta 52.7 min
+step 1840/7191  epoch 0.77  loss 2.9971  lr 1.74e-04  eta 52.5 min
+step 1860/7191  epoch 0.78  loss 3.0846  lr 1.74e-04  eta 52.3 min
+step 1880/7191  epoch 0.78  loss 2.9961  lr 1.73e-04  eta 52.1 min
+step 1900/7191  epoch 0.79  loss 3.0293  lr 1.73e-04  eta 52.0 min
+step 1920/7191  epoch 0.80  loss 2.9931  lr 1.72e-04  eta 51.8 min
+step 1940/7191  epoch 0.81  loss 3.0951  lr 1.71e-04  eta 51.6 min
+step 1960/7191  epoch 0.82  loss 3.0569  lr 1.71e-04  eta 51.3 min
+step 1980/7191  epoch 0.83  loss 3.0557  lr 1.70e-04  eta 51.1 min
+step 2000/7191  epoch 0.83  loss 3.0449  lr 1.69e-04  eta 50.9 min
+step 2000/7191  val_loss 3.0687  (saved best)
+step 2020/7191  epoch 0.84  loss 3.0721  lr 1.69e-04  eta 50.8 min
+step 2040/7191  epoch 0.85  loss 2.9916  lr 1.68e-04  eta 50.6 min
+step 2060/7191  epoch 0.86  loss 3.1170  lr 1.67e-04  eta 50.3 min
+step 2080/7191  epoch 0.87  loss 3.0115  lr 1.67e-04  eta 50.1 min
+step 2100/7191  epoch 0.88  loss 3.0474  lr 1.66e-04  eta 49.8 min
+step 2120/7191  epoch 0.88  loss 3.0191  lr 1.65e-04  eta 49.6 min
+step 2140/7191  epoch 0.89  loss 3.0620  lr 1.65e-04  eta 49.4 min
+step 2160/7191  epoch 0.90  loss 3.0285  lr 1.64e-04  eta 49.3 min
+step 2180/7191  epoch 0.91  loss 3.0309  lr 1.63e-04  eta 48.9 min
+step 2200/7191  epoch 0.92  loss 3.0300  lr 1.63e-04  eta 48.6 min
+step 2200/7191  val_loss 3.0636  (saved best)
+step 2220/7191  epoch 0.93  loss 3.1158  lr 1.62e-04  eta 48.6 min
+step 2240/7191  epoch 0.93  loss 3.0087  lr 1.61e-04  eta 48.4 min
+step 2260/7191  epoch 0.94  loss 3.1918  lr 1.61e-04  eta 48.2 min
+step 2280/7191  epoch 0.95  loss 3.0237  lr 1.60e-04  eta 48.1 min
+step 2300/7191  epoch 0.96  loss 3.0202  lr 1.59e-04  eta 47.9 min
+step 2320/7191  epoch 0.97  loss 3.1471  lr 1.58e-04  eta 47.7 min
+step 2340/7191  epoch 0.98  loss 2.9661  lr 1.58e-04  eta 47.4 min
+step 2360/7191  epoch 0.98  loss 3.0494  lr 1.57e-04  eta 47.1 min
+step 2380/7191  epoch 0.99  loss 3.0959  lr 1.56e-04  eta 46.8 min
+step 2400/7191  epoch 1.00  loss 3.0975  lr 1.55e-04  eta 46.6 min
+step 2400/7191  val_loss 3.0491  (saved best)
+step 2420/7191  epoch 1.01  loss 2.9673  lr 1.55e-04  eta 46.5 min
+step 2440/7191  epoch 1.02  loss 2.9974  lr 1.54e-04  eta 46.3 min
+step 2460/7191  epoch 1.03  loss 2.9593  lr 1.53e-04  eta 46.0 min
+step 2480/7191  epoch 1.03  loss 3.0775  lr 1.52e-04  eta 45.8 min
+step 2500/7191  epoch 1.04  loss 2.9560  lr 1.52e-04  eta 45.6 min
+step 2520/7191  epoch 1.05  loss 3.1217  lr 1.51e-04  eta 45.5 min
+step 2540/7191  epoch 1.06  loss 3.0649  lr 1.50e-04  eta 45.2 min
+step 2560/7191  epoch 1.07  loss 3.0584  lr 1.49e-04  eta 45.0 min
+step 2580/7191  epoch 1.08  loss 2.9330  lr 1.48e-04  eta 44.8 min
+step 2600/7191  epoch 1.08  loss 3.1725  lr 1.48e-04  eta 44.7 min
+step 2600/7191  val_loss 3.0388  (saved best)
+step 2620/7191  epoch 1.09  loss 3.0351  lr 1.47e-04  eta 44.6 min
+step 2640/7191  epoch 1.10  loss 3.0618  lr 1.46e-04  eta 44.4 min
+step 2660/7191  epoch 1.11  loss 2.9220  lr 1.45e-04  eta 44.2 min
+step 2680/7191  epoch 1.12  loss 2.9638  lr 1.44e-04  eta 44.1 min
+step 2700/7191  epoch 1.13  loss 3.0525  lr 1.44e-04  eta 43.8 min
+step 2720/7191  epoch 1.13  loss 3.1026  lr 1.43e-04  eta 43.6 min
+step 2740/7191  epoch 1.14  loss 3.0271  lr 1.42e-04  eta 43.4 min
+step 2760/7191  epoch 1.15  loss 3.0591  lr 1.41e-04  eta 43.2 min
+step 2780/7191  epoch 1.16  loss 2.9628  lr 1.40e-04  eta 42.9 min
+step 2800/7191  epoch 1.17  loss 3.0244  lr 1.40e-04  eta 42.8 min
+step 2800/7191  val_loss 3.0276  (saved best)
+step 2820/7191  epoch 1.18  loss 3.1989  lr 1.39e-04  eta 42.7 min
+step 2840/7191  epoch 1.18  loss 2.9446  lr 1.38e-04  eta 42.5 min
+step 2860/7191  epoch 1.19  loss 3.0512  lr 1.37e-04  eta 42.3 min
+step 2880/7191  epoch 1.20  loss 3.0433  lr 1.36e-04  eta 42.0 min
+step 2900/7191  epoch 1.21  loss 2.9778  lr 1.35e-04  eta 41.9 min
+step 2920/7191  epoch 1.22  loss 2.9425  lr 1.35e-04  eta 41.7 min
+step 2940/7191  epoch 1.23  loss 2.9791  lr 1.34e-04  eta 41.5 min
+step 2960/7191  epoch 1.23  loss 3.0702  lr 1.33e-04  eta 41.3 min
+step 2980/7191  epoch 1.24  loss 2.9769  lr 1.32e-04  eta 41.1 min
+step 3000/7191  epoch 1.25  loss 3.0026  lr 1.31e-04  eta 40.8 min
+step 3000/7191  val_loss 3.0275  (saved best)
+step 3020/7191  epoch 1.26  loss 3.0359  lr 1.30e-04  eta 40.7 min
+step 3040/7191  epoch 1.27  loss 3.0653  lr 1.29e-04  eta 40.5 min
+step 3060/7191  epoch 1.28  loss 2.9341  lr 1.29e-04  eta 40.3 min
+step 3080/7191  epoch 1.28  loss 3.0172  lr 1.28e-04  eta 40.1 min
+step 3100/7191  epoch 1.29  loss 3.0128  lr 1.27e-04  eta 39.9 min
+step 3120/7191  epoch 1.30  loss 2.9434  lr 1.26e-04  eta 39.7 min
+step 3140/7191  epoch 1.31  loss 2.9519  lr 1.25e-04  eta 39.6 min
+step 3160/7191  epoch 1.32  loss 2.9506  lr 1.24e-04  eta 39.4 min
+step 3180/7191  epoch 1.33  loss 2.8967  lr 1.23e-04  eta 39.1 min
+step 3200/7191  epoch 1.34  loss 3.0298  lr 1.22e-04  eta 38.9 min
+step 3200/7191  val_loss 3.0135  (saved best)
+step 3220/7191  epoch 1.34  loss 3.0001  lr 1.22e-04  eta 38.8 min
+step 3240/7191  epoch 1.35  loss 3.1022  lr 1.21e-04  eta 38.6 min
+step 3260/7191  epoch 1.36  loss 3.0442  lr 1.20e-04  eta 38.4 min
+step 3280/7191  epoch 1.37  loss 2.9571  lr 1.19e-04  eta 38.2 min
+step 3300/7191  epoch 1.38  loss 2.9972  lr 1.18e-04  eta 38.0 min
+step 3320/7191  epoch 1.39  loss 3.0598  lr 1.17e-04  eta 37.8 min
+step 3340/7191  epoch 1.39  loss 2.9499  lr 1.16e-04  eta 37.6 min
+step 3360/7191  epoch 1.40  loss 2.9839  lr 1.15e-04  eta 37.4 min
+step 3380/7191  epoch 1.41  loss 2.9802  lr 1.14e-04  eta 37.2 min
+step 3400/7191  epoch 1.42  loss 2.9060  lr 1.14e-04  eta 37.0 min
+step 3400/7191  val_loss 3.0101  (saved best)
+step 3420/7191  epoch 1.43  loss 2.8734  lr 1.13e-04  eta 36.8 min
+step 3440/7191  epoch 1.44  loss 2.9112  lr 1.12e-04  eta 36.6 min
+step 3460/7191  epoch 1.44  loss 3.0202  lr 1.11e-04  eta 36.4 min
+step 3480/7191  epoch 1.45  loss 2.9709  lr 1.10e-04  eta 36.2 min
+step 3500/7191  epoch 1.46  loss 2.9793  lr 1.09e-04  eta 36.0 min
+step 3520/7191  epoch 1.47  loss 2.9739  lr 1.08e-04  eta 35.8 min
+step 3540/7191  epoch 1.48  loss 3.0152  lr 1.07e-04  eta 35.6 min
+step 3560/7191  epoch 1.49  loss 2.8943  lr 1.06e-04  eta 35.4 min
+step 3580/7191  epoch 1.49  loss 3.1076  lr 1.06e-04  eta 35.2 min
+step 3600/7191  epoch 1.50  loss 3.0895  lr 1.05e-04  eta 35.0 min
+step 3600/7191  val_loss 2.9986  (saved best)
+step 3620/7191  epoch 1.51  loss 3.0190  lr 1.04e-04  eta 34.9 min
+step 3640/7191  epoch 1.52  loss 2.9879  lr 1.03e-04  eta 34.7 min
+step 3660/7191  epoch 1.53  loss 2.9680  lr 1.02e-04  eta 34.4 min
+step 3680/7191  epoch 1.54  loss 3.0710  lr 1.01e-04  eta 34.2 min
+step 3700/7191  epoch 1.54  loss 3.0573  lr 1.00e-04  eta 34.0 min
+step 3720/7191  epoch 1.55  loss 3.0509  lr 9.92e-05  eta 33.8 min
+step 3740/7191  epoch 1.56  loss 2.9833  lr 9.83e-05  eta 33.6 min
+step 3760/7191  epoch 1.57  loss 2.9448  lr 9.74e-05  eta 33.4 min
+step 3780/7191  epoch 1.58  loss 2.9138  lr 9.65e-05  eta 33.2 min
+step 3800/7191  epoch 1.59  loss 3.0477  lr 9.56e-05  eta 33.0 min
+step 3800/7191  val_loss 2.9969  (saved best)
+step 3820/7191  epoch 1.59  loss 2.9544  lr 9.47e-05  eta 32.9 min
+step 3840/7191  epoch 1.60  loss 2.8802  lr 9.38e-05  eta 32.7 min
+step 3860/7191  epoch 1.61  loss 2.9634  lr 9.29e-05  eta 32.5 min
+step 3880/7191  epoch 1.62  loss 2.9593  lr 9.20e-05  eta 32.3 min
+step 3900/7191  epoch 1.63  loss 2.9035  lr 9.11e-05  eta 32.1 min
+step 3920/7191  epoch 1.64  loss 2.9756  lr 9.02e-05  eta 31.9 min
+step 3940/7191  epoch 1.64  loss 2.9148  lr 8.93e-05  eta 31.7 min
+step 3960/7191  epoch 1.65  loss 2.9178  lr 8.85e-05  eta 31.5 min
+step 3980/7191  epoch 1.66  loss 3.0511  lr 8.76e-05  eta 31.3 min
+step 4000/7191  epoch 1.67  loss 2.9989  lr 8.67e-05  eta 31.1 min
+step 4000/7191  val_loss 2.9907  (saved best)
+step 4020/7191  epoch 1.68  loss 3.0054  lr 8.58e-05  eta 30.9 min
+step 4040/7191  epoch 1.69  loss 2.9462  lr 8.49e-05  eta 30.8 min
+step 4060/7191  epoch 1.69  loss 3.0707  lr 8.40e-05  eta 30.5 min
+step 4080/7191  epoch 1.70  loss 2.9779  lr 8.31e-05  eta 30.3 min
+step 4100/7191  epoch 1.71  loss 2.9282  lr 8.22e-05  eta 30.1 min
+step 4120/7191  epoch 1.72  loss 2.9035  lr 8.13e-05  eta 29.9 min
+step 4140/7191  epoch 1.73  loss 3.0278  lr 8.04e-05  eta 29.7 min
+step 4160/7191  epoch 1.74  loss 2.9683  lr 7.96e-05  eta 29.4 min
+step 4180/7191  epoch 1.74  loss 2.9608  lr 7.87e-05  eta 29.2 min
+step 4200/7191  epoch 1.75  loss 2.9772  lr 7.78e-05  eta 29.0 min
+step 4200/7191  val_loss 2.9866  (saved best)
+step 4220/7191  epoch 1.76  loss 2.9631  lr 7.69e-05  eta 28.9 min
+step 4240/7191  epoch 1.77  loss 2.9495  lr 7.61e-05  eta 28.7 min
+step 4260/7191  epoch 1.78  loss 2.9802  lr 7.52e-05  eta 28.5 min
+step 4280/7191  epoch 1.79  loss 3.0254  lr 7.43e-05  eta 28.3 min
+step 4300/7191  epoch 1.79  loss 2.9488  lr 7.34e-05  eta 28.1 min
+step 4320/7191  epoch 1.80  loss 2.9409  lr 7.26e-05  eta 27.9 min
+step 4340/7191  epoch 1.81  loss 2.9018  lr 7.17e-05  eta 27.8 min
+step 4360/7191  epoch 1.82  loss 3.0062  lr 7.08e-05  eta 27.6 min
+step 4380/7191  epoch 1.83  loss 2.9773  lr 7.00e-05  eta 27.4 min
+step 4400/7191  epoch 1.84  loss 2.9859  lr 6.91e-05  eta 27.2 min
+step 4400/7191  val_loss 2.9830  (saved best)
+step 4420/7191  epoch 1.84  loss 2.9901  lr 6.83e-05  eta 27.0 min
+step 4440/7191  epoch 1.85  loss 2.9772  lr 6.74e-05  eta 26.8 min
+step 4460/7191  epoch 1.86  loss 3.0270  lr 6.66e-05  eta 26.6 min
+step 4480/7191  epoch 1.87  loss 3.0075  lr 6.57e-05  eta 26.4 min
+step 4500/7191  epoch 1.88  loss 3.0191  lr 6.49e-05  eta 26.2 min
+step 4520/7191  epoch 1.89  loss 2.9616  lr 6.40e-05  eta 26.0 min
+step 4540/7191  epoch 1.89  loss 3.0112  lr 6.32e-05  eta 25.8 min
+step 4560/7191  epoch 1.90  loss 2.9086  lr 6.24e-05  eta 25.6 min
+step 4580/7191  epoch 1.91  loss 2.9170  lr 6.15e-05  eta 25.4 min
+step 4600/7191  epoch 1.92  loss 2.9264  lr 6.07e-05  eta 25.2 min
+step 4600/7191  val_loss 2.9769  (saved best)
+step 4620/7191  epoch 1.93  loss 2.9191  lr 5.99e-05  eta 25.1 min
+step 4640/7191  epoch 1.94  loss 2.9394  lr 5.90e-05  eta 24.9 min
+step 4660/7191  epoch 1.94  loss 3.0115  lr 5.82e-05  eta 24.7 min
+step 4680/7191  epoch 1.95  loss 3.0541  lr 5.74e-05  eta 24.5 min
+step 4700/7191  epoch 1.96  loss 2.8915  lr 5.66e-05  eta 24.3 min
+step 4720/7191  epoch 1.97  loss 3.0188  lr 5.58e-05  eta 24.1 min
+step 4740/7191  epoch 1.98  loss 2.8599  lr 5.50e-05  eta 23.9 min
+step 4760/7191  epoch 1.99  loss 3.1185  lr 5.42e-05  eta 23.7 min
+step 4780/7191  epoch 1.99  loss 3.0312  lr 5.34e-05  eta 23.5 min
+step 4800/7191  epoch 2.00  loss 2.9778  lr 5.26e-05  eta 23.3 min
+step 4800/7191  val_loss 2.9738  (saved best)
+step 4820/7191  epoch 2.01  loss 2.9706  lr 5.18e-05  eta 23.1 min
+step 4840/7191  epoch 2.02  loss 2.9739  lr 5.10e-05  eta 22.9 min
+step 4860/7191  epoch 2.03  loss 3.0287  lr 5.02e-05  eta 22.7 min
+step 4880/7191  epoch 2.04  loss 2.8229  lr 4.94e-05  eta 22.5 min
+step 4900/7191  epoch 2.04  loss 2.8884  lr 4.87e-05  eta 22.3 min
+step 4920/7191  epoch 2.05  loss 2.9720  lr 4.79e-05  eta 22.1 min
+step 4940/7191  epoch 2.06  loss 2.9237  lr 4.71e-05  eta 21.9 min
+step 4960/7191  epoch 2.07  loss 2.9534  lr 4.64e-05  eta 21.7 min
+step 4980/7191  epoch 2.08  loss 3.0017  lr 4.56e-05  eta 21.5 min
+step 5000/7191  epoch 2.09  loss 2.9455  lr 4.49e-05  eta 21.3 min
+step 5000/7191  val_loss 2.9739
+step 5020/7191  epoch 2.09  loss 2.9222  lr 4.41e-05  eta 21.1 min
+step 5040/7191  epoch 2.10  loss 2.9485  lr 4.34e-05  eta 20.9 min
+step 5060/7191  epoch 2.11  loss 2.8665  lr 4.26e-05  eta 20.7 min
+step 5080/7191  epoch 2.12  loss 2.9630  lr 4.19e-05  eta 20.5 min
+step 5100/7191  epoch 2.13  loss 2.9406  lr 4.12e-05  eta 20.3 min
+step 5120/7191  epoch 2.14  loss 2.9954  lr 4.04e-05  eta 20.1 min
+step 5140/7191  epoch 2.14  loss 3.0773  lr 3.97e-05  eta 19.9 min
+step 5160/7191  epoch 2.15  loss 2.8586  lr 3.90e-05  eta 19.7 min
+step 5180/7191  epoch 2.16  loss 2.9439  lr 3.83e-05  eta 19.5 min
+step 5200/7191  epoch 2.17  loss 2.9307  lr 3.76e-05  eta 19.3 min
+step 5200/7191  val_loss 2.9707  (saved best)
+step 5220/7191  epoch 2.18  loss 2.9439  lr 3.69e-05  eta 19.2 min
+step 5240/7191  epoch 2.19  loss 3.0317  lr 3.62e-05  eta 19.0 min
+step 5260/7191  epoch 2.19  loss 2.9393  lr 3.55e-05  eta 18.8 min
+step 5280/7191  epoch 2.20  loss 2.9502  lr 3.48e-05  eta 18.6 min
+step 5300/7191  epoch 2.21  loss 2.9112  lr 3.41e-05  eta 18.4 min
+step 5320/7191  epoch 2.22  loss 2.9197  lr 3.34e-05  eta 18.2 min
+step 5340/7191  epoch 2.23  loss 2.8764  lr 3.28e-05  eta 18.0 min
+step 5360/7191  epoch 2.24  loss 2.9381  lr 3.21e-05  eta 17.8 min
+step 5380/7191  epoch 2.24  loss 2.8827  lr 3.15e-05  eta 17.6 min
+step 5400/7191  epoch 2.25  loss 2.9773  lr 3.08e-05  eta 17.4 min
+step 5400/7191  val_loss 2.9684  (saved best)
+step 5420/7191  epoch 2.26  loss 2.9375  lr 3.02e-05  eta 17.3 min
+step 5440/7191  epoch 2.27  loss 2.9335  lr 2.95e-05  eta 17.1 min
+step 5460/7191  epoch 2.28  loss 2.9248  lr 2.89e-05  eta 16.9 min
+step 5480/7191  epoch 2.29  loss 2.9592  lr 2.82e-05  eta 16.7 min
+step 5500/7191  epoch 2.29  loss 2.9761  lr 2.76e-05  eta 16.5 min
+step 5520/7191  epoch 2.30  loss 2.9763  lr 2.70e-05  eta 16.3 min
+step 5540/7191  epoch 2.31  loss 2.9390  lr 2.64e-05  eta 16.1 min
+step 5560/7191  epoch 2.32  loss 2.8488  lr 2.58e-05  eta 15.9 min
+step 5580/7191  epoch 2.33  loss 2.9959  lr 2.52e-05  eta 15.7 min
+step 5600/7191  epoch 2.34  loss 2.8962  lr 2.46e-05  eta 15.5 min
+step 5600/7191  val_loss 2.9666  (saved best)
+step 5620/7191  epoch 2.34  loss 2.9235  lr 2.40e-05  eta 15.3 min
+step 5640/7191  epoch 2.35  loss 2.9313  lr 2.34e-05  eta 15.1 min
+step 5660/7191  epoch 2.36  loss 2.9898  lr 2.28e-05  eta 14.9 min
+step 5680/7191  epoch 2.37  loss 3.0122  lr 2.23e-05  eta 14.7 min
+step 5700/7191  epoch 2.38  loss 2.9486  lr 2.17e-05  eta 14.5 min
+step 5720/7191  epoch 2.39  loss 2.9681  lr 2.12e-05  eta 14.3 min
+step 5740/7191  epoch 2.39  loss 2.9363  lr 2.06e-05  eta 14.1 min
+step 5760/7191  epoch 2.40  loss 2.8596  lr 2.01e-05  eta 13.9 min
+step 5780/7191  epoch 2.41  loss 2.8464  lr 1.95e-05  eta 13.7 min
+step 5800/7191  epoch 2.42  loss 2.8978  lr 1.90e-05  eta 13.5 min
+step 5800/7191  val_loss 2.9650  (saved best)
+step 5820/7191  epoch 2.43  loss 2.9970  lr 1.85e-05  eta 13.4 min
+step 5840/7191  epoch 2.44  loss 2.9157  lr 1.79e-05  eta 13.2 min
+step 5860/7191  epoch 2.44  loss 2.8609  lr 1.74e-05  eta 13.0 min
+step 5880/7191  epoch 2.45  loss 3.0216  lr 1.69e-05  eta 12.8 min
+step 5900/7191  epoch 2.46  loss 2.9233  lr 1.64e-05  eta 12.6 min
+step 5920/7191  epoch 2.47  loss 2.8919  lr 1.59e-05  eta 12.4 min
+step 5940/7191  epoch 2.48  loss 3.0134  lr 1.55e-05  eta 12.2 min
+step 5960/7191  epoch 2.49  loss 2.9583  lr 1.50e-05  eta 12.0 min
+step 5980/7191  epoch 2.49  loss 2.9403  lr 1.45e-05  eta 11.8 min
+step 6000/7191  epoch 2.50  loss 2.9615  lr 1.40e-05  eta 11.6 min
+step 6000/7191  val_loss 2.9639  (saved best)
+step 6020/7191  epoch 2.51  loss 3.0107  lr 1.36e-05  eta 11.4 min
+step 6040/7191  epoch 2.52  loss 2.9407  lr 1.31e-05  eta 11.2 min
+step 6060/7191  epoch 2.53  loss 2.8099  lr 1.27e-05  eta 11.0 min
+step 6080/7191  epoch 2.54  loss 2.9779  lr 1.23e-05  eta 10.8 min
+step 6100/7191  epoch 2.54  loss 3.0095  lr 1.18e-05  eta 10.6 min
+step 6120/7191  epoch 2.55  loss 2.9847  lr 1.14e-05  eta 10.4 min
+step 6140/7191  epoch 2.56  loss 3.0584  lr 1.10e-05  eta 10.2 min
+step 6160/7191  epoch 2.57  loss 3.0640  lr 1.06e-05  eta 10.0 min
+step 6180/7191  epoch 2.58  loss 2.8562  lr 1.02e-05  eta 9.8 min
+step 6200/7191  epoch 2.59  loss 2.9768  lr 9.79e-06  eta 9.6 min
+step 6200/7191  val_loss 2.9641
+step 6220/7191  epoch 2.59  loss 2.8572  lr 9.41e-06  eta 9.5 min
+step 6240/7191  epoch 2.60  loss 2.9407  lr 9.03e-06  eta 9.3 min
+step 6260/7191  epoch 2.61  loss 2.9325  lr 8.66e-06  eta 9.1 min
+step 6280/7191  epoch 2.62  loss 2.9266  lr 8.30e-06  eta 8.9 min
+step 6300/7191  epoch 2.63  loss 2.8330  lr 7.94e-06  eta 8.7 min
+step 6320/7191  epoch 2.64  loss 3.0420  lr 7.59e-06  eta 8.5 min
+step 6340/7191  epoch 2.64  loss 2.8973  lr 7.25e-06  eta 8.3 min
+step 6360/7191  epoch 2.65  loss 2.9053  lr 6.92e-06  eta 8.1 min
+step 6380/7191  epoch 2.66  loss 2.9308  lr 6.60e-06  eta 7.9 min
+step 6400/7191  epoch 2.67  loss 2.9338  lr 6.28e-06  eta 7.7 min
+step 6400/7191  val_loss 2.9624  (saved best)
+step 6420/7191  epoch 2.68  loss 2.9180  lr 5.97e-06  eta 7.5 min
+step 6440/7191  epoch 2.69  loss 2.9520  lr 5.66e-06  eta 7.3 min
+step 6460/7191  epoch 2.70  loss 2.9454  lr 5.37e-06  eta 7.1 min
+step 6480/7191  epoch 2.70  loss 3.0030  lr 5.08e-06  eta 6.9 min
+step 6500/7191  epoch 2.71  loss 2.9622  lr 4.80e-06  eta 6.7 min
+step 6520/7191  epoch 2.72  loss 2.9179  lr 4.53e-06  eta 6.5 min
+step 6540/7191  epoch 2.73  loss 2.9467  lr 4.27e-06  eta 6.4 min
+step 6560/7191  epoch 2.74  loss 3.0265  lr 4.01e-06  eta 6.2 min
+step 6580/7191  epoch 2.75  loss 2.8552  lr 3.76e-06  eta 6.0 min
+step 6600/7191  epoch 2.75  loss 2.9021  lr 3.52e-06  eta 5.8 min
+step 6600/7191  val_loss 2.9619  (saved best)
+step 6620/7191  epoch 2.76  loss 3.0503  lr 3.29e-06  eta 5.6 min
+step 6640/7191  epoch 2.77  loss 2.9593  lr 3.06e-06  eta 5.4 min
+step 6660/7191  epoch 2.78  loss 3.0021  lr 2.85e-06  eta 5.2 min
+step 6680/7191  epoch 2.79  loss 2.9072  lr 2.64e-06  eta 5.0 min
+step 6700/7191  epoch 2.80  loss 2.9037  lr 2.43e-06  eta 4.8 min
+step 6720/7191  epoch 2.80  loss 2.9728  lr 2.24e-06  eta 4.6 min
+step 6740/7191  epoch 2.81  loss 2.9501  lr 2.06e-06  eta 4.4 min
+step 6760/7191  epoch 2.82  loss 2.9009  lr 1.88e-06  eta 4.2 min
+step 6780/7191  epoch 2.83  loss 2.9751  lr 1.71e-06  eta 4.0 min
+step 6800/7191  epoch 2.84  loss 2.9451  lr 1.55e-06  eta 3.8 min
+step 6800/7191  val_loss 2.9620
+step 6820/7191  epoch 2.85  loss 2.9160  lr 1.39e-06  eta 3.6 min
+step 6840/7191  epoch 2.85  loss 2.8681  lr 1.25e-06  eta 3.4 min
+step 6860/7191  epoch 2.86  loss 3.0110  lr 1.11e-06  eta 3.2 min
+step 6880/7191  epoch 2.87  loss 2.9605  lr 9.79e-07  eta 3.0 min
+step 6900/7191  epoch 2.88  loss 2.9853  lr 8.57e-07  eta 2.8 min
+step 6920/7191  epoch 2.89  loss 2.9145  lr 7.44e-07  eta 2.6 min
+step 6940/7191  epoch 2.90  loss 2.9360  lr 6.38e-07  eta 2.4 min
+step 6960/7191  epoch 2.90  loss 3.0141  lr 5.41e-07  eta 2.2 min
+step 6980/7191  epoch 2.91  loss 2.8559  lr 4.51e-07  eta 2.1 min
+step 7000/7191  epoch 2.92  loss 2.9823  lr 3.70e-07  eta 1.9 min
+step 7000/7191  val_loss 2.9619
+step 7020/7191  epoch 2.93  loss 2.9503  lr 2.96e-07  eta 1.7 min
+step 7040/7191  epoch 2.94  loss 2.9081  lr 2.31e-07  eta 1.5 min
+step 7060/7191  epoch 2.95  loss 2.9497  lr 1.74e-07  eta 1.3 min
+step 7080/7191  epoch 2.95  loss 2.9355  lr 1.25e-07  eta 1.1 min
+step 7100/7191  epoch 2.96  loss 2.8675  lr 8.40e-08  eta 0.9 min
+step 7120/7191  epoch 2.97  loss 2.9187  lr 5.11e-08  eta 0.7 min
+step 7140/7191  epoch 2.98  loss 2.9662  lr 2.64e-08  eta 0.5 min
+step 7160/7191  epoch 2.99  loss 2.9505  lr 9.74e-09  eta 0.3 min
+step 7180/7191  epoch 3.00  loss 2.9849  lr 1.23e-09  eta 0.1 min
+step 7191/7191  epoch 3.00  loss 2.9175  lr 0.00e+00  eta 0.0 min
+step 7191/7191  val_loss 2.9619
+
+val_loss: base 3.7141 -> best 2.9619
+adapter saved to adapters/bul_instruct (final) and adapters/bul_instruct/best (lowest val loss)
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+
+stopped with <|end_of_text|>: 7/8 sample generations
+
+--- Сортирайте списъка с артикулите по цена.
+Ето един пример за изкуствен интелект, който е използван за избор.
+[stopped=True, 25 tokens]
+
+--- Намерете два примера за това как термините "компютър" и "програмиране" се използват в изречение.
+"Три дни, които са на път да се използват заедно, за да се използват за по-ниско.
+[stopped=True, 42 tokens]
+
+--- Редактирайте следното изречение, така че да е граматически правилно: В къщата ми има две котки
+Тя се отвори.
+[stopped=True, 9 tokens]
+finished: Fri Nov 13 21:01:31 EST 2026  exit: 0

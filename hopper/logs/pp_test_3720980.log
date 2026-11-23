@@ -1,0 +1,65 @@
+node: gpu021.orc.gmu.edu  job: 3720980  started: Fri Nov 13 17:15:40 EST 2026
+Fri Nov 13 17:15:40 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          On  |   00000000:C1:00.0 Off |                   On |
+| N/A   27C    P0             84W /  500W |   10360MiB /  81920MiB |     N/A      Default |
+|                                         |                        |              Enabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| MIG devices:                                                                            |
++------------------+----------------------------------+-----------+-----------------------+
+| GPU  GI  CI  MIG |              Shared Memory-Usage |        Vol|        Shared         |
+|      ID  ID  Dev |                Shared BAR1-Usage | SM     Unc| CE ENC  DEC  OFA  JPG |
+|                  |                                  |        ECC|                       |
+|==================+==================================+===========+=======================|
+|  0    2   0   0  |             107MiB / 40192MiB    | 42      0 |  3   0    2    0    0 |
+|                  |               0MiB / 24543MiB    |           |                       |
++------------------+----------------------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+train: 2000 examples (12916 dropped as > 512 tokens)
+val:   300 examples (0 dropped)
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights:   1%|          | 1/111 [00:00<00:47,  2.33it/s]Loading weights:  82%|████████▏ | 91/111 [00:00<00:00, 224.57it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 191.44it/s]
+trainable params: 3,391,488 || all params: 313,658,112 || trainable%: 1.0813
+training stop-token output row: 768 extra params
+step 0/125  val_loss 3.7141  (untrained adapter = base model)
+step 25/125  epoch 0.20  loss 3.8901  lr 1.84e-04  eta 1.0 min
+step 50/125  epoch 0.40  loss 3.5654  lr 1.35e-04  eta 0.7 min
+step 50/125  val_loss 3.4889  (saved best)
+step 75/125  epoch 0.60  loss 3.5106  lr 7.21e-05  eta 0.5 min
+step 100/125  epoch 0.80  loss 3.4962  lr 2.00e-05  eta 0.3 min
+step 100/125  val_loss 3.4261  (saved best)
+step 125/125  epoch 1.00  loss 3.4857  lr 0.00e+00  eta 0.0 min
+step 125/125  val_loss 3.4247  (saved best)
+
+val_loss: base 3.7141 -> best 3.4247
+adapter saved to adapters/test_run (final) and adapters/test_run/best (lowest val loss)
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+
+stopped with <|end_of_text|>: 7/8 sample generations
+
+--- Сортирайте списъка с артикулите по цена.
+Да вървим.
+[stopped=True, 9 tokens]
+
+--- Намерете два примера за това как термините "компютър" и "програмиране" се използват в изречение.
+" - Б.пр.]- Да, но не е ли така?- попита той, като се опитваше да се измъкне оттук.
+[stopped=True, 44 tokens]
+
+--- Редактирайте следното изречение, така че да е граматически правилно: В къщата ми има две котки
+Това е най-важното.
+[stopped=True, 10 tokens]
+finished: Fri Nov 13 17:18:34 EST 2026  exit: 0

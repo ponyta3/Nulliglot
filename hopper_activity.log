@@ -1116,3 +1116,257 @@ pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,k
 $ P=/scratch/pgopalan/project_Praveen; ls -la $P; echo "## sizes"; du -sh $P/* 2>/dev/null; echo "## files outside venv"; find $P -path $P/venv -prune -o -path $P/models -prune -o -type f -printf "%s %P\n" | sort -rn | head -80; echo "## count"; find $P -path $P/venv -prune -o -type f -print | wc -l; echo "## other scratch"; ls /scratch/pgopalan
 pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,keyboard-interactive).
 ===== 2026-11-23 10:20:46  END (exit 255)
+
+===== 2026-11-23 10:28:40  START
+$ hostname; whoami
+pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,keyboard-interactive).
+===== 2026-11-23 10:28:40  END (exit 255)
+
+===== 2026-11-23 10:36:03  START
+$ hostname; whoami; P=/scratch/pgopalan/project_Praveen; echo "## top"; ls -la $P; echo "## sizes"; du -sh $P/* 2>/dev/null; echo "## files outside venv and models (bytes path)"; find $P -path $P/venv -prune -o -path $P/models -prune -o -type f -printf "%s %TY-%Tm-%Td %P\n" | sort -k3 | head -150; echo "## count"; find $P -path $P/venv -prune -o -path $P/models -prune -o -type f -print | wc -l; echo "## models"; du -sh $P/models/* 2>/dev/null; echo "## other scratch and home"; ls -la /scratch/pgopalan; ls -la ~ | head -30; squeue -u $USER
+hopper1.orc.gmu.edu
+pgopalan
+## top
+total 0
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:58 .
+drwx--S--- 2 pgopalan scratch 4096 Nov 13 13:48 ..
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 15 15:50 adapters
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 15 15:18 data
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 15 15:18 logs
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 14:10 models
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 15 13:13 scripts
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 14:00 venv
+## sizes
+2.5G	/scratch/pgopalan/project_Praveen/adapters
+158M	/scratch/pgopalan/project_Praveen/data
+71K	/scratch/pgopalan/project_Praveen/logs
+609M	/scratch/pgopalan/project_Praveen/models
+78K	/scratch/pgopalan/project_Praveen/scripts
+5.5G	/scratch/pgopalan/project_Praveen/venv
+## files outside venv and models (bytes path)
+5184 2026-11-13 adapters/bul_instruct/README.md
+1171 2026-11-13 adapters/bul_instruct/adapter_config.json
+13587864 2026-11-13 adapters/bul_instruct/adapter_model.safetensors
+5184 2026-11-13 adapters/bul_instruct/best/README.md
+1171 2026-11-13 adapters/bul_instruct/best/adapter_config.json
+13587864 2026-11-13 adapters/bul_instruct/best/adapter_model.safetensors
+4734 2026-11-13 adapters/bul_instruct/best/stop_token.pt
+3753 2026-11-13 adapters/bul_instruct/samples.json
+4734 2026-11-13 adapters/bul_instruct/stop_token.pt
+377173 2026-11-14 adapters/bul_instruct/test_eval.json
+17209920 2026-11-13 adapters/bul_instruct/tokenizer.json
+328 2026-11-13 adapters/bul_instruct/tokenizer_config.json
+599 2026-11-13 adapters/bul_instruct/train_args.json
+29711 2026-11-13 adapters/bul_instruct/train_log.jsonl
+725 2026-11-15 adapters/probe_copy_fullft/best/config.json
+147 2026-11-15 adapters/probe_copy_fullft/best/generation_config.json
+1241078936 2026-11-15 adapters/probe_copy_fullft/best/model.safetensors
+725 2026-11-15 adapters/probe_copy_fullft/config.json
+147 2026-11-15 adapters/probe_copy_fullft/generation_config.json
+1241078936 2026-11-15 adapters/probe_copy_fullft/model.safetensors
+4402 2026-11-15 adapters/probe_copy_fullft/samples.json
+310326 2026-11-15 adapters/probe_copy_fullft/test_eval.json
+17209920 2026-11-15 adapters/probe_copy_fullft/tokenizer.json
+328 2026-11-15 adapters/probe_copy_fullft/tokenizer_config.json
+611 2026-11-15 adapters/probe_copy_fullft/train_args.json
+12943 2026-11-15 adapters/probe_copy_fullft/train_log.jsonl
+5184 2026-11-15 adapters/probe_copy_lora/README.md
+1171 2026-11-15 adapters/probe_copy_lora/adapter_config.json
+13587864 2026-11-15 adapters/probe_copy_lora/adapter_model.safetensors
+5184 2026-11-15 adapters/probe_copy_lora/best/README.md
+1171 2026-11-15 adapters/probe_copy_lora/best/adapter_config.json
+13587864 2026-11-15 adapters/probe_copy_lora/best/adapter_model.safetensors
+4734 2026-11-15 adapters/probe_copy_lora/best/stop_token.pt
+4051 2026-11-15 adapters/probe_copy_lora/samples.json
+4734 2026-11-15 adapters/probe_copy_lora/stop_token.pt
+309779 2026-11-15 adapters/probe_copy_lora/test_eval.json
+17209920 2026-11-15 adapters/probe_copy_lora/tokenizer.json
+328 2026-11-15 adapters/probe_copy_lora/tokenizer_config.json
+610 2026-11-15 adapters/probe_copy_lora/train_args.json
+12960 2026-11-15 adapters/probe_copy_lora/train_log.jsonl
+5184 2026-11-13 adapters/test_run/README.md
+1171 2026-11-13 adapters/test_run/adapter_config.json
+13587864 2026-11-13 adapters/test_run/adapter_model.safetensors
+5184 2026-11-13 adapters/test_run/best/README.md
+1171 2026-11-13 adapters/test_run/best/adapter_config.json
+13587864 2026-11-13 adapters/test_run/best/adapter_model.safetensors
+4734 2026-11-13 adapters/test_run/best/stop_token.pt
+3055 2026-11-13 adapters/test_run/samples.json
+4734 2026-11-13 adapters/test_run/stop_token.pt
+17209920 2026-11-13 adapters/test_run/tokenizer.json
+328 2026-11-13 adapters/test_run/tokenizer_config.json
+594 2026-11-13 adapters/test_run/train_args.json
+542 2026-11-13 adapters/test_run/train_log.jsonl
+80223819 2026-11-13 data/alpaca_data_cleaned.bg.json
+111624 2026-11-15 data/probe_copy/test.json
+5722806 2026-11-15 data/probe_copy/train.json
+170622 2026-11-15 data/probe_copy/val.json
+238 2026-11-13 data/splits/split_info.json
+178543 2026-11-13 data/splits/test.json
+78540044 2026-11-13 data/splits/train.json
+262996 2026-11-13 data/splits/val.json
+2255 2026-11-14 logs/pp_eval_3729191.log
+30545 2026-11-13 logs/pp_full_3725405.log
+34200 2026-11-15 logs/pp_probe_3750107.log
+5060 2026-11-13 logs/pp_test_3720980.log
+4149 2026-11-13 scripts/__pycache__/instruct_prompt.cpython-311.pyc
+8684 2026-11-13 scripts/__pycache__/stop_token.cpython-311.pyc
+25630 2026-11-14 scripts/__pycache__/train_lora.cpython-311.pyc
+660 2026-11-14 scripts/eval_job.slurm
+6376 2026-11-14 scripts/eval_test.py
+685 2026-11-13 scripts/full_job.slurm
+2749 2026-11-13 scripts/instruct_prompt.py
+2418 2026-11-15 scripts/make_copy_probe.py
+1637 2026-11-15 scripts/probe_job.slurm
+3016 2026-11-13 scripts/split_data.py
+4418 2026-11-13 scripts/stop_token.py
+734 2026-11-13 scripts/test_job.slurm
+14810 2026-11-13 scripts/train_lora.py
+## count
+78
+## models
+609M	/scratch/pgopalan/project_Praveen/models/bul_100m
+## other scratch and home
+total 0
+drwx--S--- 2 pgopalan scratch 4096 Nov 13 13:48 .
+drwxr-sr-x 2 root     scratch 4096 Nov 19 12:09 ..
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 14:46 cache
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 14:10 langsense
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 13:51 nanotron-env
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:58 project_Praveen
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 29 21:57 tmp
+total 18
+drwx------ 2 pgopalan users 4096 Nov 13 21:01 .
+drwxr-xr-x 2 root     root  4096 Nov 19 12:09 ..
+-rw------- 1 pgopalan users 4998 Nov 13 17:09 .bash_history
+-rw------- 1 pgopalan users   18 Aug 26  2025 .bash_logout
+-rw------- 1 pgopalan users  141 Aug 26  2025 .bash_profile
+-rw------- 1 pgopalan users 1031 Oct 22 15:41 .bashrc
+drwxr-xr-x 2 pgopalan users 4096 Oct 22 15:08 .cache
+drwx------ 2 pgopalan users 4096 Oct 22 10:04 .config
+-rw------- 1 pgopalan users   16 Oct 22 10:04 .esd_auth
+-rw-r--r-- 1 pgopalan users 6871 Nov 23 10:36 .lastlogin
+-rw------- 1 pgopalan users  143 Oct 22 15:08 .netrc
+drwx------ 2 pgopalan users 4096 Nov 13 17:16 .nv
+drwx------ 2 pgopalan users 4096 Oct 22 10:04 .ssh
+-rw------- 1 pgopalan users 1079 Oct 22 22:51 .viminfo
+-rw-r--r-- 1 pgopalan users  165 Oct 22 14:24 .wget-hsts
+-rw-r--r-- 1 pgopalan users   97 Oct 28 13:18 id_ed25519.pub
+drwxr-xr-x 2 pgopalan users 4096 Oct 21 18:34 pfiles
+drwxr-xr-x 2 pgopalan users 4096 Nov 13 21:01 project_praveen
+-rw-r--r-- 1 pgopalan users    0 Nov 13 13:04 testnov13
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+===== 2026-11-23 10:36:17  END (exit 0)
+
+===== 2026-11-23 10:36:43  START
+COPY FROM HOPPER (rsync, read-only on Hopper)  /scratch/pgopalan/project_Praveen/{adapters,logs,scripts}  ->  hopper/   excluding *.safetensors, __pycache__
+===== 2026-11-23 10:36:50  END (exit 0)
+
+===== 2026-11-23 10:36:50  START
+$ echo "## weights sha"; cd /scratch/pgopalan/project_Praveen/adapters && sha256sum */*.safetensors */best/*.safetensors | cut -c1-12,65-; echo "## home project_praveen"; ls -la ~/project_praveen ~/pfiles | head -30; echo "## langsense"; du -sh /scratch/pgopalan/langsense /scratch/pgopalan/tmp /scratch/pgopalan/cache 2>/dev/null; ls /scratch/pgopalan/langsense /scratch/pgopalan/langsense/* | head -40
+## weights sha
+1b5d2f4c4a2e  bul_instruct/adapter_model.safetensors
+1c7e58923b5d  probe_copy_fullft/model.safetensors
+f5b6b46c757e  probe_copy_lora/adapter_model.safetensors
+fc6acff44f92  test_run/adapter_model.safetensors
+582a075e8ba8  bul_instruct/best/adapter_model.safetensors
+1c7e58923b5d  probe_copy_fullft/best/model.safetensors
+2ea0584f4e24  probe_copy_lora/best/adapter_model.safetensors
+fc6acff44f92  test_run/best/adapter_model.safetensors
+## home project_praveen
+/home/pgopalan/pfiles:
+total 0
+drwxr-xr-x 2 pgopalan users 4096 Oct 21 18:34 .
+drwx------ 2 pgopalan users 4096 Nov 13 21:01 ..
+
+/home/pgopalan/project_praveen:
+total 0
+drwxr-xr-x 2 pgopalan users 4096 Nov 13 21:01 .
+drwx------ 2 pgopalan users 4096 Nov 13 21:01 ..
+drwxr-xr-x 2 pgopalan users 4096 Nov 13 21:01 adapters
+drwxr-xr-x 2 pgopalan users 4096 Nov 13 21:01 data
+drwxr-xr-x 2 pgopalan users 4096 Nov 14 01:26 logs
+drwxr-xr-x 2 pgopalan users 4096 Nov 14 01:26 scripts
+## langsense
+25M	/scratch/pgopalan/langsense
+512	/scratch/pgopalan/tmp
+72K	/scratch/pgopalan/cache
+/scratch/pgopalan/langsense:
+datasets
+logs
+models
+nanotron
+src
+
+/scratch/pgopalan/langsense/datasets:
+
+/scratch/pgopalan/langsense/logs:
+checkpoints
+configs
+data_processing
+slurm_logs
+slurm_scripts
+
+/scratch/pgopalan/langsense/models:
+
+/scratch/pgopalan/langsense/nanotron:
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE
+Makefile
+README.md
+data_slurm.sh
+docs
+examples
+pyproject.toml
+run_evals.py
+run_generate.py
+run_train.py
+scripts
+slurm_launcher.py
+src
+test_timer_decorator.py
+tests
+tools
+
+/scratch/pgopalan/langsense/src:
+===== 2026-11-23 10:36:59  END (exit 0)
+
+===== 2026-11-23 10:37:10  START
+$ cd ~/project_praveen && du -sh . && find . -type f -printf "%s %TY-%Tm-%Td %p\n" | sort -k3 | head -60
+44M	.
+5184 2026-11-13 ./adapters/bul_instruct/README.md
+1171 2026-11-13 ./adapters/bul_instruct/adapter_config.json
+13587864 2026-11-13 ./adapters/bul_instruct/adapter_model.safetensors
+5184 2026-11-13 ./adapters/bul_instruct/best/README.md
+1171 2026-11-13 ./adapters/bul_instruct/best/adapter_config.json
+13587864 2026-11-13 ./adapters/bul_instruct/best/adapter_model.safetensors
+4734 2026-11-13 ./adapters/bul_instruct/best/stop_token.pt
+3753 2026-11-13 ./adapters/bul_instruct/samples.json
+4734 2026-11-13 ./adapters/bul_instruct/stop_token.pt
+377173 2026-11-14 ./adapters/bul_instruct/test_eval.json
+17209920 2026-11-13 ./adapters/bul_instruct/tokenizer.json
+328 2026-11-13 ./adapters/bul_instruct/tokenizer_config.json
+599 2026-11-13 ./adapters/bul_instruct/train_args.json
+29711 2026-11-13 ./adapters/bul_instruct/train_log.jsonl
+238 2026-11-13 ./data/splits/split_info.json
+178543 2026-11-13 ./data/splits/test.json
+262996 2026-11-13 ./data/splits/val.json
+2255 2026-11-14 ./logs/pp_eval_3729191.log
+30545 2026-11-13 ./logs/pp_full_3725405.log
+5060 2026-11-13 ./logs/pp_test_3720980.log
+4149 2026-11-13 ./scripts/__pycache__/instruct_prompt.cpython-311.pyc
+8684 2026-11-13 ./scripts/__pycache__/stop_token.cpython-311.pyc
+660 2026-11-14 ./scripts/eval_job.slurm
+6376 2026-11-14 ./scripts/eval_test.py
+685 2026-11-13 ./scripts/full_job.slurm
+2749 2026-11-13 ./scripts/instruct_prompt.py
+3016 2026-11-13 ./scripts/split_data.py
+4418 2026-11-13 ./scripts/stop_token.py
+734 2026-11-13 ./scripts/test_job.slurm
+14810 2026-11-13 ./scripts/train_lora.py
+===== 2026-11-23 10:37:12  END (exit 0)
+
+===== 2026-11-23 10:39:29  START
+COPY FROM HOPPER (rsync, read-only on Hopper)  /scratch/pgopalan/project_Praveen/adapters/**/*.safetensors  ->  hopper/adapters/
+===== 2026-11-23 10:41:38  END (exit )

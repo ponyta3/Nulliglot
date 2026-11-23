@@ -2,7 +2,7 @@
 # Restore the model weights and large data files that are stored as GitHub
 # release assets instead of git files (they are over GitHub's file size limit).
 #
-#     ./fetch_artifacts.sh              restore everything (about 9 GB on disk)
+#     ./fetch_artifacts.sh              restore everything (about 12 GB on disk)
 #     ./fetch_artifacts.sh phase3_lora  restore only paths containing this text
 #
 # Needs the GitHub CLI (gh), logged in to an account that can read the repo.

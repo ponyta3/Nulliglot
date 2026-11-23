@@ -27,6 +27,7 @@ training data stay in the single target language.
 | `adapters/<run>/` | per run: settings, training log, samples, evaluation results; weights are release assets |
 | `logs/` | full training and evaluation logs from the laptop |
 | `hopper.sh`, `hopper_jobs/`, `hopper_activity.log` | Slurm jobs and the record of every command run on the Hopper cluster |
+| `hopper/` | files copied back from the Hopper cluster: Slurm job logs, results of the runs made there, and the scripts as they ran |
 
 ## Weights and large data files
 
@@ -35,7 +36,7 @@ being stored in git: every `*.safetensors` file and the seven largest data files
 `artifacts/MANIFEST.tsv` lists each one with its path, size and SHA-256.
 
 ```
-./fetch_artifacts.sh              # restore everything, about 9 GB
+./fetch_artifacts.sh              # restore everything, about 12 GB
 ./fetch_artifacts.sh phase3_lora  # restore one run
 ```
 

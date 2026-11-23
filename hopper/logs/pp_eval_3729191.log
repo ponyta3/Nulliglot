@@ -1,0 +1,53 @@
+
+Lmod is automatically replacing "gnu9/9.3.0" with "gnu12/12.3.0".
+
+
+Inactive Modules:
+  1) hwloc/2.1.0     2) libfabric     3) ucx
+
+The following have been reloaded with a version change:
+  1) openmpi4/4.0.4 => openmpi4/4.1.6-a2
+
+node: gpu020.orc.gmu.edu  job: 3729191  started: Sat Nov 14 01:15:39 EST 2026
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights:   1%|          | 1/111 [00:00<00:37,  2.90it/s]Loading weights:   2%|▏         | 2/111 [00:00<00:24,  4.45it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 200.80it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+base {
+ "n": 200,
+ "stopped": 0.0,
+ "cyrillic_only": 1.0,
+ "empty": 0.0,
+ "avg_tokens": 200.0,
+ "overlap_true": 0.08168650620199663,
+ "overlap_wrong": 0.08355235702106563,
+ "loss_true": 3.67902482853755,
+ "loss_wrong": 3.7021063840715063,
+ "loss_gap": 0.023081555533956077
+}
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 1191.43it/s]
+adapter {
+ "n": 200,
+ "stopped": 0.955,
+ "cyrillic_only": 1.0,
+ "empty": 0.0,
+ "avg_tokens": 42.985,
+ "overlap_true": 0.0762254385507171,
+ "overlap_wrong": 0.07773141253250934,
+ "loss_true": 2.9329514260709635,
+ "loss_wrong": 2.9630452069532747,
+ "loss_gap": 0.030093780882311183
+}
+
+metric                base    adapter
+n                 200.0000   200.0000
+stopped             0.0000     0.9550
+cyrillic_only       1.0000     1.0000
+empty               0.0000     0.0000
+avg_tokens        200.0000    42.9850
+overlap_true        0.0817     0.0762
+overlap_wrong       0.0836     0.0777
+loss_true           3.6790     2.9330
+loss_wrong          3.7021     2.9630
+loss_gap            0.0231     0.0301
+
+saved 200 rows with both generations to adapters/bul_instruct/test_eval.json
+finished: Sat Nov 14 01:25:53 EST 2026  exit: 0
