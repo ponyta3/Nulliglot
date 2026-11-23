@@ -1,5 +1,8 @@
 # Tamil dataset shortlist
 
+> Superseded by `strict_shortlist.md`, which applies stricter rules and also covers sources
+> outside Hugging Face. This file and `Tamil_dataset_shortlist.docx` are the earlier, looser list.
+
 Survey of Hugging Face for original Tamil text, 23 November 2026. Rules applied: Tamil script
 only, brand names and digits allowed, no machine-translated or generated text.
 

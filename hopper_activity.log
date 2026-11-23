@@ -1481,3 +1481,22 @@ eefa51fd39  dataset_shortlist.md
 798464b3d2  Tamil_dataset_shortlist.docx
 ae9741e942  samples/sangraha_verified_tam_sample.txt
 ===== 2026-11-23 12:49:59  END (exit 0)
+
+===== 2026-11-23 13:31:16  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 13:31:19  END (exit 0)
+
+===== 2026-11-23 13:31:19  START
+COPY TO HOPPER    tamil_base_model/survey/strict_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/strict_shortlist.md
+===== 2026-11-23 13:31:20  END (exit 0)
+
+===== 2026-11-23 13:31:20  START
+COPY TO HOPPER    tamil_base_model/survey/dataset_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/dataset_shortlist.md
+===== 2026-11-23 13:31:22  END (exit 0)
+
+===== 2026-11-23 13:31:22  START
+$ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/strict_shortlist.md survey/dataset_shortlist.md | cut -c1-10,65-
+38b4cf4f73  README.md
+c3472a5a1b  survey/strict_shortlist.md
+1de6ba0226  survey/dataset_shortlist.md
+===== 2026-11-23 13:31:24  END (exit 0)

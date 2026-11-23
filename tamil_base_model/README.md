@@ -16,7 +16,8 @@ no model, tokenizer or data with them.
 
 - The model is trained only on Tamil text. No multilingual base model, tokenizer, adapter or data.
 - Latin-script brand names and digits inside Tamil text are allowed.
-- No machine-translated text, for now.
+- No machine-translated or synthetic text.
+- No corrupted text, no social media or Tanglish, no poorly documented datasets.
 - The model will be released on Hugging Face for research, so sources with no licence or a
   non-commercial licence are left out.
 - Data comes from Hugging Face datasets: first select good Tamil datasets, then filter and drop
@@ -24,8 +25,8 @@ no model, tokenizer or data with them.
 
 ## Plan
 
-1. **Survey** Hugging Face for Tamil datasets and shortlist the good ones. Done: see
-   `survey/dataset_shortlist.md`.
+1. **Survey** Tamil datasets, on and off Hugging Face, and shortlist the good ones. Done: see
+   `survey/strict_shortlist.md`.
 2. **Download and filter** the shortlisted datasets; remove duplicates across sources.
 3. **Train a Tamil-only tokenizer** on the filtered text.
 4. **Pre-train** the base model on Hopper.
@@ -33,10 +34,11 @@ no model, tokenizer or data with them.
 
 ## Status
 
-- 23 Nov 2026: project started. Dataset survey finished: six core sources hold about
-  4.2 billion words of original Tamil before filtering and removing duplicates. The two largest
-  are the verified Tamil part of `ai4bharat/sangraha` and the Tamil part of
-  `HuggingFaceFW/fineweb-2`. Nothing has been downloaded yet.
+- 23 Nov 2026: project started. A strict survey on and off Hugging Face found about
+  120 million words that meet every rule with a licence from the authors or publisher
+  (Wikipedia, proofread Wikisource, Thamizh Mann nationalised books, small news and ebook sets).
+  The large sources (Sangraha verified, about 2.2 billion words; HPLT 3.0) carry a licence from
+  the collector only. Which groups to use is not decided. Nothing has been downloaded yet.
 
 ## Not decided yet
 
@@ -50,7 +52,7 @@ no model, tokenizer or data with them.
 
 | Folder | Content |
 |---|---|
-| `survey/` | `dataset_shortlist.md` is the survey result; `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
+| `survey/` | `strict_shortlist.md` is the survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
 | `scripts/` | download, filter, tokenizer and training scripts (none yet) |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
 | `tokenizer/`, `logs/` | the Tamil tokenizer and training logs (none yet) |
