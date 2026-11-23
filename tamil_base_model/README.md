@@ -22,7 +22,8 @@ no model, tokenizer or data with them.
 
 ## Plan
 
-1. **Survey** Hugging Face for Tamil datasets and shortlist the good ones. In progress.
+1. **Survey** Hugging Face for Tamil datasets and shortlist the good ones. Done: see
+   `survey/dataset_shortlist.md`.
 2. **Download and filter** the shortlisted datasets; remove duplicates across sources.
 3. **Train a Tamil-only tokenizer** on the filtered text.
 4. **Pre-train** the base model on Hopper.
@@ -30,9 +31,10 @@ no model, tokenizer or data with them.
 
 ## Status
 
-- 23 Nov 2026: project started; dataset survey running. A first sample of Tamil Wikipedia
-  (`wikimedia/wikipedia`, `20231101.ta`) gave 160,651 articles, about 45 million words, with 86%
-  of sampled articles at least 95% Tamil script.
+- 23 Nov 2026: project started. Dataset survey finished: eight core sources hold about
+  4.3 billion words of original Tamil before filtering and removing duplicates. The two largest
+  are the verified Tamil part of `ai4bharat/sangraha` and the Tamil part of
+  `HuggingFaceFW/fineweb-2`. Nothing has been downloaded yet.
 
 ## Not decided yet
 
@@ -46,7 +48,7 @@ no model, tokenizer or data with them.
 
 | Folder | Content |
 |---|---|
-| `survey/` | `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script; the survey results will be added here |
+| `survey/` | `dataset_shortlist.md` is the survey result; `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
 | `scripts/` | download, filter, tokenizer and training scripts (none yet) |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
 | `tokenizer/`, `logs/` | the Tamil tokenizer and training logs (none yet) |

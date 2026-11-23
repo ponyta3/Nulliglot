@@ -1370,3 +1370,59 @@ $ cd ~/project_praveen && du -sh . && find . -type f -printf "%s %TY-%Tm-%Td %p\
 ===== 2026-11-23 10:39:29  START
 COPY FROM HOPPER (rsync, read-only on Hopper)  /scratch/pgopalan/project_Praveen/adapters/**/*.safetensors  ->  hopper/adapters/
 ===== 2026-11-23 10:41:38  END (exit )
+
+===== 2026-11-23 11:23:27  START
+$ ls -d /scratch/pgopalan/tamil_base_model 2>&1; ls /scratch/pgopalan
+ls: cannot access '/scratch/pgopalan/tamil_base_model': No such file or directory
+cache
+langsense
+nanotron-env
+project_Praveen
+tmp
+===== 2026-11-23 11:23:28  END (exit 0)
+
+===== 2026-11-23 11:23:35  START
+$ mkdir -p /scratch/pgopalan/tamil_base_model/{survey,scripts,data,tokenizer,models,logs} && echo created
+created
+===== 2026-11-23 11:23:36  END (exit 0)
+
+===== 2026-11-23 11:23:36  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 11:23:37  END (exit 0)
+
+===== 2026-11-23 11:23:37  START
+COPY TO HOPPER    tamil_base_model/survey/probe.py  ->  /scratch/pgopalan/tamil_base_model/survey/probe.py
+===== 2026-11-23 11:23:39  END (exit 0)
+
+===== 2026-11-23 11:23:39  START
+$ cd /scratch/pgopalan/tamil_base_model && find . -printf "%y %s %p\n" | sort -k3 && sha256sum README.md survey/probe.py | cut -c1-12,65-
+d 4096 .
+f 2311 ./README.md
+d 4096 ./data
+d 4096 ./logs
+d 4096 ./models
+d 4096 ./scripts
+d 4096 ./survey
+f 4359 ./survey/probe.py
+d 4096 ./tokenizer
+f22247b1de8d  README.md
+5341e173e0b0  survey/probe.py
+===== 2026-11-23 11:23:40  END (exit 0)
+
+===== 2026-11-23 11:50:01  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 11:50:03  END (exit 0)
+
+===== 2026-11-23 11:50:03  START
+COPY TO HOPPER    tamil_base_model/survey/dataset_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/dataset_shortlist.md
+===== 2026-11-23 11:50:05  END (exit 0)
+
+===== 2026-11-23 11:50:05  START
+$ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/dataset_shortlist.md | cut -c1-12,65-; quota -s 2>/dev/null | tail -3; df -h /scratch/pgopalan | tail -1
+6fb2d2db7fbf  README.md
+1bc60501c33d  survey/dataset_shortlist.md
+     Filesystem   space   quota   limit   grace   files   quota   limit   grace
+172.16.128.120:/home
+                  1851M  57221M  61989M            1811   1000k   1200k        
+172.16.128.120:/scratch  2.3P  1.7P  540T  77% /scratch
+===== 2026-11-23 11:50:06  END (exit 0)
