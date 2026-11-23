@@ -1,0 +1,116 @@
+W1118 15:57:36.434000 29515 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 6514.90it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+baseline   stop 0.900 cyr 0.985 loops 0.150 tok  48.5 ovl 0.122/0.049 topic 0.083/0.004
+clean      stop 1.000 cyr 1.000 loops 0.000 tok  32.7 ovl 0.126/0.054 topic 0.091/0.006
+boost1     stop 0.995 cyr 1.000 loops 0.000 tok  33.5 ovl 0.149/0.053 topic 0.166/0.010
+boost2     stop 1.000 cyr 1.000 loops 0.000 tok  36.0 ovl 0.161/0.051 topic 0.282/0.010
+saved to adapters/phase3_lora/decode_eval.json
+W1118 16:00:45.388000 29549 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 6758.03it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+task                        n   exact  overlap  as_copy  stopped
+copy                       30   0.067    0.576    1.000    1.000
+first_sentence             30   0.367    0.685    0.481    1.000
+last_sentence              30   0.067    0.300    0.520    1.000
+first_words                30   0.433    0.761    0.256    1.000
+last_words                 30   0.067    0.414    0.272    1.000
+second_sentence            30   0.000    0.225    0.472    1.000
+first_word                 30   0.867    0.922    0.099    1.000
+last_word                  30   0.000    0.000    0.099    1.000
+sentence_with_word         30   0.133    0.371    0.536    1.000
+word_after                 30   0.067    0.067    0.099    1.000
+word_before                30   0.033    0.100    0.099    1.000
+replace_word               30   0.000    0.581    0.947    0.967
+delete_word                30   0.000    0.567    0.973    1.000
+delete_first_sentence      30   0.000    0.217    0.801    1.000
+delete_last_sentence       30   0.000    0.568    0.774    1.000
+reverse_sentences          30   0.000    0.444    1.000    1.000
+copy_inline                30   0.100    0.645    0.938    1.000
+first_word_inline          30   0.833    0.833    0.074    1.000
+word_after_inline          30   0.067    0.076    0.072    1.000
+replace_inline             30   0.000    0.475    0.850    0.967
+ALL                       600   0.155    0.441    0.518    0.997
+
+saved 600 rows to adapters/phase3_lora/test_tasks_eval.json
+W1118 16:01:34.234000 29568 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 7183.14it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+base {
+ "n": 100,
+ "stopped": 0.0,
+ "cyrillic_only": 1.0,
+ "empty": 0.0,
+ "avg_tokens": 200.0,
+ "overlap_true": 0.06404972528329919,
+ "overlap_wrong": 0.07932523287358106,
+ "loss_true": 3.6121897034187183,
+ "loss_wrong": 3.6440031736377096,
+ "loss_gap": 0.03181347021899139
+}
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 5112.87it/s]
+adapter {
+ "n": 100,
+ "stopped": 1.0,
+ "cyrillic_only": 0.87,
+ "empty": 0.0,
+ "avg_tokens": 55.31,
+ "overlap_true": 0.7047353784178441,
+ "overlap_wrong": 0.08998409223939502,
+ "loss_true": 0.38243223136916515,
+ "loss_wrong": 3.962301119007743,
+ "loss_gap": 3.5798688876385776
+}
+
+metric                base    adapter
+n                 100.0000   100.0000
+stopped             0.0000     1.0000
+cyrillic_only       1.0000     0.8700
+empty               0.0000     0.0000
+avg_tokens        200.0000    55.3100
+overlap_true        0.0640     0.7047
+overlap_wrong       0.0793     0.0900
+loss_true           3.6122     0.3824
+loss_wrong          3.6440     3.9623
+loss_gap            0.0318     3.5799
+
+saved 100 rows with both generations to adapters/phase3_lora/test_copy_eval.json
+W1118 16:02:53.464000 29582 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+mmlu: 14042 questions, chance 0.2500
+arc_easy: 2376 questions, chance 0.2502
+arc_challenge: 1172 questions, chance 0.2502
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 6594.63it/s]
+base       mmlu           template     sum 0.2332  mean 0.2453
+base       mmlu           plain        sum 0.2348  mean 0.2401
+base       mmlu           no_question  sum 0.2333  mean 0.2482
+base       arc_easy       template     sum 0.2525  mean 0.2487
+base       arc_easy       plain        sum 0.2542  mean 0.2563
+base       arc_easy       no_question  sum 0.2471  mean 0.2445
+base       arc_challenge  template     sum 0.1988  mean 0.2585
+base       arc_challenge  plain        sum 0.2031  mean 0.2585
+base       arc_challenge  no_question  sum 0.2014  mean 0.2415
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 3833.41it/s]
+phase3     mmlu           template     sum 0.2363  mean 0.2517
+phase3     mmlu           plain        sum 0.2352  mean 0.2522
+phase3     mmlu           no_question  sum 0.2337  mean 0.2567
+phase3     arc_easy       template     sum 0.2698  mean 0.2652
+phase3     arc_easy       plain        sum 0.2786  mean 0.2706
+phase3     arc_easy       no_question  sum 0.2433  mean 0.2403
+phase3     arc_challenge  template     sum 0.1997  mean 0.2560
+phase3     arc_challenge  plain        sum 0.1766  mean 0.2560
+phase3     arc_challenge  no_question  sum 0.2022  mean 0.2602
+
+accuracy by summed log-likelihood
+benchmark      style          chance       base     phase3
+mmlu           template       0.2500     0.2332     0.2363
+mmlu           plain          0.2500     0.2348     0.2352
+mmlu           no_question    0.2500     0.2333     0.2337
+arc_easy       template       0.2502     0.2525     0.2698
+arc_easy       plain          0.2502     0.2542     0.2786
+arc_easy       no_question    0.2502     0.2471     0.2433
+arc_challenge  template       0.2502     0.1988     0.1997
+arc_challenge  plain          0.2502     0.2031     0.1766
+arc_challenge  no_question    0.2502     0.2014     0.2022
+
+saved to adapters/benchmark_results_phase3.json
+chain exit: 0

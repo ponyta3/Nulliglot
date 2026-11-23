@@ -1,0 +1,1118 @@
+Hopper activity log. Every command sent to Hopper through hopper.sh is recorded below.
+
+Before this log existed (2026-11-13), three actions were run on Hopper by hand:
+  1. hostname; whoami                       (connection test, read-only)
+  2. touch ~/testnov13                      (created empty file /home/pgopalan/testnov13)
+  3. ls -la ~/testnov13; pwd; hostname      (read-only checks around step 2)
+
+===== 2026-11-13 13:06:04  START
+$ hostname; whoami; date; ls -la ~/testnov13
+hopper2.orc.gmu.edu
+pgopalan
+Fri Nov 13 13:06:05 EST 2026
+-rw-r--r-- 1 pgopalan users 0 Nov 13 13:04 /home/pgopalan/testnov13
+===== 2026-11-13 13:06:05  END (exit 0)
+
+===== 2026-11-13 13:06:05  START
+$ ls /this/does/not/exist
+ls: cannot access '/this/does/not/exist': No such file or directory
+===== 2026-11-13 13:06:07  END (exit 2)
+
+===== 2026-11-13 13:46:58  START
+$ echo "## node"; hostname; echo "## partitions"; sinfo -s; echo "## gpu nodes"; sinfo -N -h -o "%P %G %t" | grep -i gpu | sort | uniq -c | sort -rn | head -30; echo "## my jobs"; squeue -u $USER; echo "## my slurm accounts"; sacctmgr -n -P show assoc user=$USER format=account,partition,qos 2>&1 | head -20
+## node
+hopper2.orc.gmu.edu
+## partitions
+PARTITION    AVAIL  TIMELIMIT   NODES(A/I/O/T) NODELIST
+interactive*    up   12:00:00          2/5/0/7 amd[001-004],hop[043-045]
+contrib         up 7-00:00:00       22/20/0/42 hop[001-042]
+normal          up 7-00:00:00        82/5/1/88 amd[009-068],hop[046-073]
+bigmem          up 7-00:00:00        14/8/0/22 amd[069-090]
+gpuq            up 5-00:00:00        14/2/0/16 dgx[001-002],gpu[011-024]
+contrib-gpuq    up 5-00:00:00        17/0/0/17 gpu[001-010,025-031]
+contrib-H100    up 5-00:00:00          1/0/0/1 gpu032
+contrib-B200    up 5-00:00:00          1/0/0/1 dgx003
+## gpu nodes
+      9 contrib-gpuq gpu:A100.80gb:4 mix-
+      7 gpuq gpu:A100.80gb:4 mix-
+      5 contrib-gpuq gpu:A100.80gb:4 mix
+      2 gpuq gpu:A100.80gb:4 resv
+      2 gpuq gpu:A100.40gb:8 alloc
+      2 gpuq gpu:3g.40gb:8(S:2-3,6-7,10-11,14-15) mix-
+      2 contrib-gpuq gpu:3g.40gb:4(S:2-3,6-7,10-11,14-15),gpu:2g.20gb:4(S:2-3,6-7,10-11,14-15),gpu:1g.10gb:8(S:2-3,6-7,10-11,14-15) mix-
+      1 gpuq gpu:A100.80gb:4 alloc
+      1 gpuq gpu:3g.40gb:4(S:2-3,6-7,10-11,14-15),gpu:2g.20gb:4(S:2-3,6-7,10-11,14-15),gpu:1g.10gb:8(S:2-3,6-7,10-11,14-15) mix-
+      1 gpuq gpu:3g.40gb:4(S:2-3,6-7,10-11,14-15),gpu:2g.20gb:4(S:2-3,6-7,10-11,14-15),gpu:1g.10gb:8(S:2-3,6-7,10-11,14-15) alloc
+      1 contrib-gpuq gpu:3g.40gb:8(S:2-3,6-7,10-11,14-15) mix
+      1 contrib-H100 gpu:H100.80gb:4 mix
+      1 contrib-B200 gpu:B200.180gb:8 drng
+## my jobs
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+## my slurm accounts
+aanastasopoulos||cs_dept,gpu,interactive,normal
+===== 2026-11-13 13:46:59  END (exit 0)
+
+===== 2026-11-13 13:46:59  START
+$ echo "## scratch contents"; ls -la /scratch/$USER 2>&1 | head -30; echo "## scratch usage (top level)"; du -sh /scratch/$USER/* 2>/dev/null | sort -rh | head -15; echo "## filesystem"; df -h /scratch/$USER /home/$USER 2>&1; echo "## quota"; (quota -s 2>&1 | head -10); echo "## home usage"; du -sh /home/$USER 2>/dev/null; echo "## project folder exists?"; ls -ld /scratch/$USER/project_Praveen 2>&1; echo "## modules"; (module avail python 2>&1; module avail cuda 2>&1; module avail gnu 2>&1) | grep -v "^$" | head -40; echo "## default python"; which python3; python3 --version
+## scratch contents
+total 0
+drwx--S--- 2 pgopalan scratch 4096 Oct 22 14:46 .
+drwxr-sr-x 2 root     scratch 4096 Nov 12 11:31 ..
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 14:46 cache
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 14:10 langsense
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 22 13:51 nanotron-env
+drwxr-sr-x 2 pgopalan scratch 4096 Oct 29 21:57 tmp
+## scratch usage (top level)
+6.4G	/scratch/pgopalan/nanotron-env
+25M	/scratch/pgopalan/langsense
+7.0K	/scratch/pgopalan/cache
+512	/scratch/pgopalan/tmp
+## filesystem
+Filesystem               Size  Used Avail Use% Mounted on
+172.16.144.113:/scratch  2.3P  1.9P  427T  82% /scratch
+172.16.144.113:/home      60T   36T   24T  61% /home
+## quota
+Disk quotas for user pgopalan (uid 684079169): 
+     Filesystem   space   quota   limit   grace   files   quota   limit   grace
+172.16.144.113:/home
+                  1808M  57221M  61989M            1765   1000k   1200k        
+## home usage
+1.8G	/home/pgopalan
+## project folder exists?
+ls: cannot access '/scratch/pgopalan/project_Praveen': No such file or directory
+## modules
+--------------------------------- GNU-12.3.0 ----------------------------------
+   python/3.10.13-6u    python/3.11.7-cx    python/3.12.1-33 (D)
+  Where:
+   D:  Default Module
+If the avail list is too long consider trying:
+"module --default avail" or "ml -d av" to just list the default modules.
+"module overview" or "ml ov" to display the number of modules for each name.
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching
+any of the "keys".
+--------------------------------- GNU-12.3.0 ----------------------------------
+   cuda/12.6.2-ou    namd/3.0.1-cuda-2g (D)
+--------------------------------- Independent ---------------------------------
+   cuda/11.3.0_465.19.01    cuda/12.4.0        cuda/13.1.1
+   cuda/12.2.0.1            cuda/12.6.3 (D)    cuda/13.2.1
+   cuda/12.3.1              cuda/13.0.3        namd/2.14-verbs-smp-cuda
+  Where:
+   D:  Default Module
+If the avail list is too long consider trying:
+"module --default avail" or "ml -d av" to just list the default modules.
+"module overview" or "ml ov" to display the number of modules for each name.
+Use "module spider" to find all possible modules and extensions.
+Use "module keyword key1 key2 ..." to search for all possible modules matching
+any of the "keys".
+------------------------------- Global Aliases --------------------------------
+   compiler/gnu/10.3.0 -> gnu10/10.3.0-ya    compiler/gnu/9.3.0 -> gnu9/9.3.0
+-------------------------- GNU-12.3.0_OpenMPI-4.1.6 ---------------------------
+   amber/24-gnu12    amber/26-gnu12 (D)    ufs-aqm-stack/gnu12-openmpi4
+--------------------------------- GNU-12.3.0 ----------------------------------
+   gnuplot/6.0.0-ja
+--------------------------------- Independent ---------------------------------
+   gnu/12.3.0                  gnu12/12.3.0 (L,D)    gnu9/9.3.0
+   gnu10/10.3.0-ya (10.3.0)    gnu12/12.3.0          numactl/2.0.16-gnu10
+  Where:
+   Aliases:  Aliases exist: foo/1.2.3 (1.2) means that "module load foo/1.2" will load foo/1.2.3
+   D:        Default Module
+   L:        Module is loaded
+If the avail list is too long consider trying:
+"module --default avail" or "ml -d av" to just list the default modules.
+"module overview" or "ml ov" to display the number of modules for each name.
+## default python
+/scratch/pgopalan/nanotron-env/bin/python3
+Python 3.11.7
+===== 2026-11-13 13:47:30  END (exit 0)
+
+===== 2026-11-13 13:48:50  START
+$ mkdir -p /scratch/pgopalan/project_Praveen/{data,scripts,models,adapters,logs} && ls -la /scratch/pgopalan/project_Praveen && echo "## scratch top level" && ls /scratch/pgopalan
+total 0
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 .
+drwx--S--- 2 pgopalan scratch 4096 Nov 13 13:48 ..
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 adapters
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 data
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 logs
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 models
+drwxr-sr-x 2 pgopalan scratch 4096 Nov 13 13:48 scripts
+## scratch top level
+cache
+langsense
+nanotron-env
+project_Praveen
+tmp
+===== 2026-11-13 13:48:51  END (exit 0)
+
+===== 2026-11-13 13:52:57  START
+COPY TO HOPPER    train_lora.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 13:52:59  END (exit 0)
+
+===== 2026-11-13 13:52:59  START
+COPY TO HOPPER    instruct_prompt.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 13:53:00  END (exit 0)
+
+===== 2026-11-13 13:53:00  START
+COPY TO HOPPER    stop_token.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 13:53:01  END (exit 0)
+
+===== 2026-11-13 13:53:01  START
+COPY TO HOPPER    split_data.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 13:53:03  END (exit 0)
+
+===== 2026-11-13 13:53:03  START
+COPY TO HOPPER    data/alpaca_data_cleaned.bg.json  ->  /scratch/pgopalan/project_Praveen/data/
+===== 2026-11-13 13:53:16  END (exit 0)
+
+===== 2026-11-13 13:53:16  START
+$ cd /scratch/pgopalan/project_Praveen && sha256sum scripts/*.py data/*.json | sed -E 's#(scripts|data)/##' | awk '{print $1, $2}' | sort -k2 && ls -la scripts data
+860491aecd2287f049f4b083e63165a4cefcdc3dae797de52c9b07dc57477660 alpaca_data_cleaned.bg.json
+11a7b9583bea15917954d91b7fa24e3cf82f89369803a2a72a1f5e453271f4bb instruct_prompt.py
+3a14b649e8feb01c66187773cc3217a3cd7f7d8c03d2d15f8993bce10fb3d2ce split_data.py
+a5e0eaf06d4195a17abd45aaf481844761dd5baee7979b49cbceacd97d9a14c4 stop_token.py
+12e0771286d07d0efcd322b9047879e07e6b3aaefd011b37168572220c1c0a1e train_lora.py
+data:
+total 78344
+drwxr-sr-x 2 pgopalan scratch     4096 Nov 13 13:53 .
+drwxr-sr-x 2 pgopalan scratch     4096 Nov 13 13:48 ..
+-rw-r--r-- 1 pgopalan scratch 80223819 Nov 13 13:53 alpaca_data_cleaned.bg.json
+
+scripts:
+total 25
+drwxr-sr-x 2 pgopalan scratch  4096 Nov 13 13:53 .
+drwxr-sr-x 2 pgopalan scratch  4096 Nov 13 13:48 ..
+-rw-r--r-- 1 pgopalan scratch  2749 Nov 13 13:53 instruct_prompt.py
+-rw-r--r-- 1 pgopalan scratch  3016 Nov 13 13:53 split_data.py
+-rw-r--r-- 1 pgopalan scratch  4418 Nov 13 13:53 stop_token.py
+-rw-r--r-- 1 pgopalan scratch 14810 Nov 13 13:52 train_lora.py
+===== 2026-11-13 13:53:18  END (exit 0)
+
+===== 2026-11-13 13:58:51  START
+$ set -e; source /etc/profile >/dev/null 2>&1 || true; module load gnu12/12.3.0 python/3.11.7-cx; PY=$(module show python/3.11.7-cx 2>&1 | grep -o "/[^\" ,)]*python[^\" ,)]*/bin" | head -1); echo "module python bin dir: $PY"; echo "python3 on PATH: $(which python3)"; BASE="${PY:+$PY/python3}"; BASE="${BASE:-python3}"; echo "using: $BASE ($($BASE --version))"; $BASE -m venv /scratch/pgopalan/project_Praveen/venv; /scratch/pgopalan/project_Praveen/venv/bin/python -c "import sys; print(\"venv python:\", sys.version.split()[0], \"| base:\", sys.base_prefix)"
+module python bin dir: /opt/sw/spack/apps-2024/linux-rhel8-x86_64_v3/gcc-12.3.0/python-3.11.7-cx/bin
+python3 on PATH: /opt/sw/spack/apps-2024/linux-rhel8-x86_64_v3/gcc-12.3.0/python-3.11.7-cx/bin/python3
+using: /opt/sw/spack/apps-2024/linux-rhel8-x86_64_v3/gcc-12.3.0/python-3.11.7-cx/bin/python3 (Python 3.11.7)
+venv python: 3.11.7 | base: /opt/sw/spack/apps-2024/linux-rhel8-x86_64_v3/gcc-12.3.0/python-3.11.7-cx
+===== 2026-11-13 13:59:12  END (exit 0)
+
+===== 2026-11-13 13:59:16  START
+$ V=/scratch/pgopalan/project_Praveen/venv; $V/bin/pip install --no-cache-dir --progress-bar off torch==2.15.0 transformers==5.22.2 peft==0.21.2 accelerate==1.15.0 2>&1 | grep -v -E "^(Collecting|  Downloading|Requirement already|  Using cached|Using cached)" | tail -15; echo "pip exit: ${PIPESTATUS[0]}"; du -sh $V
+Downloading markdown_it_py-4.3.0-py3-none-any.whl (96 kB)
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Downloading truststore-0.10.5-py3-none-any.whl (19 kB)
+Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Installing collected packages: nvidia-cusparselt-cu13, mpmath, cuda-toolkit, typing-extensions, truststore, triton, tqdm, sympy, shellingham, setuptools, safetensors, regex, pyyaml, pygments, psutil, packaging, nvidia-nvtx, nvidia-nvjitlink, nvidia-nccl-cu13, nvidia-cufile, nvidia-cuda-runtime, nvidia-cuda-nvrtc, nvidia-cuda-cupti, nvidia-cuda-cccl, numpy, networkx, mdurl, MarkupSafe, idna, hf-xet, h11, fsspec, filelock, cuda-pathfinder, click, annotated-types, annotated-doc, typing-inspection, pydantic-core, nvidia-nvshmem-cu13, nvidia-cusparse, nvidia-cufft, nvidia-cublas, markdown-it-py, jinja2, httpcore2, cuda-bindings, anyio, rich, pydantic, nvidia-cusolver, nvidia-cudnn-cu13, httpx2, typer, huggingface-hub, torch, tokenizers, transformers, accelerate, peft
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 65.5.0
+    Uninstalling setuptools-65.5.0:
+      Successfully uninstalled setuptools-65.5.0
+Successfully installed MarkupSafe-3.0.4 accelerate-1.15.0 annotated-doc-0.0.6 annotated-types-0.8.0 anyio-4.16.0 click-8.5.1 cuda-bindings-13.5.0 cuda-pathfinder-1.9.0 cuda-toolkit-13.2.2 filelock-4.2.10 fsspec-2026.9.0 h11-0.16.0 hf-xet-1.8.0 httpcore2-2.16.0 httpx2-2.16.0 huggingface-hub-2.4.0 idna-3.20 jinja2-3.1.6 markdown-it-py-4.3.0 mdurl-0.1.2 mpmath-1.3.0 networkx-3.6.1 numpy-2.4.6 nvidia-cublas-13.4.1.3 nvidia-cuda-cccl-13.3.5.0.6 nvidia-cuda-cupti-13.2.86 nvidia-cuda-nvrtc-13.2.86 nvidia-cuda-runtime-13.2.86 nvidia-cudnn-cu13-9.26.0.51 nvidia-cufft-12.2.0.57 nvidia-cufile-1.17.1.22 nvidia-cusolver-12.2.0.11 nvidia-cusparse-12.7.10.12 nvidia-cusparselt-cu13-0.8.1 nvidia-nccl-cu13-2.30.7 nvidia-nvjitlink-13.5.37 nvidia-nvshmem-cu13-3.7.2 nvidia-nvtx-13.2.86 packaging-26.3 peft-0.21.2 psutil-7.2.2 pydantic-2.14.3 pydantic-core-2.50.4 pygments-2.21.0 pyyaml-6.0.3 regex-2026.11.9 rich-15.0.0 safetensors-0.8.0 setuptools-84.2.1 shellingham-1.5.4 sympy-1.14.0 tokenizers-0.23.3 torch-2.15.0 tqdm-4.70.1 transformers-5.22.2 triton-3.9.0 truststore-0.10.5 typer-0.29.1 typing-extensions-4.16.0 typing-inspection-0.4.5
+
+[notice] A new release of pip is available: 23.2.1 -> 26.3
+[notice] To update, run: python3 -m pip install --upgrade pip
+pip exit: 0
+5.5G	/scratch/pgopalan/project_Praveen/venv
+===== 2026-11-13 14:05:34  END (exit 0)
+
+===== 2026-11-13 14:05:41  START
+$ V=/scratch/pgopalan/project_Praveen/venv; $V/bin/python -c "
+import torch, transformers, peft, accelerate, tokenizers, numpy
+print(\"torch\", torch.__version__, \"| built for CUDA\", torch.version.cuda)
+print(\"transformers\", transformers.__version__, \"| peft\", peft.__version__, \"| accelerate\", accelerate.__version__, \"| tokenizers\", tokenizers.__version__, \"| numpy\", numpy.__version__)
+print(\"GPU visible on this login node:\", torch.cuda.is_available())
+" 2>&1 | tail -5; echo "## nanotron-env untouched?"; ls -ld --time-style=long-iso /scratch/pgopalan/nanotron-env; du -sh /scratch/pgopalan/nanotron-env; echo "## pip cache in home"; du -sh ~/.cache/pip 2>/dev/null || echo "none"; echo "## home usage"; du -sh /home/pgopalan
+torch 2.15.0+cu132 | built for CUDA 13.2
+transformers 5.22.2 | peft 0.21.2 | accelerate 1.15.0 | tokenizers 0.23.3 | numpy 2.4.6
+GPU visible on this login node: False
+## nanotron-env untouched?
+drwxr-sr-x 2 pgopalan scratch 4096 2026-10-22 13:51 /scratch/pgopalan/nanotron-env
+6.4G	/scratch/pgopalan/nanotron-env
+## pip cache in home
+1.8G	/home/pgopalan/.cache/pip
+## home usage
+1.8G	/home/pgopalan
+===== 2026-11-13 14:06:41  END (exit 0)
+
+===== 2026-11-13 14:10:07  START
+$ P=/scratch/pgopalan/project_Praveen; HF_HUB_DISABLE_PROGRESS_BARS=1 $P/venv/bin/python -c "
+from huggingface_hub import snapshot_download
+p = snapshot_download(\"iamshnoo/bul_100m\", local_dir=\"$P/models/bul_100m\", token=False)
+print(\"downloaded to\", p)
+" 2>&1 | grep -v -i "unauthenticated" | tail -5; echo "## files"; ls -la $P/models/bul_100m; du -sh $P/models/bul_100m; echo "## checksum"; sha256sum $P/models/bul_100m/model.safetensors; echo "## tokenizer and config"; HF_HUB_OFFLINE=1 $P/venv/bin/python -c "
+from transformers import AutoTokenizer, AutoConfig
+t = AutoTokenizer.from_pretrained(\"$P/models/bul_100m\"); c = AutoConfig.from_pretrained(\"$P/models/bul_100m\")
+print(\"vocab\", len(t), \"| begin/end ids\", t.convert_tokens_to_ids([\"<|begin_of_text|>\", \"<|end_of_text|>\"]))
+print(\"layers\", c.num_hidden_layers, \"| hidden\", c.hidden_size, \"| context\", c.max_position_embeddings, \"| config bos/eos\", c.bos_token_id, c.eos_token_id)
+" 2>&1 | tail -3
+downloaded to /scratch/pgopalan/project_Praveen/models/bul_100m
+## files
+total 622863
+drwxr-sr-x 2 pgopalan scratch      4096 Nov 13 14:10 .
+drwxr-sr-x 2 pgopalan scratch      4096 Nov 13 14:10 ..
+drwxr-sr-x 2 pgopalan scratch      4096 Nov 13 14:10 .cache
+-rw-r--r-- 1 pgopalan scratch      1570 Nov 13 14:10 .gitattributes
+-rw-r--r-- 1 pgopalan scratch       669 Nov 13 14:10 config.json
+-rw-r--r-- 1 pgopalan scratch       111 Nov 13 14:10 generation_config.json
+-rw-r--r-- 1 pgopalan scratch 620545680 Nov 13 14:10 model.safetensors
+-rw-r--r-- 1 pgopalan scratch       301 Nov 13 14:10 special_tokens_map.json
+-rw-r--r-- 1 pgopalan scratch  17209920 Nov 13 14:10 tokenizer.json
+-rw-r--r-- 1 pgopalan scratch     50530 Nov 13 14:10 tokenizer_config.json
+609M	/scratch/pgopalan/project_Praveen/models/bul_100m
+## checksum
+8f672ed555c10b7dc2a83dda67cb5f19898bacc8f01763601ddb036016f6062f  /scratch/pgopalan/project_Praveen/models/bul_100m/model.safetensors
+## tokenizer and config
+vocab 128256 | begin/end ids [128000, 128001]
+layers 12 | hidden 768 | context 512 | config bos/eos 1 2
+===== 2026-11-13 14:10:30  END (exit 0)
+
+===== 2026-11-13 14:15:34  START
+$ cd /scratch/pgopalan/project_Praveen && HF_HUB_OFFLINE=1 srun -p interactive -q interactive --cpus-per-task=2 --mem=8G --time=00:15:00 --job-name=pp_split bash -c "hostname; venv/bin/python scripts/split_data.py --data data/alpaca_data_cleaned.bg.json --model models/bul_100m --out-dir data/splits" 2>&1 | grep -v -E "clean_up_tokenization|Redirects"; echo "srun exit: ${PIPESTATUS[0]}"; ls -la data/splits; squeue -u $USER
+hop043.orc.gmu.edu
+{
+  "source": "data/alpaca_data_cleaned.bg.json",
+  "model": "models/bul_100m",
+  "seed": 42,
+  "max_len": 512,
+  "rows_total": 51760,
+  "train": 51260,
+  "train_over_max_len": 12916,
+  "train_usable": 38344,
+  "val": 300,
+  "test": 200
+}
+srun exit: 0
+total 77132
+drwxr-sr-x 2 pgopalan scratch     4096 Nov 13 14:16 .
+drwxr-sr-x 2 pgopalan scratch     4096 Nov 13 14:16 ..
+-rw-r--r-- 1 pgopalan scratch      238 Nov 13 14:16 split_info.json
+-rw-r--r-- 1 pgopalan scratch   178543 Nov 13 14:16 test.json
+-rw-r--r-- 1 pgopalan scratch 78540044 Nov 13 14:16 train.json
+-rw-r--r-- 1 pgopalan scratch   262996 Nov 13 14:16 val.json
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           3717671 interacti pp_split pgopalan CG       1:02      1 hop043
+===== 2026-11-13 14:16:38  END (exit 0)
+
+===== 2026-11-13 16:14:55  START
+COPY TO HOPPER    hopper_jobs/test_job.slurm  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 16:14:57  END (exit 0)
+
+===== 2026-11-13 16:14:57  START
+$ cd /scratch/pgopalan/project_Praveen && sbatch scripts/test_job.slurm && sleep 5 && squeue -u $USER -o "%.10i %.10P %.10j %.3t %.10M %.12l %.20R %S"
+Submitted batch job 3720980
+     JOBID  PARTITION       NAME  ST       TIME   TIME_LIMIT     NODELIST(REASON) START_TIME
+   3720980       gpuq    pp_test  PD       0:00        30:00           (Priority) N/A
+===== 2026-11-13 16:15:03  END (exit 0)
+
+===== 2026-11-13 16:15:15  START
+$ J=3720980; L=/scratch/pgopalan/project_Praveen/logs/pp_test_$J.log; last=""; for i in $(seq 1 360); do st=$(squeue -h -j $J -o "%T %M %R" 2>/dev/null); [ -z "$st" ] && break; s=${st%% *}; if [ "$s" != "$last" ]; then echo "$(date +%H:%M:%S) job $J: $st"; last=$s; fi; sleep 30; done; echo "$(date +%H:%M:%S) job $J left the queue"; sacct -j $J -n -X -o JobID,State,Elapsed,ExitCode,NodeList,ReqTRES%60; echo "===== log ====="; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn" $L | cut -c1-400
+16:15:16 job 3720980: PENDING 0:00 (Priority)
+
+===== 2026-11-13 16:47:49  START
+$ J=3720980; echo "## job"; squeue -h -j $J -o "state=%T elapsed=%M reason/node=%R start=%S" 2>/dev/null || true; sacct -j $J -n -X -o JobID,State,Elapsed,ExitCode,NodeList; echo "## queue position (pending gpuq jobs ahead by priority)"; squeue -h -p gpuq -t PD --sort=-p -o "%i %Q" | awk -v j=$J "{n++; if (\$1==j) {print \"position \" n \" of pending\"; f=1}} END {print n \" pending jobs in gpuq\"; if(!f) print \"(job not in pending list)\"}"; echo "## log so far"; L=/scratch/pgopalan/project_Praveen/logs/pp_test_$J.log; [ -f $L ] && grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn" $L | tail -25 | cut -c1-300 || echo "no log yet (job has not started)"
+## job
+state=PENDING elapsed=0:00 reason/node=(Priority) start=2026-11-15T04:45:00
+3720980         PENDING   00:00:00      0:0   None assigned 
+## queue position (pending gpuq jobs ahead by priority)
+position 213 of pending
+269 pending jobs in gpuq
+## log so far
+no log yet (job has not started)
+===== 2026-11-13 16:47:50  END (exit 0)
+
+===== 2026-11-13 16:48:05  START
+$ cd /scratch/pgopalan/project_Praveen; echo "## estimated start for other GPU requests (test only, nothing is submitted)"; for g in "gpu:1" "gpu:1g.10gb:1" "gpu:2g.20gb:1" "gpu:3g.40gb:1" "gpu:A100.40gb:1" "gpu:A100.80gb:1"; do printf "%-18s " "$g"; sbatch --test-only --partition=gpuq --qos=gpu --gres=$g --cpus-per-task=4 --mem=32G --time=00:30:00 scripts/test_job.slurm 2>&1 | sed -E "s/sbatch: //" | cut -c1-110; done; echo "## free GPU slices right now"; sinfo -p gpuq -N -h -o "%N %G %t" | sort -u | head -20; echo "## my fairshare / priority"; sprio -j 3720980 -o "%.10i %.10Y %.8A %.8F %.8J %.8P %.8Q" 2>&1 | head -3; sshare -u $USER -o Account,User,RawUsage,FairShare 2>&1 | head -6
+## estimated start for other GPU requests (test only, nothing is submitted)
+gpu:1              error: GPU partition specified but a total of zero GPU resources requested.
+allocation failure: Invalid generic resource (gres) specification
+gpu:1g.10gb:1      Job 3721317 to start at 2026-12-04T16:04:39 using 4 processors on nodes gpu020 in partition gpuq
+gpu:2g.20gb:1      Job 3721318 to start at 2026-12-05T01:22:33 using 4 processors on nodes gpu020 in partition gpuq
+gpu:3g.40gb:1      Job 3721319 to start at 2026-12-04T07:30:24 using 4 processors on nodes gpu014 in partition gpuq
+gpu:A100.40gb:1    Job 3721320 to start at 2026-12-05T16:50:52 using 4 processors on nodes dgx001 in partition gpuq
+gpu:A100.80gb:1    Job 3721321 to start at 2026-12-04T08:42:35 using 4 processors on nodes gpu023 in partition gpuq
+## free GPU slices right now
+dgx001 gpu:A100.40gb:8 alloc
+dgx002 gpu:A100.40gb:8 alloc
+gpu011 gpu:A100.80gb:4 mix-
+gpu012 gpu:A100.80gb:4 mix-
+gpu013 gpu:3g.40gb:8(S:2-3,6-7,10-11,14-15) alloc
+gpu014 gpu:3g.40gb:8(S:2-3,6-7,10-11,14-15) alloc
+gpu015 gpu:A100.80gb:4 mix-
+gpu016 gpu:A100.80gb:4 mix-
+gpu017 gpu:A100.80gb:4 mix-
+gpu018 gpu:A100.80gb:4 alloc
+gpu019 gpu:A100.80gb:4 mix-
+gpu020 gpu:3g.40gb:4(S:2-3,6-7,10-11,14-15),gpu:2g.20gb:4(S:2-3,6-7,10-11,14-15),gpu:1g.10gb:8(S:2-3,6-7,10-11,14-15) mix-
+gpu021 gpu:3g.40gb:4(S:2-3,6-7,10-11,14-15),gpu:2g.20gb:4(S:2-3,6-7,10-11,14-15),gpu:1g.10gb:8(S:2-3,6-7,10-11,14-15) alloc
+gpu022 gpu:A100.80gb:4 mix-
+gpu023 gpu:A100.80gb:4 mix-
+gpu024 gpu:A100.80gb:4 mix-
+## my fairshare / priority
+     JOBID   PRIORITY      AGE FAIRSHAR  JOBSIZE PARTITIO      QOS
+   3720980       2279        3     1276        1     1000        0
+Account                    User    RawUsage  FairShare 
+-------------------- ---------- ----------- ---------- 
+aanastasopoulos        pgopalan         247   0.127555 
+===== 2026-11-13 16:48:07  END (exit 0)
+
+===== 2026-11-13 16:48:24  START
+$ cd /scratch/pgopalan/project_Praveen; echo "## test only, nothing is submitted"; t() { printf "%-52s " "$1"; shift; sbatch --test-only "$@" --cpus-per-task=4 --mem=32G --time=00:30:00 scripts/test_job.slurm 2>&1 | sed -E "s/sbatch: //" | tr "\n" " " | cut -c1-150; echo; }; t "contrib-gpuq / cs_dept / A100.80gb" --partition=contrib-gpuq --qos=cs_dept --gres=gpu:A100.80gb:1; t "contrib-gpuq / cs_dept / 3g.40gb" --partition=contrib-gpuq --qos=cs_dept --gres=gpu:3g.40gb:1; t "contrib-gpuq / gpu / A100.80gb" --partition=contrib-gpuq --qos=gpu --gres=gpu:A100.80gb:1; t "gpuq / cs_dept / A100.80gb" --partition=gpuq --qos=cs_dept --gres=gpu:A100.80gb:1; t "normal (CPU only, 48 cores)" --partition=normal --qos=normal --cpus-per-task=48; echo "## qos definitions"; sacctmgr -n -P show qos cs_dept,gpu format=name,priority,maxtres,maxtrespu,maxwall,flags 2>&1 | head; echo "## who may use contrib-gpuq"; scontrol show partition contrib-gpuq | tr " " "\n" | grep -E "AllowQos|AllowAccounts|AllowGroups|PriorityTier|PreemptMode"; scontrol show partition gpuq | tr " " "\n" | grep -E "AllowQos|AllowAccounts|PriorityTier"
+## test only, nothing is submitted
+contrib-gpuq / cs_dept / A100.80gb                   Job 3721324 to start at 2026-11-16T01:24:58 using 4 processors on nodes gpu010 in partition contrib-gpuq 
+
+contrib-gpuq / cs_dept / 3g.40gb                     Job 3721325 to start at 2026-11-16T00:56:13 using 4 processors on nodes gpu028 in partition contrib-gpuq 
+
+contrib-gpuq / gpu / A100.80gb                       Job 3721326 to start at 2026-11-20T13:33:58 using 4 processors on nodes gpu010 in partition contrib-gpuq 
+
+gpuq / cs_dept / A100.80gb                           allocation failure: Invalid qos specification 
+
+normal (CPU only, 48 cores)                          allocation failure: Requested node configuration is not available 
+
+## qos definitions
+cs_dept|1||||
+gpu|0||gres/gpu:a100.80gb=8,gres/gpu:b200.180gb=1,gres/gpu:h100.80gb=4,gres/gpu=12||
+## who may use contrib-gpuq
+AllowGroups=ALL
+AllowAccounts=ALL
+AllowQos=gpu,hantil,ksun,cs_dept,ist_dept,lrg
+PriorityTier=1
+PreemptMode=REQUEUE
+AllowAccounts=ALL
+AllowQos=gpu
+PriorityTier=1
+===== 2026-11-13 16:48:25  END (exit 0)
+
+===== 2026-11-13 18:14:25  START
+COPY TO HOPPER    hopper_jobs/full_job.slurm  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-13 18:14:30  END (exit 0)
+
+===== 2026-11-13 18:14:30  START
+$ cd /scratch/pgopalan/project_Praveen && sbatch scripts/full_job.slurm && sleep 8 && squeue -u $USER -o "%.10i %.10P %.10j %.3t %.10M %.12l %.14R %S" && echo "## checksums of split files" && sha256sum data/splits/val.json data/splits/test.json data/splits/train.json
+Submitted batch job 3725405
+     JOBID  PARTITION       NAME  ST       TIME   TIME_LIMIT NODELIST(REASON) START_TIME
+   3725405       gpuq    pp_full  PD       0:00      4:00:00     (Priority) N/A
+## checksums of split files
+a7916ceed8768d07ebca2b46fd33bdcd86cf33869820bb7e2a4d218a4bb38a3d  data/splits/val.json
+e7cdfe8bee2d497e2209562a81fe4638e2944d3b189085f963b3b438d68d7b02  data/splits/test.json
+3dc1110a8d347f32890200916f8b11e050c8eb61542add18c66e7e0cf53b2962  data/splits/train.json
+===== 2026-11-13 18:14:42  END (exit 0)
+
+===== 2026-11-13 19:02:09  START
+$ squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R %S"; for J in 3720980 3725405; do squeue -h -p gpuq -t PD --sort=-p -o "%i" | awk -v j=$J "{n++; if (\$1==j) p=n} END {if (p) print \"job \" j \": position \" p \" of \" n \" pending\"}"; done; ls /scratch/pgopalan/project_Praveen/logs
+     JOBID       NAME  ST       TIME NODELIST(REASON) START_TIME
+   3725405    pp_full  PD       0:00   (Priority) 2026-11-15T08:30:00
+job 3725405: position 230 of 277 pending
+pp_test_3720980.log
+===== 2026-11-13 19:02:15  END (exit 0)
+
+===== 2026-11-13 19:02:22  START
+$ J=3720980; sacct -j $J -n -X -o JobID,State,Start,Elapsed,ExitCode,NodeList; echo "===== log ====="; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn" /scratch/pgopalan/project_Praveen/logs/pp_test_$J.log | cut -c1-330; echo "===== outputs ====="; ls /scratch/pgopalan/project_Praveen/adapters/test_run 2>&1
+3720980       COMPLETED 2026-11-13T17:15:35   00:02:59      0:0          gpu021 
+===== log =====
+node: gpu021.orc.gmu.edu  job: 3720980  started: Fri Nov 13 17:15:40 EST 2026
+Fri Nov 13 17:15:40 2026       
++-----------------------------------------------------------------------------------------+
++-----------------------------------------+------------------------+----------------------+
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
++------------------+----------------------------------+-----------+-----------------------+
++------------------+----------------------------------+-----------+-----------------------+
+
++-----------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+train: 2000 examples (12916 dropped as > 512 tokens)
+val:   300 examples (0 dropped)
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights:   1%|          | 1/111 [00:00<00:47,  2.33it/s]Loading weights:  82%|████████▏ | 91/111 [00:00<00:00, 224.57it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 191.44it/s]
+trainable params: 3,391,488 || all params: 313,658,112 || trainable%: 1.0813
+training stop-token output row: 768 extra params
+step 0/125  val_loss 3.7141  (untrained adapter = base model)
+step 25/125  epoch 0.20  loss 3.8901  lr 1.84e-04  eta 1.0 min
+step 50/125  epoch 0.40  loss 3.5654  lr 1.35e-04  eta 0.7 min
+step 50/125  val_loss 3.4889  (saved best)
+step 75/125  epoch 0.60  loss 3.5106  lr 7.21e-05  eta 0.5 min
+step 100/125  epoch 0.80  loss 3.4962  lr 2.00e-05  eta 0.3 min
+step 100/125  val_loss 3.4261  (saved best)
+step 125/125  epoch 1.00  loss 3.4857  lr 0.00e+00  eta 0.0 min
+step 125/125  val_loss 3.4247  (saved best)
+
+val_loss: base 3.7141 -> best 3.4247
+adapter saved to adapters/test_run (final) and adapters/test_run/best (lowest val loss)
+
+stopped with <|end_of_text|>: 7/8 sample generations
+
+--- Сортирайте списъка с артикулите по цена.
+Да вървим.
+[stopped=True, 9 tokens]
+
+--- Намерете два примера за това как термините "компютър" и "програмиране" се използват в изречение.
+" - Б.пр.]- Да, но не е ли така?- попита той, като се опитваше да се измъкне оттук.
+[stopped=True, 44 tokens]
+
+--- Редактирайте следното изречение, така че да е граматически правилно: В къщата ми има две котки
+Това е най-важното.
+[stopped=True, 10 tokens]
+finished: Fri Nov 13 17:18:34 EST 2026  exit: 0
+===== outputs =====
+README.md
+adapter_config.json
+adapter_model.safetensors
+best
+samples.json
+stop_token.pt
+tokenizer.json
+tokenizer_config.json
+train_args.json
+train_log.jsonl
+===== 2026-11-13 19:02:27  END (exit 0)
+
+===== 2026-11-13 19:02:36  START
+$ grep -E "NVIDIA|MiB|Driver" /scratch/pgopalan/project_Praveen/logs/pp_test_3720980.log | sed "s/^|/ /" | cut -c1-110; sacct -j 3720980 -n -o JobID%20,AllocTRES%60,MaxRSS,Elapsed | head -4
+  NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
+    0  NVIDIA A100-SXM4-80GB          On  |   00000000:C1:00.0 Off |                   On |
+  N/A   27C    P0             84W /  500W |   10360MiB /  81920MiB |     N/A      Default |
+   0    2   0   0  |             107MiB / 40192MiB    | 42      0 |  3   0    2    0    0 |
+                   |               0MiB / 24543MiB    |           |                       |
+             3720980 billing=40,cpu=4,gres/gpu:3g.40gb=1,gres/gpu=1,mem=32G,node+              00:02:59 
+       3720980.batch           cpu=4,gres/gpu:3g.40gb=1,gres/gpu=1,mem=32G,node=1   3516284K   00:02:59 
+      3720980.extern billing=40,cpu=4,gres/gpu:3g.40gb=1,gres/gpu=1,mem=32G,node+          0   00:02:59 
+===== 2026-11-13 19:02:44  END (exit 0)
+
+===== 2026-11-13 19:22:53  START
+$ squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R %S"; J=3725405; squeue -h -p gpuq -t PD --sort=-p -o "%i" | awk -v j=$J "{n++; if (\$1==j) p=n} END {if (p) print \"job \" j \": position \" p \" of \" n \" pending\"}"; sacct -j $J -n -X -o JobID,State,Start,Elapsed,NodeList; L=$(ls /scratch/pgopalan/project_Praveen/logs/pp_full_$J.log 2>/dev/null); [ -n "$L" ] && grep -E "^step|^val_loss|^stopped" $L | tail -6 || echo "full job log: none yet"
+     JOBID       NAME  ST       TIME NODELIST(REASON) START_TIME
+   3725405    pp_full  PD       0:00   (Priority) 2026-11-14T06:40:29
+job 3725405: position 225 of 274 pending
+3725405         PENDING             Unknown   00:00:00   None assigned 
+full job log: none yet
+===== 2026-11-13 19:22:58  END (exit 0)
+Read from remote host hopper-intel.orc.gmu.edu: Operation timed out
+client_loop: send disconnect: Broken pipe
+===== 2026-11-13 20:17:35  END (exit 255)
+
+===== 2026-11-13 20:17:45  START
+$ squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R %S"; sacct -j 3725405 -n -X -o JobID,State,Start,Elapsed,NodeList; pgrep -u $USER -fl "squeue|sleep" | head -5 || true
+     JOBID       NAME  ST       TIME NODELIST(REASON) START_TIME
+   3725405    pp_full   R      27:46       gpu014 2026-11-13T19:50:02
+3725405         RUNNING 2026-11-13T19:50:02   00:27:46          gpu014 
+2046119 bash
+===== 2026-11-13 20:17:48  END (exit 0)
+
+===== 2026-11-13 20:17:56  START
+$ L=/scratch/pgopalan/project_Praveen/logs/pp_full_3725405.log; grep -E "^train:|^val:|^training" $L; grep "val_loss" $L | awk "{print \$2, \$4, \$5, \$6}" | tail -8; grep "^step" $L | grep -v val_loss | tail -1; grep -E "Error|Traceback|CUDA out" $L | head -3
+train: 38344 examples (12916 dropped as > 512 tokens)
+val:   300 examples (0 dropped)
+training stop-token output row: 768 extra params
+1200/7191 3.1262 (saved best)
+1400/7191 3.1146 (saved best)
+1600/7191 3.0967 (saved best)
+1800/7191 3.0804 (saved best)
+2000/7191 3.0687 (saved best)
+2200/7191 3.0636 (saved best)
+2400/7191 3.0491 (saved best)
+2600/7191 3.0388 (saved best)
+step 2740/7191  epoch 1.14  loss 3.0271  lr 1.42e-04  eta 43.4 min
+===== 2026-11-13 20:17:59  END (exit 0)
+
+===== 2026-11-13 20:39:36  START
+$ P=/scratch/pgopalan/project_Praveen; L=$P/logs/pp_full_3725405.log; squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R"; sacct -j 3725405 -n -X -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; grep "val_loss" $L | awk "{print \$2, \$4, \$5, \$6}" | tail -6; grep "^step" $L | grep -v val_loss | tail -1; grep -E "^val_loss|^stopped|^finished|Error|Traceback|CUDA out" $L; ls $P/adapters/bul_instruct 2>&1; [ -f $P/adapters/bul_instruct/samples.json ] && $P/venv/bin/python -c "
+import json
+for s in json.load(open(\"$P/adapters/bul_instruct/samples.json\")):
+    print(\"---\", s[\"instruction\"][:110], \"/ input:\", s[\"input\"][:60].replace(chr(10), \" \"))
+    print(s[\"generated\"][:300].replace(chr(10), \" \"))
+    print(\"[stopped=%s, %d tokens]\" % (s[\"stopped\"], s[\"new_tokens\"]))
+"
+     JOBID       NAME  ST       TIME NODELIST(REASON)
+   3725405    pp_full   R      49:38       gpu014
+3725405         RUNNING 2026-11-13T19:50:02             Unknown   00:49:38      0:0          gpu014 
+3800/7191 2.9969 (saved best)
+4000/7191 2.9907 (saved best)
+4200/7191 2.9866 (saved best)
+4400/7191 2.9830 (saved best)
+4600/7191 2.9769 (saved best)
+4800/7191 2.9738 (saved best)
+step 4980/7191  epoch 2.08  loss 3.0017  lr 4.56e-05  eta 21.5 min
+best
+train_args.json
+train_log.jsonl
+===== 2026-11-13 20:39:40  END (exit 1)
+
+===== 2026-11-13 20:41:13  START
+$ P=/scratch/pgopalan/project_Praveen; L=$P/logs/pp_full_3725405.log; sacct -j 3725405 -n -X -o JobID,State,Elapsed,ExitCode; grep "^step" $L | grep -v val_loss | tail -1; grep -E "^val_loss|^stopped|^finished|Traceback|CUDA out" $L; ls $P/adapters/bul_instruct
+3725405         RUNNING   00:51:14      0:0 
+step 5140/7191  epoch 2.14  loss 3.0773  lr 3.97e-05  eta 19.9 min
+best
+train_args.json
+train_log.jsonl
+===== 2026-11-13 20:41:16  END (exit 0)
+
+===== 2026-11-13 20:49:38  START
+$ P=/scratch/pgopalan/project_Praveen; L=$P/logs/pp_full_3725405.log; sacct -j 3725405 -n -X -o JobID,State,Start,End,Elapsed,ExitCode; grep "^step" $L | grep -v val_loss | tail -1; grep -E "^val_loss|^stopped|^finished|Traceback|CUDA out" $L; du -sh $P/adapters/bul_instruct $P/adapters/test_run $P/scripts $P/logs 2>&1; ls -la $P/adapters/bul_instruct; ls -ld /home/pgopalan/project_praveen 2>&1
+3725405         RUNNING 2026-11-13T19:50:02             Unknown   00:59:40      0:0 
+step 6000/7191  epoch 2.50  loss 2.9615  lr 1.40e-05  eta 11.6 min
+13M	/scratch/pgopalan/project_Praveen/adapters/bul_instruct
+43M	/scratch/pgopalan/project_Praveen/adapters/test_run
+40K	/scratch/pgopalan/project_Praveen/scripts
+30K	/scratch/pgopalan/project_Praveen/logs
+total 26
+drwxr-sr-x 2 pgopalan scratch  4096 Nov 13 19:53 .
+drwxr-sr-x 2 pgopalan scratch  4096 Nov 13 19:50 ..
+drwxr-sr-x 2 pgopalan scratch  4096 Nov 13 20:47 best
+-rw-r--r-- 1 pgopalan scratch   599 Nov 13 19:51 train_args.json
+-rw-r--r-- 1 pgopalan scratch 24738 Nov 13 20:49 train_log.jsonl
+ls: cannot access '/home/pgopalan/project_praveen': No such file or directory
+===== 2026-11-13 20:49:42  END (exit 2)
+
+===== 2026-11-13 20:50:00  START
+$ J=3725405; P=/scratch/pgopalan/project_Praveen; H=/home/pgopalan/project_praveen; L=$P/logs/pp_full_$J.log; for i in $(seq 1 90); do [ -z "$(squeue -h -j $J 2>/dev/null)" ] && break; [ $((i % 4)) -eq 1 ] && echo "$(date +%H:%M:%S) waiting: $(grep "^step" $L | grep -v val_loss | tail -1 | cut -c1-60)"; sleep 30; done; echo "## job"; sacct -j $J -n -X -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; grep -E "^val_loss|^stopped|^finished|Traceback|CUDA out" $L; st=$(sacct -j $J -n -X -o State | tr -d " "); if [ "$st" = "COMPLETED" ]; then echo "## copying to $H"; mkdir -p $H/adapters $H/data/splits && cp -r $P/adapters/bul_instruct $H/adapters/ && cp -r $P/scripts $P/logs $H/ && cp $P/data/splits/val.json $P/data/splits/test.json $P/data/splits/split_info.json $H/data/splits/ && du -sh $H && find $H -type f | sort | sed "s#$H/##" && echo "## verify" && (cd $P && sha256sum adapters/bul_instruct/adapter_model.safetensors adapters/bul_instruct/best/adapter_model.safetensors adapters/bul_instruct/stop_token.pt) && (cd $H && sha256sum adapters/bul_instruct/adapter_model.safetensors adapters/bul_instruct/best/adapter_model.safetensors adapters/bul_instruct/stop_token.pt); echo "## samples"; $P/venv/bin/python -c "
+import json
+for s in json.load(open(\"$P/adapters/bul_instruct/samples.json\")):
+    print(\"---\", s[\"instruction\"][:110], \"/ input:\", s[\"input\"][:60].replace(chr(10), \" \"))
+    print(s[\"generated\"][:300].replace(chr(10), \" \"))
+    print(\"[stopped=%s, %d tokens]\" % (s[\"stopped\"], s[\"new_tokens\"]))
+"; else echo "job state is $st: nothing copied"; fi
+20:50:04 waiting: step 6020/7191  epoch 2.51  loss 3.0107  lr 1.36e-05  eta 11
+
+===== 2026-11-13 20:51:53  START
+$ date +%H:%M:%S; P=/scratch/pgopalan/project_Praveen; L=$P/logs/pp_full_3725405.log; sacct -j 3725405 -n -X -o JobID,State,Start,End,Elapsed,ExitCode; grep "^step" $L | grep -v val_loss | tail -1; grep -E "^val_loss|^stopped|^finished|Traceback|CUDA out" $L; ls -ld /home/pgopalan/project_praveen 2>&1
+20:51:58
+3725405         RUNNING 2026-11-13T19:50:02             Unknown   01:01:56      0:0 
+step 6240/7191  epoch 2.60  loss 2.9407  lr 9.03e-06  eta 9.3 min
+ls: cannot access '/home/pgopalan/project_praveen': No such file or directory
+===== 2026-11-13 20:51:58  END (exit 2)
+20:52:04 waiting: step 6240/7191  epoch 2.60  loss 2.9407  lr 9.03e-06  eta 9.
+20:54:04 waiting: step 6440/7191  epoch 2.69  loss 2.9520  lr 5.66e-06  eta 7.
+20:56:04 waiting: step 6620/7191  epoch 2.76  loss 3.0503  lr 3.29e-06  eta 5.
+20:58:07 waiting: step 6860/7191  epoch 2.86  loss 3.0110  lr 1.11e-06  eta 3.
+21:00:10 waiting: step 7080/7191  epoch 2.95  loss 2.9355  lr 1.25e-07  eta 1.
+## job
+3725405       COMPLETED 2026-11-13T19:50:02 2026-11-13T21:01:31   01:11:29      0:0          gpu014 
+val_loss: base 3.7141 -> best 2.9619
+stopped with <|end_of_text|>: 7/8 sample generations
+finished: Fri Nov 13 21:01:31 EST 2026  exit: 0
+## copying to /home/pgopalan/project_praveen
+43M	/home/pgopalan/project_praveen
+adapters/bul_instruct/README.md
+adapters/bul_instruct/adapter_config.json
+adapters/bul_instruct/adapter_model.safetensors
+adapters/bul_instruct/best/README.md
+adapters/bul_instruct/best/adapter_config.json
+adapters/bul_instruct/best/adapter_model.safetensors
+adapters/bul_instruct/best/stop_token.pt
+adapters/bul_instruct/samples.json
+adapters/bul_instruct/stop_token.pt
+adapters/bul_instruct/tokenizer.json
+adapters/bul_instruct/tokenizer_config.json
+adapters/bul_instruct/train_args.json
+adapters/bul_instruct/train_log.jsonl
+data/splits/split_info.json
+data/splits/test.json
+data/splits/val.json
+logs/pp_full_3725405.log
+logs/pp_test_3720980.log
+scripts/__pycache__/instruct_prompt.cpython-311.pyc
+scripts/__pycache__/stop_token.cpython-311.pyc
+scripts/full_job.slurm
+scripts/instruct_prompt.py
+scripts/split_data.py
+scripts/stop_token.py
+scripts/test_job.slurm
+scripts/train_lora.py
+## verify
+1b5d2f4c4a2e4ae0580569a74393ffabaf6e23ba5b9a814d3e0b7d3e756a4360  adapters/bul_instruct/adapter_model.safetensors
+582a075e8ba8361168504b8e4d8cad0f2630824868021fed2bcc046f1c02a32f  adapters/bul_instruct/best/adapter_model.safetensors
+d578478b30e47524b7d7ba38a9796b2aeeb76d6d0dd796e023b01dbf05c583a9  adapters/bul_instruct/stop_token.pt
+1b5d2f4c4a2e4ae0580569a74393ffabaf6e23ba5b9a814d3e0b7d3e756a4360  adapters/bul_instruct/adapter_model.safetensors
+582a075e8ba8361168504b8e4d8cad0f2630824868021fed2bcc046f1c02a32f  adapters/bul_instruct/best/adapter_model.safetensors
+d578478b30e47524b7d7ba38a9796b2aeeb76d6d0dd796e023b01dbf05c583a9  adapters/bul_instruct/stop_token.pt
+## samples
+--- Сортирайте списъка с артикулите по цена. / input: Apple, Banana, Orange - $ 3, $ 1, $2
+Ето един пример за изкуствен интелект, който е използван за избор.
+[stopped=True, 25 tokens]
+--- Намерете два примера за това как термините "компютър" и "програмиране" се използват в изречение. / input: 
+"Три дни, които са на път да се използват заедно, за да се използват за по-ниско.
+[stopped=True, 42 tokens]
+--- Редактирайте следното изречение, така че да е граматически правилно: В къщата ми има две котки / input: Има две котки в къщата ми.
+Тя се отвори.
+[stopped=True, 9 tokens]
+--- Дайте пример за време, когато трябва да мислите извън кутията. / input: 
+"Това е най-важно.
+[stopped=True, 10 tokens]
+--- Редактирайте следния блок код и го направете по-кратък. / input: за (i-0; i ? 10; i ++)     console.log("Hello World"); . . .
+Ето един пример за изпълнител на 2,5, 3, 4, 7, 6, 1, 2, 3, 8, 9, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+[stopped=False, 200 tokens]
+--- Можете ли да обобщите даденото описание/параграф? / input: Ракетите са космически кораби, които се задвижват от ракетни
+"Възможността да се използва за по-често и по-скоро да се използва за изкуствен интелект, който е използван за използване на използването на изкуствения интелект, който може да се използва за използване на извличане на изкуствени хора.
+[stopped=True, 100 tokens]
+--- Дайте пример за алгоритъм и обяснете какво прави. / input: 
+"Това е "плуване на възрастта".
+[stopped=True, 17 tokens]
+--- Дайте решение на етичен въпрос. / input: Реклама на деца.
+Ето един пример за изкуствен интелект, който се опитва да се използва за изследване на 2, така че, ако имате нужда от помощта ви да се използвате заедно.
+[stopped=True, 63 tokens]
+===== 2026-11-13 21:01:45  END (exit 0)
+
+===== 2026-11-14 01:06:03  START
+COPY TO HOPPER    eval_test.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-14 01:06:07  END (exit 0)
+
+===== 2026-11-14 01:06:07  START
+COPY TO HOPPER    hopper_jobs/eval_job.slurm  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-14 01:06:10  END (exit 0)
+
+===== 2026-11-14 01:06:10  START
+$ cd /scratch/pgopalan/project_Praveen && sha256sum scripts/eval_test.py && sbatch scripts/eval_job.slurm && sleep 8 && squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R %S"
+a8629c685261d5c86fe197fabf77cd54ba9d932da57a160c0c0d10fc63a671fa  scripts/eval_test.py
+Submitted batch job 3729191
+     JOBID       NAME  ST       TIME NODELIST(REASON) START_TIME
+   3729191    pp_eval  PD       0:00   (Priority) 2026-11-14T10:44:36
+===== 2026-11-14 01:06:22  END (exit 0)
+
+===== 2026-11-14 01:06:33  START
+$ J=3729191; P=/scratch/pgopalan/project_Praveen; H=/home/pgopalan/project_praveen; L=$P/logs/pp_eval_$J.log; last=""; for i in $(seq 1 1400); do st=$(squeue -h -j $J -o "%T" 2>/dev/null); [ -z "$st" ] && break; if [ "$st" != "$last" ]; then echo "$(date +%H:%M:%S) job $J: $st $(squeue -h -j $J -o "est-start=%S node=%R")"; last=$st; fi; [ $((i % 60)) -eq 0 ] && echo "$(date +%H:%M:%S) still $st"; sleep 30; done; echo "## job"; sacct -j $J -n -X -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; st=$(sacct -j $J -n -X -o State | tr -d " "); echo "## log"; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn|Loading weights" $L | tail -22; if [ "$st" = "COMPLETED" ] && [ -f $P/adapters/bul_instruct/test_eval.json ]; then cp $P/adapters/bul_instruct/test_eval.json $H/adapters/bul_instruct/ && cp $P/scripts/eval_test.py $P/scripts/eval_job.slurm $H/scripts/ && cp $L $H/logs/ && echo "## copied to home" && ls -la $H/adapters/bul_instruct/test_eval.json; else echo "state $st: nothing copied"; fi
+01:06:36 job 3729191: PENDING est-start=2026-11-14T10:44:36 node=(Priority)
+
+===== 2026-11-14 01:15:31  START
+$ date "+now on Hopper: %Y-%m-%d %H:%M"; squeue -u $USER -o "%.10i %.10j %.3t %.10M %.12R %S"; squeue -h -p gpuq -t PD --sort=-p -o "%i" | awk "{n++; if (\$1==3729191) p=n} END {if (p) print \"position \" p \" of \" n \" pending\"; else print n \" pending, job not among them\"}"; sacct -j 3729191 -n -X -o JobID,State,Start,Elapsed
+now on Hopper: 2026-11-14 01:15
+     JOBID       NAME  ST       TIME NODELIST(REASON) START_TIME
+   3729191    pp_eval  PD       0:00   (Priority) N/A
+position 215 of 261 pending
+3729191         PENDING             Unknown   00:00:00 
+===== 2026-11-14 01:15:34  END (exit 0)
+01:15:36 job 3729191: RUNNING est-start=2026-11-14T01:15:35 node=gpu020
+
+===== 2026-11-14 01:19:40  START
+COPY FROM HOPPER  /home/pgopalan/project_praveen/adapters/bul_instruct/train_log.jsonl  ->  adapters/hopper_bul_instruct/
+===== 2026-11-14 01:19:44  END (exit 0)
+
+===== 2026-11-14 01:19:44  START
+COPY FROM HOPPER  /home/pgopalan/project_praveen/adapters/bul_instruct/samples.json  ->  adapters/hopper_bul_instruct/
+===== 2026-11-14 01:19:47  END (exit 0)
+
+===== 2026-11-14 01:19:47  START
+COPY FROM HOPPER  /home/pgopalan/project_praveen/adapters/bul_instruct/train_args.json  ->  adapters/hopper_bul_instruct/
+===== 2026-11-14 01:19:51  END (exit 0)
+
+===== 2026-11-14 01:21:08  START
+$ date +%H:%M:%S; sacct -j 3729191 -n -X -o JobID,State,Start,Elapsed,NodeList; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn|Loading weights" /scratch/pgopalan/project_Praveen/logs/pp_eval_3729191.log | tail -30
+01:21:12
+3729191         RUNNING 2026-11-14T01:15:35   00:05:37          gpu020 
+
+Lmod is automatically replacing "gnu9/9.3.0" with "gnu12/12.3.0".
+
+
+Inactive Modules:
+  1) hwloc/2.1.0     2) libfabric     3) ucx
+
+The following have been reloaded with a version change:
+  1) openmpi4/4.0.4 => openmpi4/4.1.6-a2
+
+node: gpu020.orc.gmu.edu  job: 3729191  started: Sat Nov 14 01:15:39 EST 2026
+===== 2026-11-14 01:21:12  END (exit 0)
+Read from remote host hopper-intel.orc.gmu.edu: Operation timed out
+client_loop: send disconnect: Broken pipe
+===== 2026-11-14 02:09:21  END (exit 255)
+
+===== 2026-11-14 10:15:25  START
+$ date +%H:%M:%S; J=3729191; P=/scratch/pgopalan/project_Praveen; sacct -j $J -n -X -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; squeue -u $USER -h -o "%i %j %T %M"; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn|Loading weights|Lmod|Inactive|hwloc|reloaded|openmpi|^$" $P/logs/pp_eval_$J.log | tail -24; ls -la $P/adapters/bul_instruct/test_eval.json 2>&1; ls /home/pgopalan/project_praveen/adapters/bul_instruct/ | tr "\n" " "
+pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,keyboard-interactive).
+===== 2026-11-14 10:15:25  END (exit 255)
+
+===== 2026-11-14 10:33:45  START
+$ date "+%Y-%m-%d %H:%M:%S"; J=3729191; P=/scratch/pgopalan/project_Praveen; sacct -j $J -n -X -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; squeue -u $USER -h -o "%i %j %T %M"; grep -v -E "clean_up_tokenization|Redirects|UserWarning|warnings.warn|Loading weights|Lmod|Inactive|hwloc|reloaded|openmpi|^$" $P/logs/pp_eval_$J.log | tail -24; ls -la $P/adapters/bul_instruct/test_eval.json 2>&1
+2026-11-14 10:33:52
+3729191       COMPLETED 2026-11-14T01:15:35 2026-11-14T01:25:53   00:10:18      0:0          gpu020 
+ "n": 200,
+ "stopped": 0.955,
+ "cyrillic_only": 1.0,
+ "empty": 0.0,
+ "avg_tokens": 42.985,
+ "overlap_true": 0.0762254385507171,
+ "overlap_wrong": 0.07773141253250934,
+ "loss_true": 2.9329514260709635,
+ "loss_wrong": 2.9630452069532747,
+ "loss_gap": 0.030093780882311183
+}
+metric                base    adapter
+n                 200.0000   200.0000
+stopped             0.0000     0.9550
+cyrillic_only       1.0000     1.0000
+empty               0.0000     0.0000
+avg_tokens        200.0000    42.9850
+overlap_true        0.0817     0.0762
+overlap_wrong       0.0836     0.0777
+loss_true           3.6790     2.9330
+loss_wrong          3.7021     2.9630
+loss_gap            0.0231     0.0301
+saved 200 rows with both generations to adapters/bul_instruct/test_eval.json
+finished: Sat Nov 14 01:25:53 EST 2026  exit: 0
+-rw-r--r-- 1 pgopalan scratch 377173 Nov 14 01:25 /scratch/pgopalan/project_Praveen/adapters/bul_instruct/test_eval.json
+===== 2026-11-14 10:33:52  END (exit 0)
+
+===== 2026-11-14 10:34:04  START
+$ P=/scratch/pgopalan/project_Praveen; H=/home/pgopalan/project_praveen; cp $P/adapters/bul_instruct/test_eval.json $H/adapters/bul_instruct/ && cp $P/scripts/eval_test.py $P/scripts/eval_job.slurm $H/scripts/ && cp $P/logs/pp_eval_3729191.log $H/logs/ && sha256sum $P/adapters/bul_instruct/test_eval.json $H/adapters/bul_instruct/test_eval.json | awk "{print \$1}" | uniq -c && du -sh $H
+      2 af732788d744ca8045e81fd8464667b6aeb55c0c852cbd07e666df2896c4c22a
+44M	/home/pgopalan/project_praveen
+===== 2026-11-14 10:34:12  END (exit 0)
+
+===== 2026-11-14 10:34:12  START
+COPY FROM HOPPER  /home/pgopalan/project_praveen/adapters/bul_instruct/test_eval.json  ->  adapters/hopper_bul_instruct/
+===== 2026-11-14 10:34:17  END (exit 0)
+
+===== 2026-11-15 13:11:31  START
+$ squeue -u pgopalan; ls /scratch/pgopalan/project_Praveen /scratch/pgopalan/project_Praveen/scripts; df -h /scratch/pgopalan | tail -1
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+/scratch/pgopalan/project_Praveen:
+adapters
+data
+logs
+models
+scripts
+venv
+
+/scratch/pgopalan/project_Praveen/scripts:
+__pycache__
+eval_job.slurm
+eval_test.py
+full_job.slurm
+instruct_prompt.py
+split_data.py
+stop_token.py
+test_job.slurm
+train_lora.py
+172.16.128.120:/scratch  2.3P  1.9P  416T  82% /scratch
+===== 2026-11-15 13:11:33  END (exit 0)
+
+===== 2026-11-15 13:13:30  START
+COPY TO HOPPER    make_copy_probe.py  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-15 13:13:31  END (exit 0)
+
+===== 2026-11-15 13:13:31  START
+COPY TO HOPPER    hopper_jobs/probe_job.slurm  ->  /scratch/pgopalan/project_Praveen/scripts/
+===== 2026-11-15 13:13:32  END (exit 0)
+
+===== 2026-11-15 13:13:32  START
+$ cd /scratch/pgopalan/project_Praveen && sha256sum scripts/make_copy_probe.py scripts/probe_job.slurm && sbatch scripts/probe_job.slurm && sleep 5 && squeue -u pgopalan --start; squeue -u pgopalan
+2b3bc38c01fd334a0cd4eb671e60fcd074813214f2854b216e816fbe776225d8  scripts/make_copy_probe.py
+beb4cedeb70dd0a123a9f70a54b7b0343b6f2d9053f5eb7ab884afb0a0ea96af  scripts/probe_job.slurm
+Submitted batch job 3750107
+             JOBID PARTITION     NAME     USER ST          START_TIME  NODES SCHEDNODES           NODELIST(REASON)
+           3750107      gpuq pp_probe pgopalan PD 2026-11-16T12:30:00      1 gpu013               (Priority)
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           3750107      gpuq pp_probe pgopalan PD       0:00      1 (Priority)
+===== 2026-11-15 13:13:38  END (exit 0)
+
+===== 2026-11-15 13:13:48  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:13:49  END (exit 0)
+
+===== 2026-11-15 13:18:49  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:18:51  END (exit 0)
+
+===== 2026-11-15 13:23:51  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:23:52  END (exit 0)
+
+===== 2026-11-15 13:28:52  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:28:53  END (exit 0)
+
+===== 2026-11-15 13:33:53  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:33:55  END (exit 0)
+
+===== 2026-11-15 13:38:55  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:38:56  END (exit 0)
+
+===== 2026-11-15 13:43:56  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:43:57  END (exit 0)
+
+===== 2026-11-15 13:48:57  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:48:59  END (exit 0)
+
+===== 2026-11-15 13:53:59  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:54:00  END (exit 0)
+
+===== 2026-11-15 13:59:00  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 13:59:01  END (exit 0)
+
+===== 2026-11-15 14:04:01  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:04:03  END (exit 0)
+
+===== 2026-11-15 14:09:03  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:09:05  END (exit 0)
+
+===== 2026-11-15 14:14:05  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:14:07  END (exit 0)
+
+===== 2026-11-15 14:19:07  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:19:08  END (exit 0)
+
+===== 2026-11-15 14:23:31  START
+$ squeue -j 3750107 --start -h -o "%i %T %r start=%S node=%Y"; sprio -j 3750107 -h -o "prio=%Y age=%A fairshare=%F"; echo "gpuq pending jobs: $(squeue -h -p gpuq -t PD | wc -l)  running: $(squeue -h -p gpuq -t R | wc -l)"; echo "pending ahead (higher priority): $(squeue -h -p gpuq -t PD -o %Q | awk -v p=$(squeue -h -j 3750107 -o %Q) "\$1>p" | wc -l)"; sinfo -h -p gpuq -o "%D nodes %T"; sshare -u pgopalan -A aanastasopoulos -h -o "User,FairShare" | tail -1
+3750107 PENDING Priority start=2026-11-16T07:30:00 node=gpu014
+prio=2283 age=6 fairshare=1276
+gpuq pending jobs: 229  running: 59
+pending ahead (higher priority): 182
+1 nodes completing
+10 nodes mixed-
+5 nodes allocated
+  pgopalan   0.127555 
+===== 2026-11-15 14:23:33  END (exit 0)
+
+===== 2026-11-15 14:24:08  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:24:09  END (exit 0)
+
+===== 2026-11-15 14:29:09  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:29:11  END (exit 0)
+
+===== 2026-11-15 14:34:11  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:34:12  END (exit 0)
+
+===== 2026-11-15 14:39:12  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:39:13  END (exit 0)
+
+===== 2026-11-15 14:44:13  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:44:15  END (exit 0)
+
+===== 2026-11-15 14:49:15  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:49:16  END (exit 0)
+
+===== 2026-11-15 14:54:16  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:54:17  END (exit 0)
+
+===== 2026-11-15 14:59:17  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 14:59:19  END (exit 0)
+
+===== 2026-11-15 15:04:19  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 15:04:20  END (exit 0)
+
+===== 2026-11-15 15:09:20  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 15:09:22  END (exit 0)
+
+===== 2026-11-15 15:14:22  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: PENDING
+===== 2026-11-15 15:14:23  END (exit 0)
+
+===== 2026-11-15 15:19:23  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+===== LoRA + stop token =====
+===== 2026-11-15 15:19:25  END (exit 0)
+
+===== 2026-11-15 15:24:25  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 660/3125  epoch 1.06  loss 3.0787  lr 1.83e-04  eta 16.3 min
+step 680/3125  epoch 1.09  loss 3.0218  lr 1.82e-04  eta 16.1 min
+===== 2026-11-15 15:24:26  END (exit 0)
+
+===== 2026-11-15 15:29:26  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 1420/3125  epoch 2.27  loss 2.9739  lr 1.19e-04  eta 11.3 min
+step 1440/3125  epoch 2.30  loss 3.0060  lr 1.17e-04  eta 11.1 min
+===== 2026-11-15 15:29:27  END (exit 0)
+
+===== 2026-11-15 15:34:27  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 2180/3125  epoch 3.49  loss 2.9483  lr 4.42e-05  eta 6.3 min
+step 2200/3125  epoch 3.52  loss 2.8974  lr 4.25e-05  eta 6.1 min
+===== 2026-11-15 15:34:29  END (exit 0)
+
+===== 2026-11-15 15:39:29  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 2940/3125  epoch 4.70  loss 2.8772  lr 1.83e-06  eta 1.2 min
+step 2960/3125  epoch 4.74  loss 2.8632  lr 1.46e-06  eta 1.1 min
+===== 2026-11-15 15:39:30  END (exit 0)
+
+===== 2026-11-15 15:44:30  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+stopped with <|end_of_text|>: 8/8 sample generations
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+===== 2026-11-15 15:44:32  END (exit 0)
+
+===== 2026-11-15 15:49:32  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+stopped with <|end_of_text|>: 8/8 sample generations
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+===== 2026-11-15 15:49:33  END (exit 0)
+
+===== 2026-11-15 15:54:33  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 380/3125  epoch 0.61  loss 3.0980  lr 4.89e-05  eta 24.2 min
+step 400/3125  epoch 0.64  loss 2.9717  lr 4.87e-05  eta 24.2 min
+===== 2026-11-15 15:54:35  END (exit 0)
+
+===== 2026-11-15 15:59:35  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 940/3125  epoch 1.50  loss 2.7997  lr 4.10e-05  eta 19.7 min
+step 960/3125  epoch 1.54  loss 2.6941  lr 4.06e-05  eta 19.5 min
+===== 2026-11-15 15:59:36  END (exit 0)
+
+===== 2026-11-15 16:04:36  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 1500/3125  epoch 2.40  loss 2.6833  lr 2.78e-05  eta 14.6 min
+step 1520/3125  epoch 2.43  loss 2.6716  lr 2.73e-05  eta 14.4 min
+===== 2026-11-15 16:04:37  END (exit 0)
+
+===== 2026-11-15 16:09:37  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 2040/3125  epoch 3.26  loss 2.5411  lr 1.42e-05  eta 9.8 min
+step 2060/3125  epoch 3.30  loss 2.5670  lr 1.37e-05  eta 9.6 min
+===== 2026-11-15 16:09:39  END (exit 0)
+
+===== 2026-11-15 16:14:39  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+step 2580/3125  epoch 4.13  loss 2.6083  lr 3.88e-06  eta 4.9 min
+step 2600/3125  epoch 4.16  loss 2.6075  lr 3.61e-06  eta 4.7 min
+===== 2026-11-15 16:14:40  END (exit 0)
+
+===== 2026-11-15 16:19:40  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+stopped with <|end_of_text|>: 7/8 sample generations
+===== 2026-11-15 16:19:41  END (exit 0)
+
+===== 2026-11-15 16:24:41  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: RUNNING
+stopped with <|end_of_text|>: 7/8 sample generations
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+===== 2026-11-15 16:24:43  END (exit 0)
+
+===== 2026-11-15 16:29:43  START
+$ st=$(squeue -h -j 3750107 -o %T 2>/dev/null); echo "state: ${st:-DONE}"; grep -E "^=====|step |val_loss|stopped with" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log 2>/dev/null | tail -2
+state: DONE
+stopped with <|end_of_text|>: 7/8 sample generations
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+===== 2026-11-15 16:29:44  END (exit 0)
+
+===== 2026-11-15 16:29:44  START
+$ sacct -j 3750107 -X -n -o JobID,State,Start,End,Elapsed,ExitCode,NodeList; grep -E "^=====|val_loss|stopped with|^metric|^stopped|^overlap|^loss|^avg_tokens|finished" /scratch/pgopalan/project_Praveen/logs/pp_probe_3750107.log
+3750107       COMPLETED 2026-11-15T15:18:46 2026-11-15T16:28:10   01:09:24      0:0          gpu013 
+===== LoRA + stop token =====
+step 0/3125  val_loss 3.9316  (untrained adapter = base model)
+step 200/3125  val_loss 3.2383  (saved best)
+step 400/3125  val_loss 3.1538  (saved best)
+step 600/3125  val_loss 3.1116  (saved best)
+step 800/3125  val_loss 3.0805  (saved best)
+step 1000/3125  val_loss 3.0587  (saved best)
+step 1200/3125  val_loss 3.0383  (saved best)
+step 1400/3125  val_loss 3.0267  (saved best)
+step 1600/3125  val_loss 3.0124  (saved best)
+step 1800/3125  val_loss 2.9972  (saved best)
+step 2000/3125  val_loss 2.9925  (saved best)
+step 2200/3125  val_loss 2.9860  (saved best)
+step 2400/3125  val_loss 2.9838  (saved best)
+step 2600/3125  val_loss 2.9795  (saved best)
+step 2800/3125  val_loss 2.9787  (saved best)
+step 3000/3125  val_loss 2.9781  (saved best)
+step 3125/3125  val_loss 2.9781
+val_loss: base 3.9316 -> best 2.9781
+stopped with <|end_of_text|>: 8/8 sample generations
+metric                base    adapter
+stopped             0.0000     0.9500
+avg_tokens        200.0000    40.4100
+overlap_true        0.0456     0.0710
+overlap_wrong       0.0569     0.0668
+loss_true           3.8428     2.9183
+loss_wrong          3.8827     3.0592
+loss_gap            0.0399     0.1409
+===== full fine-tune =====
+step 0/3125  val_loss 3.9316  (untrained adapter = base model)
+step 200/3125  val_loss 3.2855  (saved best)
+step 400/3125  val_loss 3.0345  (saved best)
+step 600/3125  val_loss 2.9397  (saved best)
+step 800/3125  val_loss 2.8879  (saved best)
+step 1000/3125  val_loss 2.8490  (saved best)
+step 1200/3125  val_loss 2.8173  (saved best)
+step 1400/3125  val_loss 2.7988  (saved best)
+step 1600/3125  val_loss 2.7810  (saved best)
+step 1800/3125  val_loss 2.7646  (saved best)
+step 2000/3125  val_loss 2.7586  (saved best)
+step 2200/3125  val_loss 2.7504  (saved best)
+step 2400/3125  val_loss 2.7453  (saved best)
+step 2600/3125  val_loss 2.7420  (saved best)
+step 2800/3125  val_loss 2.7412  (saved best)
+step 3000/3125  val_loss 2.7407  (saved best)
+step 3125/3125  val_loss 2.7406  (saved best)
+val_loss: base 3.9316 -> best 2.7406
+stopped with <|end_of_text|>: 7/8 sample generations
+metric                base    adapter
+stopped             0.0000     0.9550
+avg_tokens        200.0000    39.9400
+overlap_true        0.0456     0.0813
+overlap_wrong       0.0569     0.0690
+loss_true           3.8428     2.7096
+loss_wrong          3.8827     2.8387
+loss_gap            0.0399     0.1291
+finished: Sun Nov 15 16:28:10 EST 2026  exit: 0
+===== 2026-11-15 16:29:46  END (exit 0)
+
+===== 2026-11-20 16:31:30  START
+$ echo "--- GPU partitions ---"; sinfo -o "%.14P %.6a %.11l %.6D %.10T %.22G" | grep -i -E "PARTITION|gpu"; echo "--- my jobs ---"; squeue -u pgopalan; echo "--- sgpu command? ---"; type sgpu 2>&1 | head -2
+pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,keyboard-interactive).
+===== 2026-11-20 16:31:30  END (exit 255)
+
+===== 2026-11-23 10:20:46  START
+$ P=/scratch/pgopalan/project_Praveen; ls -la $P; echo "## sizes"; du -sh $P/* 2>/dev/null; echo "## files outside venv"; find $P -path $P/venv -prune -o -path $P/models -prune -o -type f -printf "%s %P\n" | sort -rn | head -80; echo "## count"; find $P -path $P/venv -prune -o -type f -print | wc -l; echo "## other scratch"; ls /scratch/pgopalan
+pgopalan@hopper-intel.orc.gmu.edu: Permission denied (gssapi-with-mic,password,keyboard-interactive).
+===== 2026-11-23 10:20:46  END (exit 255)

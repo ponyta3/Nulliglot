@@ -1,0 +1,12 @@
+{
+  "source": "data/alpaca_data_cleaned.bg.json",
+  "model": "iamshnoo/bul_100m",
+  "seed": 42,
+  "max_len": 512,
+  "rows_total": 51760,
+  "train": 51260,
+  "train_over_max_len": 12916,
+  "train_usable": 38344,
+  "val": 300,
+  "test": 200
+}

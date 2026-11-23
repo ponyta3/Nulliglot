@@ -1,0 +1,423 @@
+W1113 18:15:04.596000 35058 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+train: 38344 examples (12916 dropped as > 512 tokens)
+val:   300 examples (0 dropped)
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 3587.11it/s]
+trainable params: 3,391,488 || all params: 313,658,112 || trainable%: 1.0813
+training stop-token output row: 768 extra params
+step 0/7191  val_loss 3.7141  (untrained adapter = base model)
+step 20/7191  epoch 0.01  loss 4.2009  lr 1.95e-05  eta 58.1 min  gpu 2.9 GB
+step 40/7191  epoch 0.02  loss 3.8405  lr 3.81e-05  eta 68.8 min  gpu 3.2 GB
+step 60/7191  epoch 0.03  loss 4.0957  lr 5.67e-05  eta 65.1 min  gpu 3.2 GB
+step 80/7191  epoch 0.03  loss 3.8467  lr 7.53e-05  eta 64.7 min  gpu 2.6 GB
+step 100/7191  epoch 0.04  loss 3.6740  lr 9.40e-05  eta 67.3 min  gpu 3.0 GB
+step 120/7191  epoch 0.05  loss 3.4701  lr 1.13e-04  eta 66.1 min  gpu 3.0 GB
+step 140/7191  epoch 0.06  loss 3.5118  lr 1.31e-04  eta 66.4 min  gpu 3.0 GB
+step 160/7191  epoch 0.07  loss 3.6540  lr 1.50e-04  eta 66.6 min  gpu 3.0 GB
+step 180/7191  epoch 0.08  loss 3.4152  lr 1.68e-04  eta 67.1 min  gpu 3.0 GB
+step 200/7191  epoch 0.08  loss 3.3763  lr 1.87e-04  eta 67.0 min  gpu 3.0 GB
+/Users/praveen/Desktop/Research/CS 795/.venv/lib/python3.12/site-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in iamshnoo/bul_100m - will assume that the vocabulary was not modified.
+  warnings.warn(
+step 200/7191  val_loss 3.3650  (saved best)
+step 220/7191  epoch 0.09  loss 3.3407  lr 2.00e-04  eta 70.3 min  gpu 3.0 GB
+step 240/7191  epoch 0.10  loss 3.2944  lr 2.00e-04  eta 69.9 min  gpu 3.0 GB
+step 260/7191  epoch 0.11  loss 3.4142  lr 2.00e-04  eta 69.4 min  gpu 3.0 GB
+step 280/7191  epoch 0.12  loss 3.3049  lr 2.00e-04  eta 68.4 min  gpu 2.6 GB
+step 300/7191  epoch 0.13  loss 3.2127  lr 2.00e-04  eta 67.6 min  gpu 2.6 GB
+step 320/7191  epoch 0.13  loss 3.4276  lr 2.00e-04  eta 67.0 min  gpu 2.6 GB
+step 340/7191  epoch 0.14  loss 3.4318  lr 2.00e-04  eta 66.3 min  gpu 3.0 GB
+step 360/7191  epoch 0.15  loss 3.1089  lr 2.00e-04  eta 65.7 min  gpu 2.6 GB
+step 380/7191  epoch 0.16  loss 3.3134  lr 2.00e-04  eta 65.0 min  gpu 2.6 GB
+step 400/7191  epoch 0.17  loss 3.3001  lr 2.00e-04  eta 64.9 min  gpu 2.6 GB
+step 400/7191  val_loss 3.2519  (saved best)
+step 420/7191  epoch 0.18  loss 3.2975  lr 2.00e-04  eta 66.1 min  gpu 3.0 GB
+step 440/7191  epoch 0.18  loss 3.1698  lr 1.99e-04  eta 66.4 min  gpu 3.0 GB
+step 460/7191  epoch 0.19  loss 3.1791  lr 1.99e-04  eta 66.1 min  gpu 2.7 GB
+step 480/7191  epoch 0.20  loss 3.1852  lr 1.99e-04  eta 65.7 min  gpu 2.6 GB
+step 500/7191  epoch 0.21  loss 3.2603  lr 1.99e-04  eta 65.2 min  gpu 3.0 GB
+step 520/7191  epoch 0.22  loss 3.2398  lr 1.99e-04  eta 64.6 min  gpu 3.0 GB
+step 540/7191  epoch 0.23  loss 3.2447  lr 1.99e-04  eta 63.9 min  gpu 2.6 GB
+step 560/7191  epoch 0.23  loss 3.2173  lr 1.99e-04  eta 64.0 min  gpu 3.0 GB
+step 580/7191  epoch 0.24  loss 3.1787  lr 1.99e-04  eta 63.7 min  gpu 2.6 GB
+step 600/7191  epoch 0.25  loss 3.2560  lr 1.99e-04  eta 63.5 min  gpu 3.0 GB
+step 600/7191  val_loss 3.1999  (saved best)
+step 620/7191  epoch 0.26  loss 3.1889  lr 1.98e-04  eta 64.3 min  gpu 3.0 GB
+step 640/7191  epoch 0.27  loss 3.1696  lr 1.98e-04  eta 64.1 min  gpu 3.0 GB
+step 660/7191  epoch 0.28  loss 3.2734  lr 1.98e-04  eta 63.9 min  gpu 3.0 GB
+step 680/7191  epoch 0.28  loss 3.2223  lr 1.98e-04  eta 63.5 min  gpu 2.6 GB
+step 700/7191  epoch 0.29  loss 3.1558  lr 1.98e-04  eta 63.5 min  gpu 2.6 GB
+step 720/7191  epoch 0.30  loss 3.1488  lr 1.97e-04  eta 63.5 min  gpu 3.0 GB
+step 740/7191  epoch 0.31  loss 3.1503  lr 1.97e-04  eta 63.3 min  gpu 2.6 GB
+step 760/7191  epoch 0.32  loss 3.1527  lr 1.97e-04  eta 63.0 min  gpu 3.0 GB
+step 780/7191  epoch 0.33  loss 3.2134  lr 1.97e-04  eta 62.7 min  gpu 2.6 GB
+step 800/7191  epoch 0.33  loss 3.1057  lr 1.97e-04  eta 62.3 min  gpu 3.0 GB
+step 800/7191  val_loss 3.1745  (saved best)
+step 820/7191  epoch 0.34  loss 3.1507  lr 1.96e-04  eta 62.9 min  gpu 2.6 GB
+step 840/7191  epoch 0.35  loss 3.1707  lr 1.96e-04  eta 62.6 min  gpu 3.0 GB
+step 860/7191  epoch 0.36  loss 3.1530  lr 1.96e-04  eta 62.3 min  gpu 2.6 GB
+step 880/7191  epoch 0.37  loss 3.0643  lr 1.96e-04  eta 61.8 min  gpu 2.6 GB
+step 900/7191  epoch 0.38  loss 3.1592  lr 1.95e-04  eta 61.5 min  gpu 2.6 GB
+step 920/7191  epoch 0.38  loss 3.1944  lr 1.95e-04  eta 61.2 min  gpu 3.0 GB
+step 940/7191  epoch 0.39  loss 3.1566  lr 1.95e-04  eta 60.9 min  gpu 3.0 GB
+step 960/7191  epoch 0.40  loss 3.1242  lr 1.94e-04  eta 60.5 min  gpu 2.6 GB
+step 980/7191  epoch 0.41  loss 3.2103  lr 1.94e-04  eta 60.2 min  gpu 3.0 GB
+step 1000/7191  epoch 0.42  loss 3.0793  lr 1.94e-04  eta 60.0 min  gpu 3.0 GB
+step 1000/7191  val_loss 3.1465  (saved best)
+step 1020/7191  epoch 0.43  loss 3.1587  lr 1.94e-04  eta 60.4 min  gpu 2.7 GB
+step 1040/7191  epoch 0.43  loss 3.2828  lr 1.93e-04  eta 60.1 min  gpu 3.0 GB
+step 1060/7191  epoch 0.44  loss 3.1222  lr 1.93e-04  eta 59.7 min  gpu 2.6 GB
+step 1080/7191  epoch 0.45  loss 3.2113  lr 1.93e-04  eta 59.3 min  gpu 2.6 GB
+step 1100/7191  epoch 0.46  loss 3.1350  lr 1.92e-04  eta 58.9 min  gpu 3.0 GB
+step 1120/7191  epoch 0.47  loss 3.0970  lr 1.92e-04  eta 58.5 min  gpu 2.6 GB
+step 1140/7191  epoch 0.48  loss 3.1685  lr 1.91e-04  eta 58.3 min  gpu 2.6 GB
+step 1160/7191  epoch 0.48  loss 3.0468  lr 1.91e-04  eta 58.0 min  gpu 2.6 GB
+step 1180/7191  epoch 0.49  loss 3.0359  lr 1.91e-04  eta 57.7 min  gpu 2.6 GB
+step 1200/7191  epoch 0.50  loss 3.0919  lr 1.90e-04  eta 57.5 min  gpu 2.6 GB
+step 1200/7191  val_loss 3.1267  (saved best)
+step 1220/7191  epoch 0.51  loss 3.1196  lr 1.90e-04  eta 57.9 min  gpu 2.6 GB
+step 1240/7191  epoch 0.52  loss 3.1023  lr 1.90e-04  eta 57.7 min  gpu 3.0 GB
+step 1260/7191  epoch 0.53  loss 3.1864  lr 1.89e-04  eta 57.5 min  gpu 2.6 GB
+step 1280/7191  epoch 0.53  loss 3.1221  lr 1.89e-04  eta 57.1 min  gpu 2.6 GB
+step 1300/7191  epoch 0.54  loss 3.1237  lr 1.88e-04  eta 56.7 min  gpu 3.0 GB
+step 1320/7191  epoch 0.55  loss 3.1272  lr 1.88e-04  eta 56.4 min  gpu 3.0 GB
+step 1340/7191  epoch 0.56  loss 3.0743  lr 1.87e-04  eta 56.1 min  gpu 2.6 GB
+step 1360/7191  epoch 0.57  loss 3.0998  lr 1.87e-04  eta 55.9 min  gpu 3.0 GB
+step 1380/7191  epoch 0.58  loss 3.1557  lr 1.87e-04  eta 55.6 min  gpu 2.6 GB
+step 1400/7191  epoch 0.58  loss 3.1350  lr 1.86e-04  eta 55.5 min  gpu 2.6 GB
+step 1400/7191  val_loss 3.1168  (saved best)
+step 1420/7191  epoch 0.59  loss 3.0342  lr 1.86e-04  eta 55.6 min  gpu 2.7 GB
+step 1440/7191  epoch 0.60  loss 3.1338  lr 1.85e-04  eta 55.4 min  gpu 2.6 GB
+step 1460/7191  epoch 0.61  loss 3.0979  lr 1.85e-04  eta 55.3 min  gpu 2.6 GB
+step 1480/7191  epoch 0.62  loss 3.0710  lr 1.84e-04  eta 55.0 min  gpu 2.6 GB
+step 1500/7191  epoch 0.63  loss 3.0484  lr 1.84e-04  eta 54.9 min  gpu 3.0 GB
+step 1520/7191  epoch 0.63  loss 3.0508  lr 1.83e-04  eta 54.8 min  gpu 2.6 GB
+step 1540/7191  epoch 0.64  loss 3.1752  lr 1.83e-04  eta 54.5 min  gpu 2.6 GB
+step 1560/7191  epoch 0.65  loss 3.0788  lr 1.82e-04  eta 54.4 min  gpu 3.0 GB
+step 1580/7191  epoch 0.66  loss 3.0718  lr 1.82e-04  eta 54.2 min  gpu 2.6 GB
+step 1600/7191  epoch 0.67  loss 3.0675  lr 1.81e-04  eta 53.9 min  gpu 2.6 GB
+step 1600/7191  val_loss 3.0962  (saved best)
+step 1620/7191  epoch 0.68  loss 3.0210  lr 1.81e-04  eta 54.1 min  gpu 2.6 GB
+step 1640/7191  epoch 0.68  loss 3.1672  lr 1.80e-04  eta 54.0 min  gpu 2.6 GB
+step 1660/7191  epoch 0.69  loss 3.1100  lr 1.80e-04  eta 53.8 min  gpu 2.6 GB
+step 1680/7191  epoch 0.70  loss 3.1636  lr 1.79e-04  eta 53.6 min  gpu 2.6 GB
+step 1700/7191  epoch 0.71  loss 3.1354  lr 1.78e-04  eta 53.4 min  gpu 2.6 GB
+step 1720/7191  epoch 0.72  loss 3.1158  lr 1.78e-04  eta 53.1 min  gpu 2.6 GB
+step 1740/7191  epoch 0.73  loss 3.1420  lr 1.77e-04  eta 52.8 min  gpu 2.6 GB
+step 1760/7191  epoch 0.73  loss 3.1207  lr 1.77e-04  eta 52.5 min  gpu 2.6 GB
+step 1780/7191  epoch 0.74  loss 3.0580  lr 1.76e-04  eta 52.3 min  gpu 2.6 GB
+step 1800/7191  epoch 0.75  loss 3.0988  lr 1.76e-04  eta 52.2 min  gpu 3.0 GB
+step 1800/7191  val_loss 3.0798  (saved best)
+step 1820/7191  epoch 0.76  loss 3.1378  lr 1.75e-04  eta 52.1 min  gpu 2.8 GB
+step 1840/7191  epoch 0.77  loss 2.9980  lr 1.74e-04  eta 51.9 min  gpu 3.1 GB
+step 1860/7191  epoch 0.78  loss 3.0897  lr 1.74e-04  eta 51.7 min  gpu 3.2 GB
+step 1880/7191  epoch 0.78  loss 2.9995  lr 1.73e-04  eta 51.6 min  gpu 2.9 GB
+step 1900/7191  epoch 0.79  loss 3.0303  lr 1.73e-04  eta 51.4 min  gpu 2.9 GB
+step 1920/7191  epoch 0.80  loss 2.9977  lr 1.72e-04  eta 51.2 min  gpu 2.9 GB
+step 1940/7191  epoch 0.81  loss 3.0971  lr 1.71e-04  eta 51.0 min  gpu 2.9 GB
+step 1960/7191  epoch 0.82  loss 3.0589  lr 1.71e-04  eta 50.8 min  gpu 2.8 GB
+step 1980/7191  epoch 0.83  loss 3.0577  lr 1.70e-04  eta 50.5 min  gpu 2.9 GB
+step 2000/7191  epoch 0.83  loss 3.0453  lr 1.69e-04  eta 50.4 min  gpu 3.1 GB
+step 2000/7191  val_loss 3.0727  (saved best)
+step 2020/7191  epoch 0.84  loss 3.0774  lr 1.69e-04  eta 50.4 min  gpu 2.9 GB
+step 2040/7191  epoch 0.85  loss 2.9960  lr 1.68e-04  eta 50.1 min  gpu 2.8 GB
+step 2060/7191  epoch 0.86  loss 3.1151  lr 1.67e-04  eta 49.8 min  gpu 2.8 GB
+step 2080/7191  epoch 0.87  loss 3.0166  lr 1.67e-04  eta 49.6 min  gpu 2.8 GB
+step 2100/7191  epoch 0.88  loss 3.0511  lr 1.66e-04  eta 49.4 min  gpu 2.9 GB
+step 2120/7191  epoch 0.88  loss 3.0205  lr 1.65e-04  eta 49.2 min  gpu 3.3 GB
+step 2140/7191  epoch 0.89  loss 3.0649  lr 1.65e-04  eta 49.0 min  gpu 2.8 GB
+step 2160/7191  epoch 0.90  loss 3.0361  lr 1.64e-04  eta 48.9 min  gpu 2.8 GB
+step 2180/7191  epoch 0.91  loss 3.0355  lr 1.63e-04  eta 48.5 min  gpu 2.8 GB
+step 2200/7191  epoch 0.92  loss 3.0371  lr 1.63e-04  eta 48.3 min  gpu 3.1 GB
+step 2200/7191  val_loss 3.0665  (saved best)
+step 2220/7191  epoch 0.93  loss 3.1257  lr 1.62e-04  eta 48.3 min  gpu 3.2 GB
+step 2240/7191  epoch 0.93  loss 3.0110  lr 1.61e-04  eta 48.1 min  gpu 3.2 GB
+step 2260/7191  epoch 0.94  loss 3.1909  lr 1.61e-04  eta 47.9 min  gpu 2.9 GB
+step 2280/7191  epoch 0.95  loss 3.0269  lr 1.60e-04  eta 47.7 min  gpu 2.9 GB
+step 2300/7191  epoch 0.96  loss 3.0236  lr 1.59e-04  eta 47.6 min  gpu 2.9 GB
+step 2320/7191  epoch 0.97  loss 3.1544  lr 1.58e-04  eta 47.3 min  gpu 2.9 GB
+step 2340/7191  epoch 0.98  loss 2.9670  lr 1.58e-04  eta 47.0 min  gpu 2.8 GB
+step 2360/7191  epoch 0.98  loss 3.0527  lr 1.57e-04  eta 46.8 min  gpu 2.7 GB
+step 2380/7191  epoch 0.99  loss 3.1030  lr 1.56e-04  eta 46.5 min  gpu 2.8 GB
+step 2400/7191  epoch 1.00  loss 3.0981  lr 1.55e-04  eta 46.3 min  gpu 2.9 GB
+step 2400/7191  val_loss 3.0498  (saved best)
+step 2420/7191  epoch 1.01  loss 2.9701  lr 1.55e-04  eta 46.2 min  gpu 2.9 GB
+step 2440/7191  epoch 1.02  loss 2.9961  lr 1.54e-04  eta 46.0 min  gpu 2.9 GB
+step 2460/7191  epoch 1.03  loss 2.9612  lr 1.53e-04  eta 45.8 min  gpu 2.9 GB
+step 2480/7191  epoch 1.03  loss 3.0846  lr 1.52e-04  eta 45.6 min  gpu 2.9 GB
+step 2500/7191  epoch 1.04  loss 2.9581  lr 1.52e-04  eta 45.4 min  gpu 3.1 GB
+step 2520/7191  epoch 1.05  loss 3.1227  lr 1.51e-04  eta 45.2 min  gpu 3.4 GB
+step 2540/7191  epoch 1.06  loss 3.0664  lr 1.50e-04  eta 45.0 min  gpu 3.0 GB
+step 2560/7191  epoch 1.07  loss 3.0585  lr 1.49e-04  eta 44.7 min  gpu 2.6 GB
+step 2580/7191  epoch 1.08  loss 2.9360  lr 1.48e-04  eta 44.5 min  gpu 2.7 GB
+step 2600/7191  epoch 1.08  loss 3.1739  lr 1.48e-04  eta 44.4 min  gpu 2.9 GB
+step 2600/7191  val_loss 3.0389  (saved best)
+step 2620/7191  epoch 1.09  loss 3.0345  lr 1.47e-04  eta 44.4 min  gpu 3.1 GB
+step 2640/7191  epoch 1.10  loss 3.0631  lr 1.46e-04  eta 44.2 min  gpu 2.8 GB
+step 2660/7191  epoch 1.11  loss 2.9242  lr 1.45e-04  eta 44.0 min  gpu 2.9 GB
+step 2680/7191  epoch 1.12  loss 2.9677  lr 1.44e-04  eta 43.8 min  gpu 2.9 GB
+step 2700/7191  epoch 1.13  loss 3.0605  lr 1.44e-04  eta 43.6 min  gpu 2.9 GB
+step 2720/7191  epoch 1.13  loss 3.1091  lr 1.43e-04  eta 43.4 min  gpu 2.9 GB
+step 2740/7191  epoch 1.14  loss 3.0321  lr 1.42e-04  eta 43.2 min  gpu 2.8 GB
+step 2760/7191  epoch 1.15  loss 3.0631  lr 1.41e-04  eta 43.0 min  gpu 2.8 GB
+step 2780/7191  epoch 1.16  loss 2.9669  lr 1.40e-04  eta 42.7 min  gpu 2.5 GB
+step 2800/7191  epoch 1.17  loss 3.0306  lr 1.40e-04  eta 42.6 min  gpu 2.9 GB
+step 2800/7191  val_loss 3.0302  (saved best)
+step 2820/7191  epoch 1.18  loss 3.2027  lr 1.39e-04  eta 42.5 min  gpu 3.0 GB
+step 2840/7191  epoch 1.18  loss 2.9441  lr 1.38e-04  eta 42.4 min  gpu 2.9 GB
+step 2860/7191  epoch 1.19  loss 3.0589  lr 1.37e-04  eta 42.1 min  gpu 2.5 GB
+step 2880/7191  epoch 1.20  loss 3.0462  lr 1.36e-04  eta 41.9 min  gpu 2.6 GB
+step 2900/7191  epoch 1.21  loss 2.9785  lr 1.35e-04  eta 41.7 min  gpu 2.8 GB
+step 2920/7191  epoch 1.22  loss 2.9463  lr 1.35e-04  eta 41.5 min  gpu 2.9 GB
+step 2940/7191  epoch 1.23  loss 2.9846  lr 1.34e-04  eta 41.4 min  gpu 2.9 GB
+step 2960/7191  epoch 1.23  loss 3.0759  lr 1.33e-04  eta 41.1 min  gpu 2.8 GB
+step 2980/7191  epoch 1.24  loss 2.9804  lr 1.32e-04  eta 40.9 min  gpu 2.9 GB
+step 3000/7191  epoch 1.25  loss 3.0005  lr 1.31e-04  eta 40.7 min  gpu 2.9 GB
+step 3000/7191  val_loss 3.0333
+step 3020/7191  epoch 1.26  loss 3.0408  lr 1.30e-04  eta 40.6 min  gpu 2.6 GB
+step 3040/7191  epoch 1.27  loss 3.0716  lr 1.29e-04  eta 40.4 min  gpu 2.8 GB
+step 3060/7191  epoch 1.28  loss 2.9393  lr 1.29e-04  eta 40.2 min  gpu 3.3 GB
+step 3080/7191  epoch 1.28  loss 3.0192  lr 1.28e-04  eta 40.0 min  gpu 2.6 GB
+step 3100/7191  epoch 1.29  loss 3.0139  lr 1.27e-04  eta 39.8 min  gpu 2.9 GB
+step 3120/7191  epoch 1.30  loss 2.9485  lr 1.26e-04  eta 39.6 min  gpu 2.8 GB
+step 3140/7191  epoch 1.31  loss 2.9569  lr 1.25e-04  eta 39.5 min  gpu 3.0 GB
+step 3160/7191  epoch 1.32  loss 2.9521  lr 1.24e-04  eta 39.3 min  gpu 3.0 GB
+step 3180/7191  epoch 1.33  loss 2.9039  lr 1.23e-04  eta 39.0 min  gpu 2.9 GB
+step 3200/7191  epoch 1.34  loss 3.0321  lr 1.22e-04  eta 38.8 min  gpu 3.0 GB
+step 3200/7191  val_loss 3.0156  (saved best)
+step 3220/7191  epoch 1.34  loss 3.0042  lr 1.22e-04  eta 38.7 min  gpu 2.5 GB
+step 3240/7191  epoch 1.35  loss 3.1014  lr 1.21e-04  eta 38.5 min  gpu 3.0 GB
+step 3260/7191  epoch 1.36  loss 3.0498  lr 1.20e-04  eta 38.3 min  gpu 2.6 GB
+step 3280/7191  epoch 1.37  loss 2.9645  lr 1.19e-04  eta 38.1 min  gpu 2.9 GB
+step 3300/7191  epoch 1.38  loss 3.0069  lr 1.18e-04  eta 37.9 min  gpu 2.6 GB
+step 3320/7191  epoch 1.39  loss 3.0617  lr 1.17e-04  eta 37.7 min  gpu 3.1 GB
+step 3340/7191  epoch 1.39  loss 2.9585  lr 1.16e-04  eta 37.5 min  gpu 2.5 GB
+step 3360/7191  epoch 1.40  loss 2.9862  lr 1.15e-04  eta 37.3 min  gpu 2.9 GB
+step 3380/7191  epoch 1.41  loss 2.9833  lr 1.14e-04  eta 37.1 min  gpu 3.2 GB
+step 3400/7191  epoch 1.42  loss 2.9115  lr 1.14e-04  eta 36.9 min  gpu 2.7 GB
+step 3400/7191  val_loss 3.0111  (saved best)
+step 3420/7191  epoch 1.43  loss 2.8792  lr 1.13e-04  eta 36.8 min  gpu 3.2 GB
+step 3440/7191  epoch 1.44  loss 2.9135  lr 1.12e-04  eta 36.6 min  gpu 2.8 GB
+step 3460/7191  epoch 1.44  loss 3.0235  lr 1.11e-04  eta 36.4 min  gpu 3.0 GB
+step 3480/7191  epoch 1.45  loss 2.9798  lr 1.10e-04  eta 36.1 min  gpu 2.8 GB
+step 3500/7191  epoch 1.46  loss 2.9825  lr 1.09e-04  eta 36.0 min  gpu 3.0 GB
+step 3520/7191  epoch 1.47  loss 2.9811  lr 1.08e-04  eta 35.7 min  gpu 2.6 GB
+step 3540/7191  epoch 1.48  loss 3.0183  lr 1.07e-04  eta 35.5 min  gpu 2.6 GB
+step 3560/7191  epoch 1.49  loss 2.8970  lr 1.06e-04  eta 35.3 min  gpu 2.8 GB
+step 3580/7191  epoch 1.49  loss 3.1067  lr 1.06e-04  eta 35.1 min  gpu 3.0 GB
+step 3600/7191  epoch 1.50  loss 3.0946  lr 1.05e-04  eta 34.9 min  gpu 3.0 GB
+step 3600/7191  val_loss 3.0023  (saved best)
+step 3620/7191  epoch 1.51  loss 3.0249  lr 1.04e-04  eta 34.8 min  gpu 3.4 GB
+step 3640/7191  epoch 1.52  loss 2.9941  lr 1.03e-04  eta 34.6 min  gpu 2.9 GB
+step 3660/7191  epoch 1.53  loss 2.9720  lr 1.02e-04  eta 34.4 min  gpu 3.0 GB
+step 3680/7191  epoch 1.54  loss 3.0754  lr 1.01e-04  eta 34.2 min  gpu 3.0 GB
+step 3700/7191  epoch 1.54  loss 3.0613  lr 1.00e-04  eta 34.0 min  gpu 2.9 GB
+step 3720/7191  epoch 1.55  loss 3.0569  lr 9.92e-05  eta 33.7 min  gpu 2.5 GB
+step 3740/7191  epoch 1.56  loss 2.9836  lr 9.83e-05  eta 33.6 min  gpu 3.2 GB
+step 3760/7191  epoch 1.57  loss 2.9463  lr 9.74e-05  eta 33.4 min  gpu 3.2 GB
+step 3780/7191  epoch 1.58  loss 2.9172  lr 9.65e-05  eta 33.2 min  gpu 3.2 GB
+step 3800/7191  epoch 1.59  loss 3.0515  lr 9.56e-05  eta 33.0 min  gpu 2.9 GB
+step 3800/7191  val_loss 2.9985  (saved best)
+step 3820/7191  epoch 1.59  loss 2.9584  lr 9.47e-05  eta 32.9 min  gpu 2.9 GB
+step 3840/7191  epoch 1.60  loss 2.8852  lr 9.38e-05  eta 32.7 min  gpu 2.9 GB
+step 3860/7191  epoch 1.61  loss 2.9695  lr 9.29e-05  eta 32.5 min  gpu 2.5 GB
+step 3880/7191  epoch 1.62  loss 2.9634  lr 9.20e-05  eta 32.3 min  gpu 2.8 GB
+step 3900/7191  epoch 1.63  loss 2.9104  lr 9.11e-05  eta 32.1 min  gpu 3.1 GB
+step 3920/7191  epoch 1.64  loss 2.9814  lr 9.02e-05  eta 31.9 min  gpu 2.9 GB
+step 3940/7191  epoch 1.64  loss 2.9196  lr 8.93e-05  eta 31.7 min  gpu 2.6 GB
+step 3960/7191  epoch 1.65  loss 2.9230  lr 8.85e-05  eta 31.5 min  gpu 2.9 GB
+step 3980/7191  epoch 1.66  loss 3.0559  lr 8.76e-05  eta 31.3 min  gpu 3.2 GB
+step 4000/7191  epoch 1.67  loss 2.9999  lr 8.67e-05  eta 31.1 min  gpu 2.9 GB
+step 4000/7191  val_loss 2.9937  (saved best)
+step 4020/7191  epoch 1.68  loss 3.0089  lr 8.58e-05  eta 31.0 min  gpu 2.9 GB
+step 4040/7191  epoch 1.69  loss 2.9480  lr 8.49e-05  eta 30.8 min  gpu 2.8 GB
+step 4060/7191  epoch 1.69  loss 3.0751  lr 8.40e-05  eta 30.6 min  gpu 2.8 GB
+step 4080/7191  epoch 1.70  loss 2.9836  lr 8.31e-05  eta 30.3 min  gpu 2.8 GB
+step 4100/7191  epoch 1.71  loss 2.9328  lr 8.22e-05  eta 30.1 min  gpu 2.8 GB
+step 4120/7191  epoch 1.72  loss 2.9104  lr 8.13e-05  eta 29.9 min  gpu 2.9 GB
+step 4140/7191  epoch 1.73  loss 3.0342  lr 8.04e-05  eta 29.7 min  gpu 2.8 GB
+step 4160/7191  epoch 1.74  loss 2.9723  lr 7.96e-05  eta 29.5 min  gpu 2.9 GB
+step 4180/7191  epoch 1.74  loss 2.9622  lr 7.87e-05  eta 29.3 min  gpu 2.8 GB
+step 4200/7191  epoch 1.75  loss 2.9835  lr 7.78e-05  eta 29.0 min  gpu 2.5 GB
+step 4200/7191  val_loss 2.9888  (saved best)
+step 4220/7191  epoch 1.76  loss 2.9729  lr 7.69e-05  eta 28.9 min  gpu 2.9 GB
+step 4240/7191  epoch 1.77  loss 2.9511  lr 7.61e-05  eta 28.7 min  gpu 2.9 GB
+step 4260/7191  epoch 1.78  loss 2.9836  lr 7.52e-05  eta 28.5 min  gpu 2.8 GB
+step 4280/7191  epoch 1.79  loss 3.0299  lr 7.43e-05  eta 28.3 min  gpu 2.9 GB
+step 4300/7191  epoch 1.79  loss 2.9486  lr 7.34e-05  eta 28.2 min  gpu 2.9 GB
+step 4320/7191  epoch 1.80  loss 2.9446  lr 7.26e-05  eta 28.0 min  gpu 2.9 GB
+step 4340/7191  epoch 1.81  loss 2.9094  lr 7.17e-05  eta 27.8 min  gpu 2.8 GB
+step 4360/7191  epoch 1.82  loss 3.0090  lr 7.08e-05  eta 27.6 min  gpu 2.5 GB
+step 4380/7191  epoch 1.83  loss 2.9852  lr 7.00e-05  eta 27.4 min  gpu 2.9 GB
+step 4400/7191  epoch 1.84  loss 2.9883  lr 6.91e-05  eta 27.2 min  gpu 3.0 GB
+step 4400/7191  val_loss 2.9858  (saved best)
+step 4420/7191  epoch 1.84  loss 2.9948  lr 6.83e-05  eta 27.1 min  gpu 3.2 GB
+step 4440/7191  epoch 1.85  loss 2.9789  lr 6.74e-05  eta 26.9 min  gpu 2.9 GB
+step 4460/7191  epoch 1.86  loss 3.0298  lr 6.66e-05  eta 26.7 min  gpu 3.0 GB
+step 4480/7191  epoch 1.87  loss 3.0106  lr 6.57e-05  eta 26.5 min  gpu 3.0 GB
+step 4500/7191  epoch 1.88  loss 3.0203  lr 6.49e-05  eta 26.3 min  gpu 2.9 GB
+step 4520/7191  epoch 1.89  loss 2.9651  lr 6.40e-05  eta 26.1 min  gpu 2.9 GB
+step 4540/7191  epoch 1.89  loss 3.0214  lr 6.32e-05  eta 25.9 min  gpu 2.9 GB
+step 4560/7191  epoch 1.90  loss 2.9103  lr 6.24e-05  eta 25.7 min  gpu 2.9 GB
+step 4580/7191  epoch 1.91  loss 2.9213  lr 6.15e-05  eta 25.5 min  gpu 2.9 GB
+step 4600/7191  epoch 1.92  loss 2.9274  lr 6.07e-05  eta 25.3 min  gpu 3.0 GB
+step 4600/7191  val_loss 2.9804  (saved best)
+step 4620/7191  epoch 1.93  loss 2.9250  lr 5.99e-05  eta 25.1 min  gpu 2.9 GB
+step 4640/7191  epoch 1.94  loss 2.9429  lr 5.90e-05  eta 24.9 min  gpu 2.9 GB
+step 4660/7191  epoch 1.94  loss 3.0168  lr 5.82e-05  eta 24.8 min  gpu 2.8 GB
+step 4680/7191  epoch 1.95  loss 3.0629  lr 5.74e-05  eta 24.5 min  gpu 2.9 GB
+step 4700/7191  epoch 1.96  loss 2.8920  lr 5.66e-05  eta 24.3 min  gpu 2.9 GB
+step 4720/7191  epoch 1.97  loss 3.0217  lr 5.58e-05  eta 24.2 min  gpu 2.9 GB
+step 4740/7191  epoch 1.98  loss 2.8615  lr 5.50e-05  eta 24.0 min  gpu 2.9 GB
+step 4760/7191  epoch 1.99  loss 3.1282  lr 5.42e-05  eta 23.7 min  gpu 2.9 GB
+step 4780/7191  epoch 1.99  loss 3.0329  lr 5.34e-05  eta 23.5 min  gpu 2.8 GB
+step 4800/7191  epoch 2.00  loss 2.9784  lr 5.26e-05  eta 23.3 min  gpu 2.8 GB
+step 4800/7191  val_loss 2.9776  (saved best)
+step 4820/7191  epoch 2.01  loss 2.9732  lr 5.18e-05  eta 23.2 min  gpu 2.9 GB
+step 4840/7191  epoch 2.02  loss 2.9799  lr 5.10e-05  eta 23.0 min  gpu 2.9 GB
+step 4860/7191  epoch 2.03  loss 3.0306  lr 5.02e-05  eta 22.8 min  gpu 2.9 GB
+step 4880/7191  epoch 2.04  loss 2.8278  lr 4.94e-05  eta 22.6 min  gpu 2.5 GB
+step 4900/7191  epoch 2.04  loss 2.8919  lr 4.87e-05  eta 22.4 min  gpu 2.8 GB
+step 4920/7191  epoch 2.05  loss 2.9735  lr 4.79e-05  eta 22.2 min  gpu 2.8 GB
+step 4940/7191  epoch 2.06  loss 2.9231  lr 4.71e-05  eta 22.0 min  gpu 2.5 GB
+step 4960/7191  epoch 2.07  loss 2.9598  lr 4.64e-05  eta 21.8 min  gpu 2.8 GB
+step 4980/7191  epoch 2.08  loss 3.0053  lr 4.56e-05  eta 21.6 min  gpu 2.5 GB
+step 5000/7191  epoch 2.09  loss 2.9537  lr 4.49e-05  eta 21.4 min  gpu 3.2 GB
+step 5000/7191  val_loss 2.9777
+step 5020/7191  epoch 2.09  loss 2.9285  lr 4.41e-05  eta 21.2 min  gpu 2.5 GB
+step 5040/7191  epoch 2.10  loss 2.9537  lr 4.34e-05  eta 21.0 min  gpu 2.9 GB
+step 5060/7191  epoch 2.11  loss 2.8717  lr 4.26e-05  eta 20.8 min  gpu 2.9 GB
+step 5080/7191  epoch 2.12  loss 2.9637  lr 4.19e-05  eta 20.6 min  gpu 2.9 GB
+step 5100/7191  epoch 2.13  loss 2.9456  lr 4.12e-05  eta 20.4 min  gpu 3.0 GB
+step 5120/7191  epoch 2.14  loss 2.9985  lr 4.04e-05  eta 20.2 min  gpu 3.1 GB
+step 5140/7191  epoch 2.14  loss 3.0792  lr 3.97e-05  eta 20.0 min  gpu 2.8 GB
+step 5160/7191  epoch 2.15  loss 2.8633  lr 3.90e-05  eta 19.8 min  gpu 2.5 GB
+step 5180/7191  epoch 2.16  loss 2.9496  lr 3.83e-05  eta 19.6 min  gpu 2.5 GB
+step 5200/7191  epoch 2.17  loss 2.9356  lr 3.76e-05  eta 19.4 min  gpu 2.6 GB
+step 5200/7191  val_loss 2.9745  (saved best)
+step 5220/7191  epoch 2.18  loss 2.9466  lr 3.69e-05  eta 19.3 min  gpu 3.2 GB
+step 5240/7191  epoch 2.19  loss 3.0385  lr 3.62e-05  eta 19.1 min  gpu 2.9 GB
+step 5260/7191  epoch 2.19  loss 2.9437  lr 3.55e-05  eta 18.9 min  gpu 2.8 GB
+step 5280/7191  epoch 2.20  loss 2.9551  lr 3.48e-05  eta 18.7 min  gpu 2.8 GB
+step 5300/7191  epoch 2.21  loss 2.9157  lr 3.41e-05  eta 18.5 min  gpu 3.3 GB
+step 5320/7191  epoch 2.22  loss 2.9210  lr 3.34e-05  eta 18.3 min  gpu 2.9 GB
+step 5340/7191  epoch 2.23  loss 2.8845  lr 3.28e-05  eta 18.1 min  gpu 2.9 GB
+step 5360/7191  epoch 2.24  loss 2.9446  lr 3.21e-05  eta 17.9 min  gpu 2.6 GB
+step 5380/7191  epoch 2.24  loss 2.8854  lr 3.15e-05  eta 17.7 min  gpu 2.6 GB
+step 5400/7191  epoch 2.25  loss 2.9809  lr 3.08e-05  eta 17.5 min  gpu 2.5 GB
+step 5400/7191  val_loss 2.9726  (saved best)
+step 5420/7191  epoch 2.26  loss 2.9421  lr 3.02e-05  eta 17.3 min  gpu 2.8 GB
+step 5440/7191  epoch 2.27  loss 2.9363  lr 2.95e-05  eta 17.1 min  gpu 2.6 GB
+step 5460/7191  epoch 2.28  loss 2.9252  lr 2.89e-05  eta 16.9 min  gpu 2.9 GB
+step 5480/7191  epoch 2.29  loss 2.9644  lr 2.82e-05  eta 16.7 min  gpu 3.2 GB
+step 5500/7191  epoch 2.29  loss 2.9796  lr 2.76e-05  eta 16.5 min  gpu 2.8 GB
+step 5520/7191  epoch 2.30  loss 2.9775  lr 2.70e-05  eta 16.3 min  gpu 2.9 GB
+step 5540/7191  epoch 2.31  loss 2.9420  lr 2.64e-05  eta 16.1 min  gpu 2.9 GB
+step 5560/7191  epoch 2.32  loss 2.8503  lr 2.58e-05  eta 15.9 min  gpu 2.9 GB
+step 5580/7191  epoch 2.33  loss 2.9977  lr 2.52e-05  eta 15.7 min  gpu 2.8 GB
+step 5600/7191  epoch 2.34  loss 2.9037  lr 2.46e-05  eta 15.5 min  gpu 2.9 GB
+step 5600/7191  val_loss 2.9705  (saved best)
+step 5620/7191  epoch 2.34  loss 2.9266  lr 2.40e-05  eta 15.4 min  gpu 2.9 GB
+step 5640/7191  epoch 2.35  loss 2.9334  lr 2.34e-05  eta 15.2 min  gpu 3.0 GB
+step 5660/7191  epoch 2.36  loss 2.9953  lr 2.28e-05  eta 15.0 min  gpu 2.8 GB
+step 5680/7191  epoch 2.37  loss 3.0180  lr 2.23e-05  eta 14.8 min  gpu 2.9 GB
+step 5700/7191  epoch 2.38  loss 2.9549  lr 2.17e-05  eta 14.6 min  gpu 2.8 GB
+step 5720/7191  epoch 2.39  loss 2.9733  lr 2.12e-05  eta 14.4 min  gpu 2.8 GB
+step 5740/7191  epoch 2.39  loss 2.9415  lr 2.06e-05  eta 14.2 min  gpu 2.8 GB
+step 5760/7191  epoch 2.40  loss 2.8618  lr 2.01e-05  eta 14.0 min  gpu 2.8 GB
+step 5780/7191  epoch 2.41  loss 2.8515  lr 1.95e-05  eta 13.8 min  gpu 3.1 GB
+step 5800/7191  epoch 2.42  loss 2.8998  lr 1.90e-05  eta 13.6 min  gpu 2.8 GB
+step 5800/7191  val_loss 2.9692  (saved best)
+step 5820/7191  epoch 2.43  loss 3.0034  lr 1.85e-05  eta 13.4 min  gpu 2.9 GB
+step 5840/7191  epoch 2.44  loss 2.9192  lr 1.79e-05  eta 13.2 min  gpu 2.9 GB
+step 5860/7191  epoch 2.44  loss 2.8654  lr 1.74e-05  eta 13.0 min  gpu 2.9 GB
+step 5880/7191  epoch 2.45  loss 3.0300  lr 1.69e-05  eta 12.8 min  gpu 2.5 GB
+step 5900/7191  epoch 2.46  loss 2.9237  lr 1.64e-05  eta 12.6 min  gpu 3.2 GB
+step 5920/7191  epoch 2.47  loss 2.8958  lr 1.59e-05  eta 12.4 min  gpu 2.8 GB
+step 5940/7191  epoch 2.48  loss 3.0167  lr 1.55e-05  eta 12.2 min  gpu 2.8 GB
+step 5960/7191  epoch 2.49  loss 2.9596  lr 1.50e-05  eta 12.1 min  gpu 2.8 GB
+step 5980/7191  epoch 2.49  loss 2.9427  lr 1.45e-05  eta 11.9 min  gpu 2.5 GB
+step 6000/7191  epoch 2.50  loss 2.9649  lr 1.40e-05  eta 11.7 min  gpu 2.8 GB
+step 6000/7191  val_loss 2.9678  (saved best)
+step 6020/7191  epoch 2.51  loss 3.0124  lr 1.36e-05  eta 11.5 min  gpu 3.3 GB
+step 6040/7191  epoch 2.52  loss 2.9437  lr 1.31e-05  eta 11.3 min  gpu 2.9 GB
+step 6060/7191  epoch 2.53  loss 2.8140  lr 1.27e-05  eta 11.1 min  gpu 2.8 GB
+step 6080/7191  epoch 2.54  loss 2.9828  lr 1.23e-05  eta 10.9 min  gpu 2.6 GB
+step 6100/7191  epoch 2.54  loss 3.0139  lr 1.18e-05  eta 10.7 min  gpu 2.5 GB
+step 6120/7191  epoch 2.55  loss 2.9897  lr 1.14e-05  eta 10.5 min  gpu 3.0 GB
+step 6140/7191  epoch 2.56  loss 3.0646  lr 1.10e-05  eta 10.3 min  gpu 2.8 GB
+step 6160/7191  epoch 2.57  loss 3.0679  lr 1.06e-05  eta 10.1 min  gpu 3.0 GB
+step 6180/7191  epoch 2.58  loss 2.8590  lr 1.02e-05  eta 9.9 min  gpu 3.0 GB
+step 6200/7191  epoch 2.59  loss 2.9782  lr 9.79e-06  eta 9.7 min  gpu 3.0 GB
+step 6200/7191  val_loss 2.9682
+step 6220/7191  epoch 2.59  loss 2.8574  lr 9.41e-06  eta 9.5 min  gpu 3.1 GB
+step 6240/7191  epoch 2.60  loss 2.9461  lr 9.03e-06  eta 9.3 min  gpu 2.8 GB
+step 6260/7191  epoch 2.61  loss 2.9329  lr 8.66e-06  eta 9.1 min  gpu 2.9 GB
+step 6280/7191  epoch 2.62  loss 2.9331  lr 8.30e-06  eta 8.9 min  gpu 3.0 GB
+step 6300/7191  epoch 2.63  loss 2.8372  lr 7.94e-06  eta 8.7 min  gpu 2.9 GB
+step 6320/7191  epoch 2.64  loss 3.0455  lr 7.59e-06  eta 8.5 min  gpu 2.9 GB
+step 6340/7191  epoch 2.64  loss 2.9020  lr 7.25e-06  eta 8.3 min  gpu 3.2 GB
+step 6360/7191  epoch 2.65  loss 2.9046  lr 6.92e-06  eta 8.1 min  gpu 3.2 GB
+step 6380/7191  epoch 2.66  loss 2.9358  lr 6.60e-06  eta 7.9 min  gpu 2.9 GB
+step 6400/7191  epoch 2.67  loss 2.9393  lr 6.28e-06  eta 7.7 min  gpu 2.9 GB
+step 6400/7191  val_loss 2.9670  (saved best)
+step 6420/7191  epoch 2.68  loss 2.9226  lr 5.97e-06  eta 7.6 min  gpu 2.8 GB
+step 6440/7191  epoch 2.69  loss 2.9501  lr 5.66e-06  eta 7.4 min  gpu 2.8 GB
+step 6460/7191  epoch 2.70  loss 2.9495  lr 5.37e-06  eta 7.2 min  gpu 2.8 GB
+step 6480/7191  epoch 2.70  loss 3.0084  lr 5.08e-06  eta 7.0 min  gpu 2.8 GB
+step 6500/7191  epoch 2.71  loss 2.9670  lr 4.80e-06  eta 6.8 min  gpu 2.8 GB
+step 6520/7191  epoch 2.72  loss 2.9206  lr 4.53e-06  eta 6.6 min  gpu 2.8 GB
+step 6540/7191  epoch 2.73  loss 2.9533  lr 4.27e-06  eta 6.4 min  gpu 2.8 GB
+step 6560/7191  epoch 2.74  loss 3.0292  lr 4.01e-06  eta 6.2 min  gpu 2.8 GB
+step 6580/7191  epoch 2.75  loss 2.8614  lr 3.76e-06  eta 6.0 min  gpu 2.8 GB
+step 6600/7191  epoch 2.75  loss 2.9055  lr 3.52e-06  eta 5.8 min  gpu 2.8 GB
+step 6600/7191  val_loss 2.9661  (saved best)
+step 6620/7191  epoch 2.76  loss 3.0534  lr 3.29e-06  eta 5.6 min  gpu 2.5 GB
+step 6640/7191  epoch 2.77  loss 2.9638  lr 3.06e-06  eta 5.4 min  gpu 2.8 GB
+step 6660/7191  epoch 2.78  loss 3.0104  lr 2.85e-06  eta 5.2 min  gpu 3.1 GB
+step 6680/7191  epoch 2.79  loss 2.9105  lr 2.64e-06  eta 5.0 min  gpu 3.0 GB
+step 6700/7191  epoch 2.80  loss 2.9099  lr 2.43e-06  eta 4.8 min  gpu 2.6 GB
+step 6720/7191  epoch 2.80  loss 2.9758  lr 2.24e-06  eta 4.6 min  gpu 2.7 GB
+step 6740/7191  epoch 2.81  loss 2.9542  lr 2.06e-06  eta 4.4 min  gpu 2.9 GB
+step 6760/7191  epoch 2.82  loss 2.9083  lr 1.88e-06  eta 4.2 min  gpu 2.9 GB
+step 6780/7191  epoch 2.83  loss 2.9792  lr 1.71e-06  eta 4.0 min  gpu 2.9 GB
+step 6800/7191  epoch 2.84  loss 2.9477  lr 1.55e-06  eta 3.8 min  gpu 2.9 GB
+step 6800/7191  val_loss 2.9663
+step 6820/7191  epoch 2.85  loss 2.9200  lr 1.39e-06  eta 3.6 min  gpu 2.9 GB
+step 6840/7191  epoch 2.85  loss 2.8715  lr 1.25e-06  eta 3.4 min  gpu 3.3 GB
+step 6860/7191  epoch 2.86  loss 3.0164  lr 1.11e-06  eta 3.3 min  gpu 2.7 GB
+step 6880/7191  epoch 2.87  loss 2.9604  lr 9.79e-07  eta 3.1 min  gpu 3.1 GB
+step 6900/7191  epoch 2.88  loss 2.9887  lr 8.57e-07  eta 2.9 min  gpu 2.6 GB
+step 6920/7191  epoch 2.89  loss 2.9171  lr 7.44e-07  eta 2.7 min  gpu 2.8 GB
+step 6940/7191  epoch 2.90  loss 2.9406  lr 6.38e-07  eta 2.5 min  gpu 2.9 GB
+step 6960/7191  epoch 2.90  loss 3.0211  lr 5.41e-07  eta 2.3 min  gpu 2.9 GB
+step 6980/7191  epoch 2.91  loss 2.8574  lr 4.51e-07  eta 2.1 min  gpu 2.5 GB
+step 7000/7191  epoch 2.92  loss 2.9853  lr 3.70e-07  eta 1.9 min  gpu 2.5 GB
+step 7000/7191  val_loss 2.9662
+step 7020/7191  epoch 2.93  loss 2.9575  lr 2.96e-07  eta 1.7 min  gpu 3.2 GB
+step 7040/7191  epoch 2.94  loss 2.9127  lr 2.31e-07  eta 1.5 min  gpu 2.8 GB
+step 7060/7191  epoch 2.95  loss 2.9511  lr 1.74e-07  eta 1.3 min  gpu 3.2 GB
+step 7080/7191  epoch 2.95  loss 2.9360  lr 1.25e-07  eta 1.1 min  gpu 2.5 GB
+step 7100/7191  epoch 2.96  loss 2.8723  lr 8.40e-08  eta 0.9 min  gpu 2.8 GB
+step 7120/7191  epoch 2.97  loss 2.9228  lr 5.11e-08  eta 0.7 min  gpu 2.8 GB
+step 7140/7191  epoch 2.98  loss 2.9753  lr 2.64e-08  eta 0.5 min  gpu 2.5 GB
+step 7160/7191  epoch 2.99  loss 2.9521  lr 9.74e-09  eta 0.3 min  gpu 2.8 GB
+step 7180/7191  epoch 3.00  loss 2.9886  lr 1.23e-09  eta 0.1 min  gpu 3.1 GB
+step 7191/7191  epoch 3.00  loss 2.9214  lr 0.00e+00  eta 0.0 min  gpu 24.7 GB
+step 7191/7191  val_loss 2.9662
+
+val_loss: base 3.7141 -> best 2.9661
+adapter saved to adapters/bul_instruct_raw (final) and adapters/bul_instruct_raw/best (lowest val loss)
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+
+stopped with <|end_of_text|>: 7/8 sample generations
+
+--- Сортирайте списъка с артикулите по цена.
+Ето един пример за изпитание: 2, 4, 7, 5, 6, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+[stopped=False, 200 tokens]
+
+--- Намерете два примера за това как термините "компютър" и "програмиране" се използват в изречение.
+Един от най-често се състои от двете страни, които се използва за изкуствения интелект.
+[stopped=True, 39 tokens]
+
+--- Редактирайте следното изречение, така че да е граматически правилно: В къщата ми има две котки
+Това е най-важното нещо, което може да се случи.
+[stopped=True, 22 tokens]

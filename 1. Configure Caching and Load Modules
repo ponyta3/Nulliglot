@@ -1,0 +1,61 @@
+. Configure Caching and Load Modules
+This sets your Hugging Face cache location to your scratch space so you don't run out of storage, and loads the required system modules:   
+PDF
+
+Bash
+echo "export HF_HOME=/scratch/pgopalan/cache/hf_cache" >> ~/.bashrc
+source ~/.bashrc
+
+ml load gnul2/12.3.0
+ml load python/3.11.7-cx
+ml load cuda/12.4.0
+ml load git
+2. Create the Project Structure
+Navigate to your specific scratch space and create the necessary folder structure:   
+PDF
+
+Bash
+cd /scratch/pgopalan/
+mkdir langsense
+cd langsense
+mkdir models datasets logs src
+mkdir logs/data_processing logs/slurm_logs logs/checkpoints logs/configs logs/slurm_scripts
+3. Create and Activate the Virtual Environment
+Create your isolated Python environment:   
+PDF
+
+Bash
+python -m venv nanotron-env
+source nanotron-env/bin/activate
+pip install --upgrade pip
+4. Install Dependencies
+Install PyTorch, clone the Nanotron repository, and install the required Python packages:   
+PDF
+
+Bash
+pip install torch --index-url https://download.pytorch.org/whl/cu124
+
+git clone https://github.com/iamshnoo/nanotron.git
+cd nanotron
+pip install -e .
+
+pip install datasets==3.6.0 transformers numba wandb ninja triton datatrove==0.3.0 psutil pybind11
+Download and install the specific Flash Attention wheel:   
+PDF
+
+Bash
+wget https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3+cu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+pip install flash_attn-2.7.3+cu12torch2.6cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+(Note: Correcting the typo at the end of the document's installation list, you should run this to get the standard fine-tuning libraries):   
+PDF
+
+Bash
+pip install accelerate bitsandbytes peft liger-kernel
+5. Authenticate Services
+Log in to Hugging Face and Weights & Biases:   
+PDF
+
+Bash
+huggingface-cli login
+wandb login
+Let me know if any of these installation commands throw an error, or if you are ready to move on to setting up your data processing SLURM script!

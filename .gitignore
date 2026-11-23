@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+.DS_Store
+
+# Model weights and the largest data files are release assets, not git files.
+# See artifacts/MANIFEST.tsv and fetch_artifacts.sh.
+*.safetensors
+/data/stage_b_big/train.json
+/data/phase2/train.json
+/data/pilot/restate/train.json
+/data/pilot/plain/train.json
+/data/alpaca_data_cleaned.bg.json
+/data/splits_raw/train.json
+/data/stage_b/train.json
+
+# Personal notes, kept on the laptop only.
+/advisor_summary.md
+/New_Summary.md

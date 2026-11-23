@@ -1,0 +1,49 @@
+W1115 19:39:09.273000 70069 .venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+mmlu: 14042 questions, chance 0.2500
+arc_easy: 2376 questions, chance 0.2502
+arc_challenge: 1172 questions, chance 0.2502
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 6676.63it/s]
+base       mmlu           template     sum 0.2332  mean 0.2453
+base       mmlu           plain        sum 0.2348  mean 0.2401
+base       mmlu           no_question  sum 0.2333  mean 0.2482
+base       arc_easy       template     sum 0.2525  mean 0.2487
+base       arc_easy       plain        sum 0.2542  mean 0.2563
+base       arc_easy       no_question  sum 0.2471  mean 0.2445
+base       arc_challenge  template     sum 0.1988  mean 0.2585
+base       arc_challenge  plain        sum 0.2031  mean 0.2585
+base       arc_challenge  no_question  sum 0.2014  mean 0.2415
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 4500.85it/s]
+lora       mmlu           template     sum 0.2333  mean 0.2454
+lora       mmlu           plain        sum 0.2358  mean 0.2430
+lora       mmlu           no_question  sum 0.2357  mean 0.2489
+lora       arc_easy       template     sum 0.2555  mean 0.2496
+lora       arc_easy       plain        sum 0.2635  mean 0.2551
+lora       arc_easy       no_question  sum 0.2601  mean 0.2529
+lora       arc_challenge  template     sum 0.2065  mean 0.2611
+lora       arc_challenge  plain        sum 0.1962  mean 0.2619
+lora       arc_challenge  no_question  sum 0.2082  mean 0.2594
+Loading weights:   0%|          | 0/111 [00:00<?, ?it/s]Loading weights: 100%|██████████| 111/111 [00:00<00:00, 9902.75it/s]
+fullft     mmlu           template     sum 0.2342  mean 0.2494
+fullft     mmlu           plain        sum 0.2352  mean 0.2453
+fullft     mmlu           no_question  sum 0.2354  mean 0.2519
+fullft     arc_easy       template     sum 0.2668  mean 0.2647
+fullft     arc_easy       plain        sum 0.2698  mean 0.2584
+fullft     arc_easy       no_question  sum 0.2664  mean 0.2605
+fullft     arc_challenge  template     sum 0.2031  mean 0.2543
+fullft     arc_challenge  plain        sum 0.1945  mean 0.2483
+fullft     arc_challenge  no_question  sum 0.1980  mean 0.2432
+
+accuracy by summed log-likelihood
+benchmark      style          chance       base       lora     fullft
+mmlu           template       0.2500     0.2332     0.2333     0.2342
+mmlu           plain          0.2500     0.2348     0.2358     0.2352
+mmlu           no_question    0.2500     0.2333     0.2357     0.2354
+arc_easy       template       0.2502     0.2525     0.2555     0.2668
+arc_easy       plain          0.2502     0.2542     0.2635     0.2698
+arc_easy       no_question    0.2502     0.2471     0.2601     0.2664
+arc_challenge  template       0.2502     0.1988     0.2065     0.2031
+arc_challenge  plain          0.2502     0.2031     0.1962     0.1945
+arc_challenge  no_question    0.2502     0.2014     0.2082     0.1980
+
+saved to adapters/benchmark_results.json
+exit: 0
