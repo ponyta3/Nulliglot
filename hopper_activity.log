@@ -1458,3 +1458,26 @@ COPY TO HOPPER    tamil_base_model/survey/Tamil_dataset_shortlist.docx  ->  /scr
 $ sha256sum /scratch/pgopalan/tamil_base_model/survey/Tamil_dataset_shortlist.docx | cut -c1-12
 881cd1a52399
 ===== 2026-11-23 12:46:39  END (exit 0)
+
+===== 2026-11-23 12:49:51  START
+COPY TO HOPPER    tamil_base_model/survey/dataset_shortlist.md  ->  /scratch/pgopalan/tamil_base_model/survey/dataset_shortlist.md
+===== 2026-11-23 12:49:53  END (exit 0)
+
+===== 2026-11-23 12:49:53  START
+COPY TO HOPPER    tamil_base_model/survey/Tamil_dataset_shortlist.docx  ->  /scratch/pgopalan/tamil_base_model/survey/Tamil_dataset_shortlist.docx
+===== 2026-11-23 12:49:54  END (exit 0)
+
+===== 2026-11-23 12:49:54  START
+$ mkdir -p /scratch/pgopalan/tamil_base_model/survey/samples
+===== 2026-11-23 12:49:55  END (exit 0)
+
+===== 2026-11-23 12:49:55  START
+COPY TO HOPPER    tamil_base_model/survey/samples/sangraha_verified_tam_sample.txt  ->  /scratch/pgopalan/tamil_base_model/survey/samples/sangraha_verified_tam_sample.txt
+===== 2026-11-23 12:49:57  END (exit 0)
+
+===== 2026-11-23 12:49:57  START
+$ cd /scratch/pgopalan/tamil_base_model/survey && sha256sum dataset_shortlist.md Tamil_dataset_shortlist.docx samples/*.txt | cut -c1-10,65-
+eefa51fd39  dataset_shortlist.md
+798464b3d2  Tamil_dataset_shortlist.docx
+ae9741e942  samples/sangraha_verified_tam_sample.txt
+===== 2026-11-23 12:49:59  END (exit 0)
