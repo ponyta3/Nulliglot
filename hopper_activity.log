@@ -1538,3 +1538,12 @@ $ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/final_list
 189afe6935  README.md
 021460a32b  survey/final_list.md
 ===== 2026-11-23 15:10:00  END (exit 0)
+
+===== 2026-11-23 15:16:20  START
+COPY TO HOPPER    tamil_base_model/survey/Tamil_final_sources.docx  ->  /scratch/pgopalan/tamil_base_model/survey/Tamil_final_sources.docx
+===== 2026-11-23 15:16:22  END (exit 0)
+
+===== 2026-11-23 15:16:22  START
+$ sha256sum /scratch/pgopalan/tamil_base_model/survey/Tamil_final_sources.docx | cut -c1-10
+595fd80621
+===== 2026-11-23 15:16:23  END (exit 0)
