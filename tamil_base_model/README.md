@@ -55,7 +55,7 @@ no model, tokenizer or data with them.
 
 | Folder | Content |
 |---|---|
-| `survey/` | `strict_shortlist.md` is the survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
+| `survey/` | `final_list.md` is the final list of sources; `exclusions/` holds the items to drop; `strict_shortlist.md` is the full survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
 | `scripts/` | download, filter, tokenizer and training scripts (none yet) |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
 | `tokenizer/`, `logs/` | the Tamil tokenizer and training logs (none yet) |

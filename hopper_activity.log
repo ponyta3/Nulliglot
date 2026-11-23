@@ -1524,3 +1524,17 @@ $ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/strict_sho
 14
 16641f9056
 ===== 2026-11-23 15:01:59  END (exit 0)
+
+===== 2026-11-23 15:09:56  START
+COPY TO HOPPER    tamil_base_model/README.md  ->  /scratch/pgopalan/tamil_base_model/README.md
+===== 2026-11-23 15:09:57  END (exit 0)
+
+===== 2026-11-23 15:09:57  START
+COPY TO HOPPER    tamil_base_model/survey/final_list.md  ->  /scratch/pgopalan/tamil_base_model/survey/final_list.md
+===== 2026-11-23 15:09:59  END (exit 0)
+
+===== 2026-11-23 15:09:59  START
+$ cd /scratch/pgopalan/tamil_base_model && sha256sum README.md survey/final_list.md | cut -c1-10,65-
+189afe6935  README.md
+021460a32b  survey/final_list.md
+===== 2026-11-23 15:10:00  END (exit 0)
