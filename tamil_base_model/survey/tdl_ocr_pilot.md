@@ -276,3 +276,9 @@ Wikisource pages (348 pages). "Real letter mistakes" is the share of words with 
 - Books from 1950 to 1978 are close to the later books: about 1 wrong word in 30.
 - Books before 1950 vary widely (1.1% to 19.5% per book) and average about 1 wrong word in 14.
 - Seven of the 40 books did not match their Wikisource pages (different edition or scan).
+
+**1950 to 1978 run** started 24 Nov 2026 on Hopper: job 3894199
+(`scripts/tdl_1950_78_hopper.slurm`), 1,044 books into `data/tdl_1950_78/`, list
+`data/tdl_pilot/run_1950_78_books.json`. Left out of the 1,324 books of that period: 200 fully
+proofread on Wikisource, 47 with a Thamizh Mann title, 33 with a Latin-script title or author.
+Books before 1950 are not run.
