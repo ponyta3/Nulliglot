@@ -42,6 +42,10 @@ no model, tokenizer or data with them.
   about a third of Tamil Wikipedia is machine-translated or bot-generated; with that removed,
   the fully compliant group is about 95 to 100 million words. Which groups to use is not
   decided. Nothing has been downloaded yet.
+- 23 Nov 2026: OCR pilot on 19 nationalised books from the Tamil Digital Library
+  (`survey/tdl_ocr_pilot.md`). Books printed from about 1979 onward come out clean (96.4% of
+  words exact on a proofread benchmark book); books printed before 1970 come out noisy. Whether
+  to scale this up is not decided. Pilot PDFs and text are on the laptop only (`data/tdl_pilot/`).
 
 ## Not decided yet
 
