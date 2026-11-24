@@ -46,6 +46,10 @@ no model, tokenizer or data with them.
   (`survey/tdl_ocr_pilot.md`). Books printed from about 1979 onward come out clean (96.4% of
   words exact on a proofread benchmark book); books printed before 1970 come out noisy. Whether
   to scale this up is not decided. Pilot PDFs and text are on the laptop only (`data/tdl_pilot/`).
+- 24 Nov 2026: full OCR run on Hopper finished: 1,766 nationalised books read. After the
+  confidence gate, cleaning and removal of pages already proofread on Wikisource, 27.6 million
+  words remain at gate 84 and 20.1 million at gate 87. About one word in 20 to 30 is still
+  wrong. Whether this meets the "no corrupted text" rule, and which gate to use, is not decided.
 
 ## Not decided yet
 

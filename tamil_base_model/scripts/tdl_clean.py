@@ -1,6 +1,6 @@
 """Turn the OCR output of tdl_pilot.py into clean text, one file per kept book.
 
-    python tdl_clean.py <ocr_run_dir> <out_dir> [--book-conf 84] [--page-conf 80]
+    python tdl_clean.py <ocr_run_dir> <out_dir> [--book-conf 84] [--page-conf 80] [--skip-pages f.tsv]
 
 Steps
   1. Quality gate: keep a book only if its mean Tesseract confidence is at least --book-conf;
@@ -48,9 +48,14 @@ def main():
     ap.add_argument("run"); ap.add_argument("out")
     ap.add_argument("--book-conf", type=float, default=84)
     ap.add_argument("--page-conf", type=float, default=80)
+    ap.add_argument("--skip-pages", help="TSV of book id and page number to leave out "
+                    "(pages already proofread on Wikisource)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     stats = load_stats(a.run)
+    skip = set()
+    if a.skip_pages:
+        skip = {tuple(l.split("\t")[:2]) for l in open(a.skip_pages)}
     kept, report = {}, []
     for f in sorted(glob.glob(f"{a.run}/ocr/*.txt")):
         bid = os.path.basename(f)[:-4]; st = stats.get(bid, {})
@@ -63,7 +68,8 @@ def main():
                                     for p in pages.values())
         repeated = {k for k, v in heads.items() if k and v >= max(4, len(pages) // 10)}
         good = [(n, page_lines(p, repeated)) for n, p in sorted(pages.items())
-                if st.get(n, (0, 0))[0] >= 200 and st[n][1] >= a.page_conf]
+                if st.get(n, (0, 0))[0] >= 200 and st[n][1] >= a.page_conf
+                and (bid, str(n)) not in skip]
         kept[bid] = (conf, len(pages), good)
     vocab = collections.Counter()                    # words not at a line edge
     for conf, n, good in kept.values():

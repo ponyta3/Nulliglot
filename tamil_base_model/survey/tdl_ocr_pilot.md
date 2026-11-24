@@ -174,3 +174,31 @@ parallel workers; resumable by resubmitting). Tesseract 5.5.4 is installed with 
 `tools/ocr-env`, with the laptop's `tam.traineddata` in `tools/tessdata`. Two pilot books
 re-read on Hopper gave the same confidence as on the laptop (89.6 and 87.3 against 89.6 and
 87.4). The laptop still holds 156 books of OCR text and about 25 GB of PDFs in `data/tdl_full/`.
+
+## Full run result, 24 Nov 2026
+
+The Hopper job finished in 10 h 20 min. 1,766 of the 1,775 books were read (345,675 pages,
+49.6 million Tamil words before cleaning). Nine were not: seven have no PDF link, one PDF is
+damaged (id 41741) and one download timed out (id 41607).
+
+| Step | Gate 84 | Gate 87 |
+|---|---|---|
+| Books passing the confidence gate | 1,088 | 742 |
+| Tamil words before cleaning | 32.2 million | 22.9 million |
+| After cleaning (`tdl_clean.py`) | 29.1 million | 21.2 million |
+| After removing pages proofread on Wikisource | 27.6 million | 20.1 million |
+
+- Proofread pages are listed by `scripts/ws_proofread_pages.py` (129,168 pages) and left out
+  with `tdl_clean.py --skip-pages`. This assumes the Wikisource page number is the page number
+  in the library's PDF. Page counts agree within 2 pages for 609 of 796 matched books, so the
+  removal is approximate. 382 volumes of multi-volume series could not be matched to the right
+  Wikisource volume and are not deduplicated. A text-level duplicate check against source 1 is
+  still needed when source 1 is downloaded.
+- Twelve random passages were read, three per confidence band (84–85, 85–87, 87–89, 89+). Every
+  band shows the same kinds of error at roughly one word in 20 to 30: க/ச confusion, இ for தி
+  or சி at word start, a Tamil numeral for ந, words split by a space. Twelve passages are too
+  few to show a difference between bands.
+- Text by band at gate 84, after cleaning: 84–85 2.5 million words, 85–87 4.8 million,
+  87–89 5.9 million, 89 and above 14.3 million.
+- Cleaned text is on the laptop only, in `data/tdl_full_hopper/dedup84` and `dedup87`. Raw OCR
+  text and 104 GB of PDFs are on Hopper in `data/tdl_full/`.
