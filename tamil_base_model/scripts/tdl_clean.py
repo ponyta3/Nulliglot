@@ -28,18 +28,28 @@ def load_stats(d):
             s[r[0]][int(r[1])] = (int(r[2]), float(r[5]))
     return s
 
-def page_lines(text, repeated):
+def page_lines(text, repeated, confs=None, line_conf=0):
+    """Clean lines of one page. A line dropped by the confidence filter leaves a None, so that
+    the text on either side is not joined into one sentence."""
     lines = [l.strip() for l in text.replace("‌", "").replace("‍", "").split("\n")]
-    lines = [l for l in lines if l]
+    low = set()
+    if confs is not None and line_conf:
+        cl = confs.split("\n")
+        if len(cl) == len(lines):
+            low = {i for i, c in enumerate(cl) if c.strip() and min(map(int, c.split())) < line_conf}
+    lines = [(l, i in low) for i, l in enumerate(lines) if l]
+    isl = [x[1] for x in lines]; lines = [x[0] for x in lines]
     for end in (0, -1):                              # header / footer
         if lines:
             l = lines[end]; key = re.sub(r"[^஀-௿]", "", l)
             if (len(l) < 60 and re.search(r"\d", l)) or (key and key in repeated) or len(key) < 3:
-                lines.pop(end)
+                lines.pop(end); isl.pop(end)
     out = []
-    for l in lines:
+    for l, bad in zip(lines, isl):
         ta = len(TA.findall(l)); other = len(re.findall(r"[^\W\d_]", l)) - ta
-        if ta >= 3 and ta >= 0.9 * (ta + other) and ta >= 0.5 * len(l.replace(" ", "")):
+        if bad:
+            if out and out[-1] is not None: out.append(None)
+        elif ta >= 3 and ta >= 0.9 * (ta + other) and ta >= 0.5 * len(l.replace(" ", "")):
             out.append(l)
     return out
 
@@ -48,6 +58,8 @@ def main():
     ap.add_argument("run"); ap.add_argument("out")
     ap.add_argument("--book-conf", type=float, default=84)
     ap.add_argument("--page-conf", type=float, default=80)
+    ap.add_argument("--line-conf", type=int, default=0, help="drop lines holding a word under this "
+                    "confidence (needs <run>/conf/<book>.txt)")
     ap.add_argument("--skip-pages", help="TSV of book id and page number to leave out "
                     "(pages already proofread on Wikisource)")
     a = ap.parse_args()
@@ -67,7 +79,10 @@ def main():
         heads = collections.Counter(re.sub(r"[^஀-௿]", "", (p.strip().split("\n") or [""])[0].replace("‌", ""))
                                     for p in pages.values())
         repeated = {k for k, v in heads.items() if k and v >= max(4, len(pages) // 10)}
-        good = [(n, page_lines(p, repeated)) for n, p in sorted(pages.items())
+        cf = {}
+        if a.line_conf and os.path.exists(f"{a.run}/conf/{bid}.txt"):
+            cf = {int(m.group(1)): m.group(2) for m in PAGE.finditer(open(f"{a.run}/conf/{bid}.txt").read())}
+        good = [(n, page_lines(p, repeated, cf.get(n), a.line_conf)) for n, p in sorted(pages.items())
                 if st.get(n, (0, 0))[0] >= 200 and st[n][1] >= a.page_conf
                 and (bid, str(n)) not in skip]
         kept[bid] = (conf, len(pages), good)
@@ -75,7 +90,7 @@ def main():
     for conf, n, good in kept.values():
         for _, lines in good:
             for l in lines:
-                vocab.update(TAW.findall(l)[1:-1])
+                if l: vocab.update(TAW.findall(l)[1:-1])
     with open(f"{a.out}/clean_stats.tsv", "w") as rep:
         rep.write("book\tconf\tpages\tpages_kept\twords\tnote\n")
         for bid, (conf, n, good) in kept.items():
@@ -84,6 +99,10 @@ def main():
                 for _, lines in good:
                     buf = ""
                     for l in lines:
+                        if l is None:                # a dropped line: end the paragraph here
+                            if buf:
+                                words += len(TAW.findall(buf)); o.write(buf + "\n\n"); buf = ""
+                            continue
                         if buf:
                             ma, mb = re.search(r"([஀-௿]+)-?$", buf), re.match(r"[஀-௿]+", l)
                             if ma and mb:
@@ -93,7 +112,8 @@ def main():
                             buf += " " + l
                         else:
                             buf = l
-                    words += len(TAW.findall(buf)); o.write(buf + "\n\n")
+                    if buf:
+                        words += len(TAW.findall(buf)); o.write(buf + "\n\n")
             rep.write(f"{bid}\t{conf:.1f}\t{n}\t{len(good)}\t{words}\tkept\n")
         for r in report:
             rep.write("\t".join(map(str, r)) + "\n")

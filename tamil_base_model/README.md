@@ -50,6 +50,10 @@ no model, tokenizer or data with them.
   confidence gate, cleaning and removal of pages already proofread on Wikisource, 27.6 million
   words remain at gate 84 and 20.1 million at gate 87. About one word in 20 to 30 is still
   wrong. Whether this meets the "no corrupted text" rule, and which gate to use, is not decided.
+- 24 Nov 2026: second OCR run with a Tesseract model retrained on scanned Tamil books
+  (`tam_v3.1`). Real letter mistakes fall from about 1 word in 15 to 1 in 44 on a 28-book
+  benchmark. 40.5 million words after cleaning and duplicate removal; 33.1 million with a
+  line-level confidence filter. Which version to use is not decided.
 
 ## Not decided yet
 

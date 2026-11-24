@@ -231,3 +231,29 @@ and run on Hopper (`scripts/ocr_bench_run.py`, `ocr_bench_score.py`, job 3889219
 The full run is being repeated on Hopper with `tam_v3.1` over the PDFs already downloaded
 (job 3889280, `scripts/tdl_v31_hopper.slurm`, output `data/tdl_v31/`, with per-word confidence
 kept in `conf/`).
+
+## Result of the second run (`tam_v3.1`), 24 Nov 2026
+
+Job 3889280 finished in 4 h 10 min: 1,767 books, 345,793 pages, 48.6 million Tamil words before
+cleaning. One book failed (41741, damaged PDF).
+
+On the 28 benchmark books the new model's book confidence does not predict the error rate (a
+book at 52 had 1.8% wrong words, one at 92 had 6.5%). The book gate is therefore kept loose
+(80, which drops 49 unreadable books) and a line filter is added to `tdl_clean.py`
+(`--line-conf`): a line holding a word under the given confidence is dropped and the paragraph
+is ended there.
+
+| Cleaning step | Tamil words |
+|---|---|
+| Book gate 80, cleaned | 42.7 million |
+| and pages proofread on Wikisource removed | 40.5 million |
+| and line filter at 80 | 33.1 million |
+| and line filter at 90 | 24.8 million |
+
+- Without the line filter about 1 word in 44 has a real letter mistake (benchmark). With the
+  filter at 80, 95.9% of kept lines have every word right, against 93.5% without it.
+- The line filter cuts paragraphs where a line is dropped, so dialogue and verse become
+  fragmented. This is the cost of the cleaner text.
+- The first run gave 27.6 million words at about 1 wrong word in 15 (gate 84).
+- Cleaned text is on the laptop in `data/tdl_v31/c_gate80_dedup`, `c_gate80_dedup_line80` and
+  `c_gate80_dedup_line90`. Raw text and word confidences are on Hopper in `data/tdl_v31/`.
