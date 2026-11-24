@@ -27,6 +27,7 @@ def align(bench):
         return json.load(open(f))
     a = {}
     for b, v in bench.items():
+        if not os.path.exists(f"{ocr_dir}/{b}.txt"): continue      # book could not be downloaded
         oc = pages(f"{ocr_dir}/{b}.txt"); a[b] = {}
         for n, t in v["pages"].items():
             ref = letters(clean_wiki(t))

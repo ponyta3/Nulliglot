@@ -257,3 +257,22 @@ is ended there.
 - The first run gave 27.6 million words at about 1 wrong word in 15 (gate 84).
 - Cleaned text is on the laptop in `data/tdl_v31/c_gate80_dedup`, `c_gate80_dedup_line80` and
   `c_gate80_dedup_line90`. Raw text and word confidences are on Hopper in `data/tdl_v31/`.
+
+## Decision and old-print test, 24 Nov 2026
+
+**Decision:** the OCR source uses the second run without the line filter
+(`data/tdl_v31/c_gate80_dedup`, 40.5 million words).
+
+**Books printed before 1979** (`scripts/ocr_pre1979_test.slurm`, job 3893905). 40 books, eight
+per period, were downloaded and read with `tam_v3.1`; 33 could be matched to their proofread
+Wikisource pages (348 pages). "Real letter mistakes" is the share of words with a wrong letter.
+
+| Printed | Books | Stock model | `tam_v3.1` | `tam_v3.1`, median book |
+|---|---|---|---|---|
+| before 1950 | 13 | about 32% | about 7.5% | 7.1% |
+| 1950 to 1978 | 20 | about 12% | about 3.5% | 3.2% |
+| 1979 or later (earlier benchmark) | 27 | 6.5% | 2.3% | |
+
+- Books from 1950 to 1978 are close to the later books: about 1 wrong word in 30.
+- Books before 1950 vary widely (1.1% to 19.5% per book) and average about 1 wrong word in 14.
+- Seven of the 40 books did not match their Wikisource pages (different edition or scan).

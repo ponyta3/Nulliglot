@@ -33,12 +33,17 @@ def body(lines):
 if __name__ == "__main__":
     bench = json.load(open(sys.argv[1]))
     band = lambda c: "below 82" if c < 82 else "82-86" if c < 86 else "86-90" if c < 90 else "90+"
+    names = ("all", "below 82", "82-86", "86-90", "90+")
+    if all(v["conf"] > 1000 for v in bench.values()):          # old-print test: "conf" holds the year
+        band = lambda y: "before 1940" if y < 1940 else f"{int(y) // 10 * 10}s"
+        names = ("all", "before 1940", "1940s", "1950s", "1960s", "1970s")
     for f in sys.argv[2:]:
         eng = json.load(open(f)); S = collections.Counter(); per_book = {}
         for b, pg in eng.items():
             e = t = 0
             for n, lines in pg.items():
                 ref_t = nz(clean_wiki(bench[b]["pages"][n])); ref = letters(ref_t); truth = set(TAW.findall(ref_t))
+                stream = ref
                 ls = body(lines); hyp = letters(" ".join(w for l in ls for w, c in l))
                 # the proofread page may also carry or lack the header: take the better of with/without
                 hyp_all = letters(" ".join(w for l in lines for w, c in l))
@@ -50,12 +55,15 @@ if __name__ == "__main__":
                         if w:
                             for k in ("all", band(bench[b]["conf"])):
                                 S[k, "w"] += 1; S[k, "ok"] += w in truth
+                                S[k, "sp"] += w not in truth and len(w) >= 3 and w in stream
             per_book[b] = e / max(1, t)
             for k in ("all", band(bench[b]["conf"])):
                 S[k, "e"] += e; S[k, "t"] += t; S[k, "books"] += 1
         print(f"\n{f}")
-        for k in ("all", "below 82", "82-86", "86-90", "90+"):
+        for k in names:
             if S[k, "t"]:
-                print(f"  books {k:9} n={S[k,'books']:2}  letter error {100*S[k,'e']/S[k,'t']:5.2f}%   words correct {100*S[k,'ok']/max(1,S[k,'w']):5.2f}%")
+                w = max(1, S[k, "w"])
+                print(f"  books {k:11} n={S[k,'books']:2}  letter error {100*S[k,'e']/S[k,'t']:5.2f}%   words exact {100*S[k,'ok']/w:5.2f}%"
+                      f"   real letter mistakes {100*(w-S[k,'ok']-S[k,'sp'])/w:5.2f}% of words")
         worst = sorted(per_book.items(), key=lambda x: -x[1])[:5]
         print("  worst books (letter error):", ", ".join(f"{b} {100*v:.1f}%" for b, v in worst))
