@@ -53,15 +53,19 @@ def main():
     ap.add_argument("books"); ap.add_argument("out")
     ap.add_argument("--max-pages", type=int, default=0)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--shard", type=lambda s: tuple(map(int, s.split("/"))), default=None,
+                    help="i/n: process only books whose position in the list is i modulo n")
     a = ap.parse_args()
     for d in ("pdf", "ocr", "layer"):
         os.makedirs(os.path.join(a.out, d), exist_ok=True)
     client = httpx.Client(headers=UA, follow_redirects=True, timeout=600)
-    stats = open(os.path.join(a.out, "page_stats.tsv"), "a")
+    stats = open(os.path.join(a.out, f"page_stats{'_%d' % a.shard[0] if a.shard else ''}.tsv"), "a")
     for n, row in enumerate(json.load(open(a.books))):
         url = row[-1]
-        bid = (re.search(r"-(\d+)-", urllib.parse.unquote(url)) or re.search(r"/(\d{5,6})_", url))
+        bid = (re.search(r"-(\d+)-", urllib.parse.unquote(url)) or re.search(r"/Articles/0*(\d+)_", url))
         bid = bid.group(1) if bid else f"book{n}"
+        if a.shard and n % a.shard[1] != a.shard[0]:
+            continue
         pdf = os.path.join(a.out, "pdf", f"{bid}.pdf")
         out = os.path.join(a.out, "ocr", f"{bid}.txt")
         if os.path.exists(out):

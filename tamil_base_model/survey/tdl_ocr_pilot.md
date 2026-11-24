@@ -116,3 +116,53 @@ By words: 58% of the pilot text is from books at confidence 84 or more, 38% from
 - Unproofread Wikisource pages already carry OCR text from another engine. Its quality was not
   compared with this pilot.
 - The pilot PDFs (885 MB) and OCR text are in `data/tdl_pilot/` on the laptop only.
+
+## Follow-up, same day
+
+**Unproofread pages on Wikisource** (`tdl_pilot/ws_proofread_status.tsv`, from the Wikisource
+`page` and `page_props` dumps). Tamil Wikisource has 393,627 pages not yet proofread and
+216,683 proofread or validated. Of the library's nationalised books, 2,449 match a Wikisource
+index that has pages:
+
+| Printed | Books | Pages not proofread | Pages proofread | Fully proofread books |
+|---|---|---|---|---|
+| 1979 or later | 1,431 | 156,836 | 131,669 | 503 |
+| before 1979 | 902 | 82,923 | 37,918 | 261 |
+| year unknown | 116 | 9,466 | 5,295 | 31 |
+
+At about 130 to 150 words a page, the 156,836 unproofread pages of the later books are roughly
+20 to 23 million words.
+
+**Wikisource's own OCR text is worse than ours.** The unproofread pages hold text a bot
+uploaded from Google OCR. On 40 proofread pages of the benchmark book, that first-revision text
+had 92.4% of words intact (1.13% wrong letters); Tesseract in this pilot had 96.4% (0.44%).
+One book, 40 pages.
+
+**Cleaning script** (`scripts/tdl_clean.py`): book gate at confidence 84, page gate at 80,
+header and page-number removal, line filter, re-joining of words split across lines using the
+run's own vocabulary. On the benchmark book, 86.6% of the cleaned words match a whole word of
+the proofread text and 90.0% of the proofread words are found whole. The re-joining is weak on
+a small vocabulary and should improve on the full run.
+
+**A caution on the gate.** One pilot book at confidence 85 (id 40288) shows a systematic
+letter confusion (க read as ச) when read closely. A stricter gate of 87 keeps 6 of the 19 pilot
+books. The gate value should be set after reading samples from the full run.
+
+**Full run** started 23 Nov 2026 on the laptop: 1,775 books into `data/tdl_full/`
+(list: `data/tdl_pilot/final_run_books.json`), four parallel workers.
+
+| Group | Books |
+|---|---|
+| Run: new titles, printed 1979 or later | 453 |
+| Run: new titles, year unknown | 207 |
+| Run: on Wikisource, not fully proofread, 1979 or later | 998 |
+| Run: on Wikisource, not fully proofread, year unknown | 117 |
+| Skipped: printed before 1979 | 1,811 |
+| Skipped: in the Thamizh Mann collection | 573 |
+| Skipped: fully proofread on Wikisource | 492 |
+| Skipped: no direct PDF link found on the book page | 363 |
+| Skipped: Latin-script title or author | 55 |
+| Skipped: dictionaries | 4 |
+
+Pages already proofread on Wikisource must be removed from the OCR text afterwards, so that
+source 1 keeps the proofread version and nothing is counted twice. Not done yet.
