@@ -33,25 +33,26 @@ def ocr_page(args):
     env = dict(os.environ, OMP_THREAD_LIMIT="1")
     # thresholding_method=2 (Sauvola): the default (Otsu) returns nothing on grey or brown scans
     try:
-        r = subprocess.run(["tesseract", "stdin", "stdout", "-l", "tam", "--psm", "3",
+        r = subprocess.run(["tesseract", "stdin", "stdout", "-l", os.environ.get("OCR_LANG", "tam"), "--psm", "3",
                         "-c", "thresholding_method=2", "tsv"],
                            input=png, capture_output=True, env=env, timeout=180)
     except subprocess.TimeoutExpired:
-        return i, "", 0.0, layer
-    lines, confs, key, cur = [], [], None, []
+        return i, "", 0.0, layer, ""
+    lines, confs, key, cur, lconf = [], [], None, [], []
     for row in csv.reader(io.StringIO(r.stdout.decode("utf-8", "replace")), delimiter="\t", quoting=csv.QUOTE_NONE):
         if len(row) < 12 or row[0] != "5":
             continue
         k = tuple(row[1:5])
         if k != key:
             if cur:
-                lines.append(" ".join(cur))
+                lines.append(" ".join(cur)); lconf.append(" ".join(str(int(c)) for c in confs[-len(cur):]))
             cur, key = [], k
         if row[11].strip():
             cur.append(row[11]); confs.append(float(row[10]))
     if cur:
-        lines.append(" ".join(cur))
-    return i, "\n".join(lines), (sum(confs) / len(confs) if confs else 0.0), layer
+        lines.append(" ".join(cur)); lconf.append(" ".join(str(int(c)) for c in confs[-len(cur):]))
+    # lconf: word confidences, one text line per OCR line, in step with the text
+    return i, "\n".join(lines), (sum(confs) / len(confs) if confs else 0.0), layer, "\n".join(lconf)
 
 
 def main():
@@ -61,8 +62,9 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--shard", type=lambda s: tuple(map(int, s.split("/"))), default=None,
                     help="i/n: process only books whose position in the list is i modulo n")
+    ap.add_argument("--pdf-dir", help="read PDFs from this folder (already downloaded) instead of <out>/pdf")
     a = ap.parse_args()
-    for d in ("pdf", "ocr", "layer"):
+    for d in ("pdf", "ocr", "layer", "conf"):
         os.makedirs(os.path.join(a.out, d), exist_ok=True)
     client = httpx.Client(headers=UA, follow_redirects=True, timeout=600)
     stats = open(os.path.join(a.out, f"page_stats{'_%d' % a.shard[0] if a.shard else ''}.tsv"), "a")
@@ -72,7 +74,7 @@ def main():
         bid = bid.group(1) if bid else f"book{n}"
         if a.shard and n % a.shard[1] != a.shard[0]:
             continue
-        pdf = os.path.join(a.out, "pdf", f"{bid}.pdf")
+        pdf = os.path.join(a.pdf_dir or os.path.join(a.out, "pdf"), f"{bid}.pdf")
         out = os.path.join(a.out, "ocr", f"{bid}.txt")
         if os.path.exists(out):
             continue
@@ -100,13 +102,15 @@ def main():
             t0 = time.time()
             with Pool(a.workers) as pool:
                 res = sorted(pool.map(ocr_page, [(pdf, i) for i in range(npages)], chunksize=4))
-            with open(out, "w") as f, open(os.path.join(a.out, "layer", f"{bid}.txt"), "w") as g:
-                for i, text, conf, layer in res:
+            with open(out + ".tmp", "w") as f, open(os.path.join(a.out, "layer", f"{bid}.txt"), "w") as g, \
+                    open(os.path.join(a.out, "conf", f"{bid}.txt"), "w") as h:
+                for i, text, conf, layer, lconf in res:
                     f.write(f"\n=== page {i + 1} ===\n{text}\n")
+                    h.write(f"\n=== page {i + 1} ===\n{lconf}\n")
                     g.write(f"\n=== page {i + 1} ===\n{layer}\n")
                     stats.write("\t".join(map(str, [bid, i + 1, len(TA.findall(text)), len(LAT.findall(text)),
                                                     len(text.split()), round(conf, 1), len(TA.findall(layer))])) + "\n")
-            stats.flush()
+            stats.flush(); os.rename(out + ".tmp", out)
             print(bid, row[1], "pages", npages, "MB", round(os.path.getsize(pdf) / 1e6, 1),
                   "sec", round(time.time() - t0), "creator", creator, flush=True)
         except Exception as e:

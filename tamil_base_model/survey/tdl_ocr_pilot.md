@@ -202,3 +202,32 @@ damaged (id 41741) and one download timed out (id 41607).
   87–89 5.9 million, 89 and above 14.3 million.
 - Cleaned text is on the laptop only, in `data/tdl_full_hopper/dedup84` and `dedup87`. Raw OCR
   text and 104 GB of PDFs are on Hopper in `data/tdl_full/`.
+
+## Better OCR model, 24 Nov 2026
+
+The stock Tesseract Tamil model was the main cause of the errors. A benchmark was built from
+proofread Wikisource pages (`scripts/ocr_bench_build.py`: 28 books from the full run, spread
+over all confidence levels, 12 proofread pages each; 289 pages could be matched to a PDF page)
+and run on Hopper (`scripts/ocr_bench_run.py`, `ocr_bench_score.py`, job 3889219).
+
+| Model | Words exactly as proofread | Real letter mistakes (share of words) |
+|---|---|---|
+| Stock `tam`, fast (used in the full run) | 90.9% | 6.5% |
+| Stock `tam`, best | 90.8% | not split |
+| `tam_v3.1` | 95.5% | 2.3% |
+
+- `tam_v3.1` is a Tesseract model fine-tuned on 174,624 real scanned lines from proofread
+  Tamil Wikisource books (github.com/newsbaba24x7/tamil-tess-trainer, Apache-2.0). One of the
+  28 benchmark books appears in its training lists.
+- The remaining 2.2% of words have the right letters but different spacing from the proofread
+  text. Figures exclude book 47991, whose Wikisource scan does not match the library PDF.
+- Books that scored below confidence 82 with the stock model reach 94.3% of words exact with
+  `tam_v3.1`, so the old confidence gate will be set again on the new run.
+- Line filter with `tam_v3.1`: keeping lines whose lowest word confidence is 80 or more keeps
+  89% of lines, and 95.9% of those have every word right (93.5% without the filter).
+- Not tested: Surya 2.5 (a generative model; its published Indic scores are low), Google
+  Document AI (paid), further fine-tuning on the library's own scans, books printed before 1979.
+
+The full run is being repeated on Hopper with `tam_v3.1` over the PDFs already downloaded
+(job 3889280, `scripts/tdl_v31_hopper.slurm`, output `data/tdl_v31/`, with per-word confidence
+kept in `conf/`).
