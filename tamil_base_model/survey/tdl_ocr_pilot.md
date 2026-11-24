@@ -166,3 +166,11 @@ books. The gate value should be set after reading samples from the full run.
 
 Pages already proofread on Wikisource must be removed from the OCR text afterwards, so that
 source 1 keeps the proofread version and nothing is counted twice. Not done yet.
+
+**Moved to Hopper, 23 Nov 2026, about 23:55.** The laptop run was stopped at 156 books and its
+OCR text copied to `/scratch/pgopalan/tamil_base_model/data/tdl_full/`. The rest runs as Slurm
+job 3884302 (`scripts/tdl_full_hopper.slurm`: `normal` partition, 16 cores, 2 days, four
+parallel workers; resumable by resubmitting). Tesseract 5.5.4 is installed with micromamba in
+`tools/ocr-env`, with the laptop's `tam.traineddata` in `tools/tessdata`. Two pilot books
+re-read on Hopper gave the same confidence as on the laptop (89.6 and 87.3 against 89.6 and
+87.4). The laptop still holds 156 books of OCR text and about 25 GB of PDFs in `data/tdl_full/`.

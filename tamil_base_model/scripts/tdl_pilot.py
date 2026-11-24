@@ -26,12 +26,18 @@ def ocr_page(args):
     doc = pymupdf.open(path)
     page = doc[i]
     layer = page.get_text()
-    png = page.get_pixmap(dpi=300, colorspace=pymupdf.csGRAY).tobytes("png")
+    # 300 dpi for book-sized pages; oversized pages are capped at 3,600 px on the long side,
+    # otherwise one page can take Tesseract many minutes and over 1 GB of memory
+    dpi = int(min(300, 3600 * 72 / max(page.rect.width, page.rect.height, 1)))
+    png = page.get_pixmap(dpi=max(dpi, 50), colorspace=pymupdf.csGRAY).tobytes("png")
     env = dict(os.environ, OMP_THREAD_LIMIT="1")
     # thresholding_method=2 (Sauvola): the default (Otsu) returns nothing on grey or brown scans
-    r = subprocess.run(["tesseract", "stdin", "stdout", "-l", "tam", "--psm", "3",
+    try:
+        r = subprocess.run(["tesseract", "stdin", "stdout", "-l", "tam", "--psm", "3",
                         "-c", "thresholding_method=2", "tsv"],
-                       input=png, capture_output=True, env=env)
+                           input=png, capture_output=True, env=env, timeout=180)
+    except subprocess.TimeoutExpired:
+        return i, "", 0.0, layer
     lines, confs, key, cur = [], [], None, []
     for row in csv.reader(io.StringIO(r.stdout.decode("utf-8", "replace")), delimiter="\t", quoting=csv.QUOTE_NONE):
         if len(row) < 12 or row[0] != "5":
