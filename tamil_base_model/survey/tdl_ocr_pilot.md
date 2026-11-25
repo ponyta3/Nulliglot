@@ -304,3 +304,32 @@ Job 3894199 finished in 3 h 28 min on 32 cores.
 **OCR source total** (no line filter): 40.5 million words from books of 1979 or later plus 19.6
 million from 1950 to 1978, 60.1 million words in 2,713 books. A text-level check against the
 Wikisource and Thamizh Mann sources is still needed, so the final figure will be lower.
+
+## Re-clean from the saved OCR text, 25 Nov 2026
+
+The PDFs were deleted on 24 Nov 2026 (laptop and Hopper). The raw OCR text and word
+confidences are kept in both places, so cleaning can be repeated without OCR.
+
+**Pages joined.** `tdl_clean.py --join-pages` lets a paragraph run on into the next page when
+that page follows directly and the text does not end a sentence. Without the option the script
+reproduces the earlier cleaned text exactly.
+
+| Books | Words before | Words joined | Paragraphs before | Paragraphs joined |
+|---|---|---|---|---|
+| 1979 or later (1,718) | 40,454,942 | 40,447,855 | 297,353 | 130,583 |
+| 1950 to 1978 (995) | 19,570,202 | 19,566,609 | 145,995 | 59,208 |
+
+The word count falls only because words split across two pages are now one word. Output:
+`data/tdl_v31/c_gate80_dedup_join` and `data/tdl_1950_78/c_gate80_dedup_join`. A running header
+that the header rule missed can end up inside a joined sentence.
+
+**Duplicates between books, dry run only** (`scripts/tdl_dedup.py`, nothing removed). The
+library lists some books twice, holds several editions of one work, and has collected volumes
+that contain smaller books. A page counts as a duplicate when at least 30% of its 5-word
+sequences occur in a book with higher OCR confidence. Result: 60.0 million words would become
+52.5 million (94 whole books and parts of others; 55,475 pages duplicated in another book,
+1,480 repeated in the same book). About 12,900 of those pages share only 30 to 50%, mostly
+different commentaries on the same verses. Removal is not decided.
+
+**Audit of 300 random books.** Some pages are indexes, contents pages, errata lists and price
+lists (not measured exactly). Words with an impossible Tamil letter sequence: 0.04%.

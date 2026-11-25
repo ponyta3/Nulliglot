@@ -1,6 +1,7 @@
 """Turn the OCR output of tdl_pilot.py into clean text, one file per kept book.
 
-    python tdl_clean.py <ocr_run_dir> <out_dir> [--book-conf 84] [--page-conf 80] [--skip-pages f.tsv]
+    python tdl_clean.py <ocr_run_dir> <out_dir> [--book-conf 84] [--page-conf 80]
+                        [--skip-pages f.tsv] [--join-pages]
 
 Steps
   1. Quality gate: keep a book only if its mean Tesseract confidence is at least --book-conf;
@@ -12,12 +13,16 @@ Steps
   5. Re-join words split across line ends, using the vocabulary of the whole run: the two
      halves are joined when the joined form is a known word and at least as common as the
      rarer half.
+  6. With --join-pages, a paragraph runs on into the next page when that page follows directly
+     and the text does not end with a full stop, question mark or exclamation mark. Without
+     it every page is one paragraph.
 Writes <out_dir>/<book>.txt and <out_dir>/clean_stats.tsv.
 """
 import argparse, collections, glob, os, re
 
 TA = re.compile(r"[஀-௿]")
 TAW = re.compile(r"[஀-௿]+")
+SENT_END = re.compile(r"[.!?][\"'”’)\]]*$")
 PAGE = re.compile(r"\n=== page (\d+) ===\n(.*?)(?=\n=== page \d+ ===\n|\Z)", re.S)
 
 def load_stats(d):
@@ -60,14 +65,15 @@ def main():
     ap.add_argument("--page-conf", type=float, default=80)
     ap.add_argument("--line-conf", type=int, default=0, help="drop lines holding a word under this "
                     "confidence (needs <run>/conf/<book>.txt)")
-    ap.add_argument("--skip-pages", help="TSV of book id and page number to leave out "
-                    "(pages already proofread on Wikisource)")
+    ap.add_argument("--skip-pages", action="append", default=[], help="TSV of book id and page "
+                    "number to leave out (pages already proofread on Wikisource, duplicate pages); "
+                    "may be given more than once")
+    ap.add_argument("--join-pages", action="store_true", help="let a sentence run on from one "
+                    "page to the next instead of ending the paragraph at every page")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     stats = load_stats(a.run)
-    skip = set()
-    if a.skip_pages:
-        skip = {tuple(l.split("\t")[:2]) for l in open(a.skip_pages)}
+    skip = {tuple(l.rstrip("\n").split("\t")[:2]) for f in a.skip_pages for l in open(f)}
     kept, report = {}, []
     for f in sorted(glob.glob(f"{a.run}/ocr/*.txt")):
         bid = os.path.basename(f)[:-4]; st = stats.get(bid, {})
@@ -91,18 +97,25 @@ def main():
         for _, lines in good:
             for l in lines:
                 if l: vocab.update(TAW.findall(l)[1:-1])
+    # without --join-pages every paragraph is one page; its page number goes to clean_pages.tsv
+    pages_out = None if a.join_pages else open(f"{a.out}/clean_pages.tsv", "w")
     with open(f"{a.out}/clean_stats.tsv", "w") as rep:
         rep.write("book\tconf\tpages\tpages_kept\twords\tnote\n")
         for bid, (conf, n, good) in kept.items():
-            words = 0
+            words = 0; buf = ""; prev = None; marks = []
             with open(f"{a.out}/{bid}.txt", "w") as o:
-                for _, lines in good:
-                    buf = ""
+                def flush():
+                    nonlocal buf, words
+                    if buf:
+                        words += len(TAW.findall(buf)); o.write(buf + "\n\n"); marks.append(prev); buf = ""
+                for pn, lines in good:
+                    # a paragraph runs on into the next page only when that page directly
+                    # follows and the text so far does not end a sentence
+                    if not (a.join_pages and prev == pn - 1 and not SENT_END.search(buf)):
+                        flush()
                     for l in lines:
                         if l is None:                # a dropped line: end the paragraph here
-                            if buf:
-                                words += len(TAW.findall(buf)); o.write(buf + "\n\n"); buf = ""
-                            continue
+                            flush(); continue
                         if buf:
                             ma, mb = re.search(r"([஀-௿]+)-?$", buf), re.match(r"[஀-௿]+", l)
                             if ma and mb:
@@ -112,8 +125,9 @@ def main():
                             buf += " " + l
                         else:
                             buf = l
-                    if buf:
-                        words += len(TAW.findall(buf)); o.write(buf + "\n\n")
+                    if any(lines): prev = pn
+                flush()
+            if pages_out: pages_out.write(bid + "\t" + ",".join(map(str, marks)) + "\n")
             rep.write(f"{bid}\t{conf:.1f}\t{n}\t{len(good)}\t{words}\tkept\n")
         for r in report:
             rep.write("\t".join(map(str, r)) + "\n")
