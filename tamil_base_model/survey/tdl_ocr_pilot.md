@@ -282,3 +282,25 @@ Wikisource pages (348 pages). "Real letter mistakes" is the share of words with 
 `data/tdl_pilot/run_1950_78_books.json`. Left out of the 1,324 books of that period: 200 fully
 proofread on Wikisource, 47 with a Thamizh Mann title, 33 with a Latin-script title or author.
 Books before 1950 are not run.
+
+## Result of the 1950 to 1978 run, 24 Nov 2026
+
+Job 3894199 finished in 3 h 28 min on 32 cores.
+
+| Step | Books | Pages | Tamil words (millions) |
+|---|---|---|---|
+| Listed for the run | 1,044 | | |
+| Read by OCR | 1,036 | 177,644 | 23.4 |
+| After the book gate of 80, cleaning and removal of Wikisource-proofread pages | 995 | 145,995 | 19.6 |
+
+- Not read: 4 books with no direct PDF link; 4 failed downloads (1766, 3989, 4001, 4006).
+- 41 books fall below the book gate of 80.
+- 9,569 pages in 445 of these books are already proofread on Wikisource and are removed.
+- Expected quality from the old-print test: about 1 wrong word in 30. This run has no benchmark
+  of its own.
+- Cleaned text is on the laptop in `data/tdl_1950_78/c_gate80_dedup`; raw text, word confidences
+  and 57 GB of PDFs are on Hopper in `data/tdl_1950_78/`.
+
+**OCR source total** (no line filter): 40.5 million words from books of 1979 or later plus 19.6
+million from 1950 to 1978, 60.1 million words in 2,713 books. A text-level check against the
+Wikisource and Thamizh Mann sources is still needed, so the final figure will be lower.

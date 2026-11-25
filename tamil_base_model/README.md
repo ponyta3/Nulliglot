@@ -54,6 +54,11 @@ no model, tokenizer or data with them.
   (`tam_v3.1`). Real letter mistakes fall from about 1 word in 15 to 1 in 44 on a 28-book
   benchmark. 40.5 million words after cleaning and duplicate removal; 33.1 million with a
   line-level confidence filter. Which version to use is not decided.
+- 24 Nov 2026: decided to use the second run without the line filter (40.5 million words). A
+  test on older print showed books of 1950 to 1978 read almost as well (about 1 wrong word in
+  30), books before 1950 do not (about 1 in 14). The 1950 to 1978 books were then run: 1,036
+  books read, 19.6 million words after cleaning and duplicate removal. OCR source total: about
+  60 million words, before a text-level check against Wikisource and Thamizh Mann.
 
 ## Not decided yet
 
