@@ -333,3 +333,23 @@ different commentaries on the same verses. Removal is not decided.
 
 **Audit of 300 random books.** Some pages are indexes, contents pages, errata lists and price
 lists (not measured exactly). Words with an impossible Tamil letter sequence: 0.04%.
+
+## Final OCR text: duplicates removed, 25 Nov 2026
+
+Decision: remove duplicate pages with the 50% rule. `tdl_dedup.py` listed 43,661 duplicate
+pages (42,581 found in a book with higher confidence, 1,080 repeated in the same book) in
+`data/tdl_ocr_dedup/dup_pages.tsv`. `tdl_clean.py` was then run again with book gate 80, the
+Wikisource page list, the duplicate page list and `--join-pages`.
+
+| Books | Books with text | Tamil words | Paragraphs | Folder |
+|---|---|---|---|---|
+| 1979 or later | 1,682 | 37,048,073 | 122,198 | `data/tdl_v31/c_final` |
+| 1950 to 1978 | 969 | 17,182,926 | 53,253 | `data/tdl_1950_78/c_final` |
+| Total | 2,651 | 54,230,999 | 175,451 | |
+
+- 62 books are left with no text (complete copies of another book).
+- Check on the final text: pairs of books sharing at least half of the smaller book fell from
+  285 to 4. Pairs sharing 30 to 50% (134) are kept on purpose: mostly different commentaries
+  on the same verses.
+- Still to do: text-level check against the Wikisource and Thamizh Mann sources; index,
+  contents and price-list pages are still in.

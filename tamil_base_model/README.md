@@ -59,6 +59,10 @@ no model, tokenizer or data with them.
   30), books before 1950 do not (about 1 in 14). The 1950 to 1978 books were then run: 1,036
   books read, 19.6 million words after cleaning and duplicate removal. OCR source total: about
   60 million words, before a text-level check against Wikisource and Thamizh Mann.
+- 25 Nov 2026: PDFs deleted; raw OCR text and word confidences kept. The text was cleaned again
+  from the saved OCR output: sentences now run on across page breaks, and pages that appear in
+  more than one book are removed. Final OCR text: 54.2 million words in 2,651 books
+  (`data/tdl_v31/c_final`, `data/tdl_1950_78/c_final`).
 
 ## Not decided yet
 
