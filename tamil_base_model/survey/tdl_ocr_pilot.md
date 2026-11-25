@@ -317,7 +317,7 @@ reproduces the earlier cleaned text exactly.
 | Books | Words before | Words joined | Paragraphs before | Paragraphs joined |
 |---|---|---|---|---|
 | 1979 or later (1,718) | 40,454,942 | 40,447,855 | 297,353 | 130,583 |
-| 1950 to 1978 (995) | 19,570,202 | 19,566,609 | 145,995 | 59,208 |
+| 1950 to 1978 (995) | 19,570,202 | 19,562,961 | 145,995 | 59,208 |
 
 The word count falls only because words split across two pages are now one word. Output:
 `data/tdl_v31/c_gate80_dedup_join` and `data/tdl_1950_78/c_gate80_dedup_join`. A running header
