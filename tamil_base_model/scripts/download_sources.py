@@ -117,6 +117,21 @@ def kaniyam():
 
 RESTRICTED = re.compile(r"non[\s-]*com|\bNC\b|no[\s-]*deriv|\bND\b|royalty", re.I)
 
+def ia_epub(content):
+    """The site's download links redirect to the Internet Archive, and the site itself drops
+    many connections. When the book page names its Archive item, return the EPUB URL there."""
+    m = re.search(r'archive\.org/details/([^"/?#\s]+)', content)
+    if not m: return None
+    try:
+        req = urllib.request.Request("https://archive.org/metadata/" + m.group(1), headers={"User-Agent": UA})
+        files = json.load(urllib.request.urlopen(req, timeout=60)).get("files", [])
+    except Exception as e:
+        log("archive metadata error", repr(e)[:80], m.group(1)); return None
+    time.sleep(0.5)
+    ep = [f["name"] for f in files if f["name"].lower().endswith(".epub") and f.get("source") == "original"] \
+         or [f["name"] for f in files if f["name"].lower().endswith(".epub")]
+    return f"https://archive.org/download/{m.group(1)}/{urllib.parse.quote(ep[0])}" if ep else None
+
 def fte():
     d = f"{OUT}/fte"
     rows = wp_all("https://freetamilebooks.com/wp-json/wp/v2/ebooks", d, "catalogue", "fte")
@@ -137,7 +152,8 @@ def fte():
                 status = "no epub link"; nolink += 1
             else:
                 p = f"{d}/epub/{r['slug']}.epub"
-                ok = fetch(html.unescape(links[0]), p, "fte")
+                ok = os.path.exists(p) or fetch(ia_epub(c) or html.unescape(links[0]), p, "fte", tries=2)
+                if not ok: ok = fetch(html.unescape(links[0]), p, "fte", tries=2)
                 if ok and open(p, "rb").read(2) != b"PK":
                     os.remove(p); ok = False
                 status = "downloaded" if ok else "FAILED"

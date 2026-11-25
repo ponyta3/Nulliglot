@@ -63,6 +63,12 @@ no model, tokenizer or data with them.
   from the saved OCR output: sentences now run on across page breaks, and pages that appear in
   more than one book are removed. Final OCR text: 54.2 million words in 2,651 books
   (`data/tdl_v31/c_final`, `data/tdl_1950_78/c_final`).
+- 25 Nov 2026: raw files of sources 1 to 6 of `survey/final_list.md` downloaded to
+  `data/raw/` on Hopper with `scripts/download_sources.py`: the Wikisource, Wikinews, Wikibooks
+  and Wikiquote dumps (dated 1 to 2 Nov 2026, checksums verified), the Thamizh Mann folder
+  (640 files), all 2,375 Kaniyam posts, and 484 FreeTamilEbooks EPUBs. The 414 ebooks with a
+  non-commercial or no-derivatives licence were not downloaded; 136 of the 484 state no exact
+  licence on their page and need a check inside the book. Nothing is cleaned or filtered yet.
 
 ## Not decided yet
 

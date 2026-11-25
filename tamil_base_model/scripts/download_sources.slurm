@@ -11,5 +11,5 @@
 R=/scratch/pgopalan/tamil_base_model
 export PATH=$R/tools/ocr-env/bin:$PATH
 cd $R
-python -u scripts/download_sources.py data/raw
+python -u scripts/download_sources.py data/raw $SOURCES
 du -sh data/raw/*
