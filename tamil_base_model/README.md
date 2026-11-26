@@ -29,7 +29,8 @@ no model, tokenizer or data with them.
    `survey/strict_shortlist.md`.
 2. **Download and filter** the shortlisted datasets; remove duplicates across sources. Done:
    95.3 million Tamil words in `data/final/` on Hopper (see Status, 25 Nov 2026).
-3. **Train a Tamil-only tokenizer** on the filtered text.
+3. **Train a Tamil-only tokenizer** on the filtered text. Done: trained at six vocabulary
+   sizes; 32,000 is chosen, in `tokenizer/bpe_32000/` (see Status, 25 and 26 Nov 2026).
 4. **Pre-train** the base model on Hopper.
 5. **Test** it: validation loss, context use, copying a text from the prompt.
 
@@ -97,13 +98,51 @@ no model, tokenizer or data with them.
   for no licence stated, 24 as translations, 18 for damaged text and 1 for almost no Tamil text.
   Kaniyam has the most words in other scripts (4.24%) and should be looked at when the row
   filter is fixed.
+- 25 Nov 2026: corpus split and tokenizer (`scripts/tokenizer.slurm`, Hopper job 3919375,
+  20 minutes).
+  - Split by whole document, fixed by a hash of the file path (`data/splits/` on Hopper):
+    train 10,680 documents and 93.2 million words; validation 127 documents and 1.11 million
+    words; test 99 documents and 0.97 million words. The test split is not used until the end.
+  - Tokenizer: BPE over Unicode characters, trained only on the training split, with a
+    SentencePiece-style byte fallback, so any text decodes back exactly and no token is half a
+    Tamil letter. A byte-level BPE (the GPT-2 / Llama 3 kind) was tested first and rejected:
+    about 150 of its tokens were pieces of a character. Words are cut with a pattern that keeps
+    vowel signs and the pulli inside the word; the usual GPT-2 pattern would cut Tamil words at
+    every vowel sign. Text is put in NFC form and zero-width characters are removed. 179
+    characters have a token (the whole Tamil block, printable ASCII, the line break and 11
+    common punctuation marks); they cover 99.998% of the training text. Token ids: 0 pad,
+    1 begin of text, 2 end of text, 3 to 15 reserved, 16 to 271 bytes. The design is described
+    at the top of `scripts/train_tokenizer.py`.
+  - Six vocabulary sizes, compared on the validation split (`tokenizer/REPORT.tsv`; the same
+    paragraphs cut by each size are in `tokenizer/samples.txt`). All six decode all 127
+    validation documents back exactly.
+
+    | Vocabulary | Tokens per Tamil word | Words that are one token | Tamil words in 1,024 tokens | Vocabulary seen in validation | Embedding table at width 768 (million parameters) |
+    |---|---|---|---|---|---|
+    | 8,000 | 1.99 | 38.5% | 453 | 97.0% | 6.1 |
+    | 16,000 | 1.76 | 48.5% | 504 | 98.2% | 12.3 |
+    | 24,000 | 1.65 | 54.2% | 534 | 98.4% | 18.4 |
+    | 32,000 | 1.58 | 57.9% | 554 | 98.2% | 24.6 |
+    | 48,000 | 1.50 | 62.8% | 581 | 96.8% | 36.9 |
+    | 64,000 | 1.44 | 66.3% | 600 | 94.3% | 49.2 |
+
+  - Chosen on 26 Nov 2026: 32,000 (`tokenizer/bpe_32000/`). The base model and the later
+    instruction model both use it. Each extra 8,000 tokens shortens the text by 10.2%, 5.5%
+    and 3.6% up to 32,000, then by 2.4% and 1.6%; above 32,000 more of the vocabulary goes
+    unused in the validation text, and the embedding table doubles by 64,000 for 8% shorter
+    text. This assumes a model of width 768 or more; for a much smaller model 24,000 would
+    fit better. Ids 3 to 15 are reserved for the chat markers of the instruction model.
+  - Noticed in the character count: the training text holds a little damaged text (stray
+    Latin-1 letters and private-use codes, under 10 characters per million). It gets no tokens
+    of its own and was not cleaned.
 
 ## Not decided yet
 
 - The goal: a research model, or one that should answer questions well. This sets how much
   data is needed.
-- Model size, context length and vocabulary size.
-- The exact row filter. Proposed: keep a row if at least 95% of its letters are Tamil script.
+- Model size and context length. (Vocabulary size is decided: 32,000.)
+- The exact row filter is no longer open: the cleaners keep a paragraph when at least 90% of
+  its words are in Tamil script (`scripts/textutil.py`, `is_tamil`).
 - Advisor agreement and Hopper compute for the pre-training run.
 
 ## Folders
@@ -111,6 +150,6 @@ no model, tokenizer or data with them.
 | Folder | Content |
 |---|---|
 | `survey/` | `final_list.md` is the final list of sources; `exclusions/` holds the items to drop; `strict_shortlist.md` is the full survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
-| `scripts/` | download, OCR, cleaning and duplicate-removal scripts (`build_corpus.slurm` rebuilds `data/final/`); tokenizer and training scripts (none yet) |
+| `scripts/` | download, OCR, cleaning and duplicate-removal scripts (`build_corpus.slurm` rebuilds `data/final/`); `tokenizer.slurm` makes the split and trains and compares the tokenizers; training scripts (none yet) |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
-| `tokenizer/`, `logs/` | the Tamil tokenizer and training logs (none yet) |
+| `tokenizer/`, `logs/` | the six Tamil tokenizers (`bpe_<size>/`), their comparison and the character count; training logs (none yet) |
