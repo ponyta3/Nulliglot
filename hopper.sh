@@ -16,7 +16,8 @@ set -o pipefail
 DIR="$(cd "$(dirname "$0")" && pwd)"
 LOG="$DIR/hopper_activity.log"
 HOST="${HOPPER_HOST:-pgopalan@hopper-intel.orc.gmu.edu}"
-SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=30 -o ServerAliveCountMax=6)
+# LogLevel=error hides the login banner (ssh still prints real errors).
+SSH_OPTS=(-o LogLevel=error -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=30 -o ServerAliveCountMax=6)
 
 stamp() { date '+%Y-%m-%d %H:%M:%S'; }
 
@@ -30,8 +31,8 @@ esac
 # Record the command before it runs, so it is visible even if it hangs.
 printf '\n===== %s  START\n%s\n' "$(stamp)" "$shown" >> "$LOG"
 
-# Stream output to the log as it arrives; drop the login banner lines.
-"${action[@]}" 2>&1 | grep --line-buffered -v '^|' | tee -a "$LOG"
+# Stream output to the log as it arrives, unfiltered.
+"${action[@]}" 2>&1 | tee -a "$LOG"
 rc=${PIPESTATUS[0]}
 
 printf '===== %s  END (exit %s)\n' "$(stamp)" "$rc" >> "$LOG"
