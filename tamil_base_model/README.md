@@ -31,7 +31,8 @@ no model, tokenizer or data with them.
    95.3 million Tamil words in `data/final/` on Hopper (see Status, 25 Nov 2026).
 3. **Train a Tamil-only tokenizer** on the filtered text. Done: trained at six vocabulary
    sizes; 32,000 is chosen, in `tokenizer/bpe_32000/` (see Status, 25 and 26 Nov 2026).
-4. **Pre-train** the base model on Hopper.
+4. **Pre-train** the base model on Hopper. In progress: four runs done, three more queued (see
+   Status, 26 Nov 2026).
 5. **Test** it: validation loss, context use, copying a text from the prompt.
 
 ## Status
@@ -135,12 +136,52 @@ no model, tokenizer or data with them.
   - Noticed in the character count: the training text holds a little damaged text (stray
     Latin-1 letters and private-use codes, under 10 characters per million). It gets no tokens
     of its own and was not cleaned.
+- 26 Nov 2026: pre-training started on Hopper.
+  - Token files: `scripts/prepare_tokens.py` (job 3921501) wrote the three splits as token ids
+    to `data/tokens/bpe_32000/`: 173,482,327 training tokens, 2,053,586 validation, 1,852,468
+    test. Each document is stored as begin-of-text, its tokens, end-of-text; every document
+    decodes back to the same text.
+  - Training script: `scripts/pretrain.py`, run with `scripts/pretrain.slurm` on one A100. A
+    Llama-style decoder (`LlamaForCausalLM`), 12 layers, width 768, 12 heads, MLP width 3072,
+    the 32,000 vocabulary with one shared embedding table: 137.8 million parameters. Training
+    windows are continuous text from the document stream, never shuffled sentences; one epoch
+    reads every window once, with the cut shifted by a random amount each epoch. A run that is
+    interrupted continues from its last checkpoint and gives the same result as an
+    uninterrupted one (checked on a small model).
+  - Every evaluation also runs the two context tests used on `bul_100m`: the loss on the same
+    tokens with 1, 8, 32, 128 and 960 tokens of context, and the loss on a passage given
+    straight after a copy of itself.
+  - First comparison, on the validation split (65,536 tokens per step, AdamW, cosine schedule,
+    about 124,000 tokens per second, 28.6 GB of GPU memory):
+
+    | Run | Weight decay | Learning rate | Epochs | Context | Validation loss | Bits per character | Loss on a repeated passage | Hours |
+    |---|---|---|---|---|---|---|---|---|
+    | A `a_wd01_lr4e4_ep10` | 0.1 | 4e-4 | 10 | 1,024 | 4.166 (lowest 4.146 at epoch 7.9) | 1.226 | 3.04 | 4.2 |
+    | B `b_wd08_lr1e3_ep16` | 0.8 | 1e-3 | 16 | 1,024 | 3.947 | 1.162 | 2.34 | 6.7 |
+    | C `c_wd16_lr1e3_ep16` | 1.6 | 1e-3 | 16 | 1,024 | 4.065 | 1.196 | 2.48 | 6.7 |
+    | D `d_wd08_lr1e3_ep16_ctx2048` | 0.8 | 1e-3 | 16 | 2,048 | 3.960 | 1.166 | 2.96 | 8.5 |
+
+    Run B is the best. Run A over-fits after epoch 8. Weight decay 1.6 is too strong. The
+    2,048 context gives no gain: run D is measured on windows twice as long and is still not
+    below B, and it copies worse; the context stays 1,024. Run B was still improving at its last
+    step. Between A and B three settings change together (weight decay, learning rate,
+    epochs), so the gain is not assigned to one of them.
+  - Context use of run B against `bul_100m` (its numbers are from the Bulgarian notes, on
+    Bulgarian text): the loss falls by 0.31 from 8 to 128 tokens of context (`bul_100m`:
+    0.09), and by 1.59 when the passage is a copy of the text just before it (`bul_100m`:
+    0.07). Run B does not copy fully: its loss on the copy is 2.34, and full copying would be
+    near zero.
+  - Queued on 26 Nov: run B's settings for 24 epochs (E) and 32 epochs (F), and a 24-layer
+    model of 251 million parameters with run B's settings (G).
+  - The stronger weight decay, higher learning rate and longer training were taken from a
+    literature search on training at 100 to 200 million tokens (arXiv 2509.14786 and others).
+    The papers were not checked by hand; the comparison above is the check.
 
 ## Not decided yet
 
 - The goal: a research model, or one that should answer questions well. This sets how much
   data is needed.
-- Model size and context length. (Vocabulary size is decided: 32,000.)
+- Model size: 12 layers or larger, after runs E to G. (Decided: vocabulary 32,000, context 1,024.)
 - The exact row filter is no longer open: the cleaners keep a paragraph when at least 90% of
   its words are in Tamil script (`scripts/textutil.py`, `is_tamil`).
 - Advisor agreement and Hopper compute for the pre-training run.
@@ -150,6 +191,7 @@ no model, tokenizer or data with them.
 | Folder | Content |
 |---|---|
 | `survey/` | `final_list.md` is the final list of sources; `exclusions/` holds the items to drop; `strict_shortlist.md` is the full survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
-| `scripts/` | download, OCR, cleaning and duplicate-removal scripts (`build_corpus.slurm` rebuilds `data/final/`); `tokenizer.slurm` makes the split and trains and compares the tokenizers; training scripts (none yet) |
+| `scripts/` | download, OCR, cleaning and duplicate-removal scripts (`build_corpus.slurm` rebuilds `data/final/`); `tokenizer.slurm` makes the split and trains and compares the tokenizers; `prepare_tokens.py` and `pretrain.py` (with their `.slurm` files) make the token files and pre-train the model |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
-| `tokenizer/`, `logs/` | the six Tamil tokenizers (`bpe_<size>/`), their comparison and the character count; training logs (none yet) |
+| `tokenizer/`, `logs/` | the six Tamil tokenizers (`bpe_<size>/`), their comparison and the character count; logs |
+| `runs/` | per pre-training run: settings (`run.json`), training log, evaluations (`eval.tsv`) and text samples; the weights are on Hopper in `models/<run>/` |
