@@ -27,7 +27,8 @@ no model, tokenizer or data with them.
 
 1. **Survey** Tamil datasets, on and off Hugging Face, and shortlist the good ones. Done: see
    `survey/strict_shortlist.md`.
-2. **Download and filter** the shortlisted datasets; remove duplicates across sources.
+2. **Download and filter** the shortlisted datasets; remove duplicates across sources. Done:
+   95.3 million Tamil words in `data/final/` on Hopper (see Status, 25 Nov 2026).
 3. **Train a Tamil-only tokenizer** on the filtered text.
 4. **Pre-train** the base model on Hopper.
 5. **Test** it: validation loss, context use, copying a text from the prompt.
@@ -69,6 +70,33 @@ no model, tokenizer or data with them.
   (640 files), all 2,375 Kaniyam posts, and 484 FreeTamilEbooks EPUBs. The 414 ebooks with a
   non-commercial or no-derivatives licence were not downloaded; 136 of the 484 state no exact
   licence on their page and need a check inside the book. Nothing is cleaned or filtered yet.
+- 25 Nov 2026: all sources cleaned and duplicates removed across sources
+  (`scripts/build_corpus.slurm`, Hopper job 3910224, 1 h 42 min). Final corpus:
+  **95.3 million Tamil words** in 10,906 documents (2.35 GB) in `data/final/` on Hopper, one
+  folder per source, with `SUMMARY.tsv`, `dedup_stats.tsv` and `ocr_dup_pages.tsv`.
+
+  | Source | Documents | Tamil words | Words in other scripts |
+  |---|---|---|---|
+  | OCR books, 1979 onward | 1,614 | 29,754,580 | 0.14% |
+  | Wikisource | 1,888 | 26,968,120 | 0.72% |
+  | Thamizh Mann | 549 | 18,900,192 | 0.29% |
+  | OCR books, 1950 to 1978 | 956 | 14,939,626 | 0.13% |
+  | FreeTamilEbooks | 296 | 3,704,381 | 0.66% |
+  | Wikinews | 3,342 | 486,509 | 0.25% |
+  | Kaniyam | 534 | 180,015 | 4.24% |
+  | Wikibooks | 692 | 172,261 | 0.99% |
+  | Wikiquote | 1,035 | 153,713 | 0.63% |
+  | Total | 10,906 | 95,259,397 | 0.36% |
+
+  Before duplicate removal the sources held 120.1 million words; 24.8 million (21%) were copies
+  of text in another document. The largest overlaps: 5.2 million words of the 1979-onward OCR
+  books are already on Wikisource (the Wikisource copy is kept), and FreeTamilEbooks loses
+  almost half its words (7.1 to 3.7 million), nearly all to Wikisource. The two OCR sets fall
+  from 60.0 to 44.7 million words. Of the 484 FreeTamilEbooks, 338 were kept by the cleaner
+  before duplicate removal: 67 were dropped for a restricted licence found inside the book, 36
+  for no licence stated, 24 as translations, 18 for damaged text and 1 for almost no Tamil text.
+  Kaniyam has the most words in other scripts (4.24%) and should be looked at when the row
+  filter is fixed.
 
 ## Not decided yet
 
@@ -83,6 +111,6 @@ no model, tokenizer or data with them.
 | Folder | Content |
 |---|---|
 | `survey/` | `final_list.md` is the final list of sources; `exclusions/` holds the items to drop; `strict_shortlist.md` is the full survey result (`dataset_shortlist.md` is the earlier, looser list); `probe.py` samples a Hugging Face dataset and measures how much of it is Tamil script |
-| `scripts/` | download, filter, tokenizer and training scripts (none yet) |
+| `scripts/` | download, OCR, cleaning and duplicate-removal scripts (`build_corpus.slurm` rebuilds `data/final/`); tokenizer and training scripts (none yet) |
 | `data/`, `models/` | downloaded text and model weights; kept on the laptop and Hopper only, not in git |
 | `tokenizer/`, `logs/` | the Tamil tokenizer and training logs (none yet) |
